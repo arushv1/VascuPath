@@ -7,8 +7,6 @@ import sys
 from pathlib import Path
 from collections import Counter
 
-sys.path.append()
-
 current_dir = Path(__file__).parent
 dinov2_path = current_dir / "dinov2"
 

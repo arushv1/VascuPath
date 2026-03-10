@@ -8,3 +8,4 @@ opencv-python
 torchvision
 tqdm
 openslide-python
+scikit-image
