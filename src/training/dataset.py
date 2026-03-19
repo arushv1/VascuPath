@@ -2,6 +2,7 @@
 PyTorch Dataset classes for patch-based training and WSI inference.
 """
 
+import re
 import numpy as np
 import torch
 from torch.utils.data import Dataset
@@ -18,10 +19,36 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from config import TARGET_SIZE_PX, TISSUE_DETECTION
 
 
+def extract_svs_name(filename: str) -> str:
+    """
+    Extract the source SVS name from a patch filename.
+
+    Filenames follow the pattern:
+        {svs_name}_patch{number}_x{x}_y{y}_500um.png
+
+    SVS names can contain underscores, commas, hyphens, etc., so we
+    split on '_patch' followed by digits — that's the reliable boundary.
+
+    Examples:
+        '1_14_135003_patch0012_x16960_y992_500um.png'    → '1_14_135003'
+        '110300_patch0028_x9561_y12472_500um.png'        → '110300'
+        'K0098,7,LHE_171505_patch0023_x18925_y7552_500um.png' → 'K0098,7,LHE_171505'
+        'LHE-003_patch0016_x19673_y22682_500um.png'      → 'LHE-003'
+    """
+    match = re.match(r"^(.+?)_patch\d+", filename)
+    if match:
+        return match.group(1)
+    # Fallback: return full stem if pattern doesn't match
+    return Path(filename).stem
+
+
 class PatchDataset(Dataset):
     """
     Dataset for loading pre-extracted, normalized patch images.
     Used for training/validation/testing the ResNet classifier.
+
+    Tracks which SVS each patch came from (via filename parsing) so that
+    GroupKFold can keep all patches from the same slide together.
 
     Expects folder structure:
         root/
@@ -30,6 +57,9 @@ class PatchDataset(Dataset):
             vessel_e/
             vessel_h/
             white/
+
+    Filename convention:
+        {svs_name}_patch{number}_x{x}_y{y}_500um.png
     """
 
     def __init__(self, root_dir: str, transform=None, class_names: list = None):
@@ -37,22 +67,31 @@ class PatchDataset(Dataset):
         self.transform = transform
 
         if class_names is None:
-            # Auto-discover from folder names, sorted for consistency
             class_names = sorted([d.name for d in self.root.iterdir() if d.is_dir()])
 
         self.class_names = class_names
         self.class_to_idx = {name: i for i, name in enumerate(class_names)}
 
-        # Build file list
-        self.samples = []
+        # Build file list with SVS group tracking
+        self.samples = []   # list of (path, label)
+        self.groups = []    # list of SVS name strings, parallel to samples
+
         for cls_name in class_names:
             cls_dir = self.root / cls_name
             if not cls_dir.exists():
                 continue
             for img_path in sorted(cls_dir.glob("*.png")):
                 self.samples.append((img_path, self.class_to_idx[cls_name]))
+                self.groups.append(extract_svs_name(img_path.name))
             for img_path in sorted(cls_dir.glob("*.jpg")):
                 self.samples.append((img_path, self.class_to_idx[cls_name]))
+                self.groups.append(extract_svs_name(img_path.name))
+
+        # Map SVS names to integer group IDs for sklearn
+        unique_groups = sorted(set(self.groups))
+        self.group_to_id = {name: i for i, name in enumerate(unique_groups)}
+        self.group_ids = np.array([self.group_to_id[g] for g in self.groups])
+        self.unique_svs = unique_groups
 
     def __len__(self):
         return len(self.samples)
@@ -65,6 +104,13 @@ class PatchDataset(Dataset):
             img = self.transform(img)
 
         return img, label
+
+    def get_group_summary(self) -> str:
+        """Print how many patches come from each SVS."""
+        from collections import Counter
+        counts = Counter(self.groups)
+        lines = [f"  {svs}: {count} patches" for svs, count in sorted(counts.items())]
+        return f"{len(counts)} unique SVS files:\n" + "\n".join(lines)
 
 
 class WSIDataset(Dataset):

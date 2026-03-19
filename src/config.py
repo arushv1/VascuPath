@@ -9,8 +9,8 @@ PROJECT_ROOT = Path(__file__).parent
 
 #Data
 DATA_DIR = PROJECT_ROOT / "data"
-RAW_PATCHES_DIR = DATA_DIR / "raw" / "train_patches"
-NORMALIZED_PATCHES_DIR = DATA_DIR / "norm" / "norm_train_patches"
+RAW_PATCHES_DIR = DATA_DIR / "raw" 
+NORMALIZED_PATCHES_DIR = DATA_DIR / "norm" 
 SVS_DIR = DATA_DIR / "svs"
 
 #Model checkpoints

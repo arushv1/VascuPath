@@ -1,11 +1,12 @@
 import numpy as np
 from skimage import color
 from scipy import ndimage
-
+import os
 import sys
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).parent.parent))
+#sys.path.insert(0, str(Path(__file__).parent.parent))
 from config import NORMALIZATION, TISSUE_DETECTION
+sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
 
 
 # =============================================================================
@@ -118,7 +119,28 @@ def classify_stain(stats: dict) -> str:
         return "eosin"
     return "mixed"
 
+def load_reference_stats(path: str = "reference_stats.npz") -> dict:
+    """
+    Load reference LAB statistics from a .npz file.
 
+    The .npz should contain arrays named:
+      - ref_L_mean, ref_L_std
+      - ref_a_mean, ref_a_std
+      - ref_b_mean, ref_b_std
+
+    Returns
+    -------
+    dict with keys L_mean, L_std, a_mean, a_std, b_mean, b_std
+    """
+    norm = np.load(path, allow_pickle=True)
+    return {
+        "L_mean": norm["ref_L_mean"],
+        "L_std": norm["ref_L_std"],
+        "a_mean": norm["ref_a_mean"],
+        "a_std": norm["ref_a_std"],
+        "b_mean": norm["ref_b_mean"],
+        "b_std": norm["ref_b_std"],
+    }
 # =============================================================================
 # Modified Reinhard Normalization
 # =============================================================================
@@ -149,15 +171,7 @@ def normalize_patch(
     -------
     ndarray (H, W, 3), uint8 RGB
     """
-    if ref_stats is None:
-        ref_stats = {
-            "L_mean": NORMALIZATION["ref_L_mean"],
-            "L_std": NORMALIZATION["ref_L_std"],
-            "a_mean": NORMALIZATION["ref_a_mean"],
-            "a_std": NORMALIZATION["ref_a_std"],
-            "b_mean": NORMALIZATION["ref_b_mean"],
-            "b_std": NORMALIZATION["ref_b_std"],
-        }
+    ref_stats = load_reference_stats()
     if ab_strength is None:
         ab_strength = NORMALIZATION["ab_strength"]
 
