@@ -16,7 +16,7 @@ _cj = _aug["color_jitter"]
 
 
 def get_train_transform(target_size: int = TARGET_SIZE_PX):
-    """Augmented transform for training."""
+    """Augmented transform for training patches from config file"""
     return transforms.Compose([
         transforms.Resize((target_size, target_size)),
         transforms.RandomHorizontalFlip() if _aug["horizontal_flip"] else transforms.Lambda(lambda x: x),

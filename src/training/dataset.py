@@ -25,11 +25,7 @@ def extract_svs_name(filename: str) -> str:
 
     Filenames follow the pattern:
         {svs_name}_patch{number}_x{x}_y{y}_500um.png
-
-    SVS names can contain underscores, commas, hyphens, etc., so we
-    split on '_patch' followed by digits — that's the reliable boundary.
-
-    Examples:
+    ex:
         '1_14_135003_patch0012_x16960_y992_500um.png'    → '1_14_135003'
         '110300_patch0028_x9561_y12472_500um.png'        → '110300'
         'K0098,7,LHE_171505_patch0023_x18925_y7552_500um.png' → 'K0098,7,LHE_171505'
@@ -38,7 +34,6 @@ def extract_svs_name(filename: str) -> str:
     match = re.match(r"^(.+?)_patch\d+", filename)
     if match:
         return match.group(1)
-    # Fallback: return full stem if pattern doesn't match
     return Path(filename).stem
 
 
@@ -116,11 +111,7 @@ class PatchDataset(Dataset):
 class WSIDataset(Dataset):
     """
     Lazy-loading dataset for whole slide image inference.
-
-    Pre-computes valid tile coordinates during __init__,
-    then reads patches on-demand via OpenSlide in __getitem__.
-    No tiles are saved to disk.
-
+    
     Parameters
     ----------
     svs_path : str
