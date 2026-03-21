@@ -5,7 +5,8 @@ import torch
 
 
 # PATHS
-PROJECT_ROOT = Path(__file__).parent
+PROJECT_ROOT = Path(__file__).parent.parent
+SRC_ROOT = PROJECT_ROOT / 'src'
 
 #Data
 DATA_DIR = PROJECT_ROOT / "data"
@@ -14,10 +15,11 @@ NORMALIZED_PATCHES_DIR = DATA_DIR / "norm"
 SVS_DIR = DATA_DIR / "svs"
 
 #Model checkpoints
-CHECKPOINTS_DIR = PROJECT_ROOT / "checkpoints"
+CHECKPOINTS_DIR = PROJECT_ROOT / SRC_ROOT / "checkpoints"
+FOUNDATION_CHECKPOINT = PROJECT_ROOT / SRC_ROOT / "checkpoints" / "teacher_checkpoint.pth"
 
 #Outputs
-OUTPUTS_DIR = PROJECT_ROOT / "outputs"
+OUTPUTS_DIR = PROJECT_ROOT / SRC_ROOT / "outputs"
 
 # DEVICE
 def get_device():

@@ -16,7 +16,7 @@ import random
 from tqdm import tqdm
 from collections import Counter
 from models.stain_segmentor import FoundationClassifier
-from models.vessel_detector import HResNetClassifier
+from models.vessel_detector import HVesselDetector
 from training.dataset import PatchDataset
 from training.augmentations import get_train_transform, get_eval_transform
 import argparse
@@ -116,7 +116,7 @@ def train_one_fold(
         n_total = sum(p.numel() for p in model.parameters())
         print(f"  Foundation model: {n_trainable:,} trainable / {n_total:,} total params")
     else:
-        model = HResNetClassifier(num_classes=NUM_CLASSES, pretrained=cfg["pretrained"]).to(DEVICE)
+        model = HVesselDetector(num_classes=NUM_CLASSES, pretrained=cfg["pretrained"]).to(DEVICE)
         params_to_train = model.parameters()
 
     criterion = nn.CrossEntropyLoss()
@@ -288,7 +288,7 @@ def train(args):
 
 def main():
     parser = argparse.ArgumentParser(description="Train patch classifier (Group K-Fold)")
-    parser.add_argument("--data", type=Path, default=NORMALIZED_PATCHES_DIR)
+    parser.add_argument("--data", type=Path, default=NORMALIZED_PATCHES_DIR / "norm_layer1_dataset")
     parser.add_argument("--model", "-m", type=str, default="resnet",
                         choices=["resnet", "foundation"],
                         help="Model architecture: 'resnet' or 'foundation' (default: resnet)")

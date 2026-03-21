@@ -7,6 +7,7 @@ import sys
 from pathlib import Path
 from collections import Counter
 from dinov2.models.vision_transformer import vit_large
+from config import FOUNDATION_CHECKPOINT
 
 
 class FoundationClassifier(nn.Module):
@@ -28,7 +29,7 @@ class FoundationClassifier(nn.Module):
         )
 
         # Pretrained neuropath weights
-        checkpoint_path = "src/models/teacher_checkpoint.pth"
+        checkpoint_path = str(FOUNDATION_CHECKPOINT)
         state_dict = torch.load(checkpoint_path, map_location="cpu")["teacher"]
         state_dict = {k.replace("backbone.", ""): v 
                       for k, v in state_dict.items() if "backbone" in k}
