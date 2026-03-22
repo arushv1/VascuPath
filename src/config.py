@@ -85,15 +85,15 @@ TRAINING = {
         "scheduler": "cosine",
     },
 
-    # U-Net segmenter (for Phase 2)
-    "segmenter": {
-        "architecture": "unet",
-        "backbone": "resnet34",
-        "learning_rate": 1e-4,
+    # Foundation model (DINOv2 ViT-Large + linear head)
+    "foundation": {
+        "learning_rate": 1e-3,
         "weight_decay": 1e-4,
-        "epochs": 100,
-        "batch_size": 8,
-        "patience": 15,
+        "epochs": 50,
+        "batch_size": 32,
+        "patience": 10,
+        "scheduler": "cosine",
+        "freeze_backbone": True,
     },
 
     # Augmentation
@@ -110,4 +110,12 @@ TRAINING = {
     },
 
     "seed": 42,
+}
+
+QUPATH_COLORS = {
+    "background_e": [255, 182, 193],  # pink
+    "background_h": [0, 0, 255],      # blue
+    "vessel_e": [255, 0, 0],          # red
+    "vessel_h": [128, 0, 128],        # purple
+    "white": [200, 200, 200],         # gray
 }
