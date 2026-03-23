@@ -13,6 +13,8 @@ Usage:
     python -m inference.pipeline ../data/svs/110300.svs --stage1-only
     python -m inference.pipeline ../data/svs/58158.svs --stage1-only --output ../outputs/
 
+    "/projectnb/rise2019/JC_CTE_Images/AI export/Frontal Cortex/11_25_140945.svs"
+
 """
 
 import argparse
