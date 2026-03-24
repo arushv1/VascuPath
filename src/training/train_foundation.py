@@ -23,11 +23,10 @@ from sklearn.model_selection import GroupKFold
 from sklearn.metrics import confusion_matrix as cm_func
 from tqdm import tqdm
 from pathlib import Path
-
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from config import (
-    NORMALIZED_PATCHES_DIR, CHECKPOINTS_DIR, DEVICE, TRAINING,
+    NORMALIZED_PATCHES_DIR, CHECKPOINTS_DIR, DEVICE, TRAINING, NUM_WORKERS
 )
 from models import FoundationClassifier
 from training.dataset import PatchDataset
@@ -94,8 +93,8 @@ def train_one_fold(fold, train_idx, val_idx, dataset_path, cfg, train_svs, val_s
     train_ds = PatchDataset(dataset_path, transform=get_train_transform(), class_names=FOUNDATION_CLASSES, label_remap=FOUNDATION_REMAP)
     eval_ds = PatchDataset(dataset_path, transform=get_eval_transform(), class_names=FOUNDATION_CLASSES, label_remap=FOUNDATION_REMAP)
 
-    train_loader = DataLoader(Subset(train_ds, train_idx), batch_size=cfg["batch_size"], shuffle=True, num_workers=0)
-    val_loader = DataLoader(Subset(eval_ds, val_idx), batch_size=cfg["batch_size"], shuffle=False, num_workers=0)
+    train_loader = DataLoader(Subset(train_ds, train_idx), batch_size=cfg["batch_size"], shuffle=True, num_workers=NUM_WORKERS)
+    val_loader = DataLoader(Subset(eval_ds, val_idx), batch_size=cfg["batch_size"], shuffle=False, num_workers=NUM_WORKERS)
 
     model = FoundationClassifier(num_classes=NUM_FOUNDATION_CLASSES, freeze_backbone=True).to(DEVICE)
     n_trainable = sum(p.numel() for p in model.classifier.parameters())
@@ -245,7 +244,7 @@ def train(args):
     print(f"  Training on {len(cv_idx)} patches from {len(cv_svs)} SVS files")
 
     train_ds = PatchDataset(args.data, transform=get_train_transform(), class_names=FOUNDATION_CLASSES, label_remap=FOUNDATION_REMAP)
-    train_loader = DataLoader(Subset(train_ds, cv_idx), batch_size=cfg["batch_size"], shuffle=True, num_workers=0)
+    train_loader = DataLoader(Subset(train_ds, cv_idx), batch_size=cfg["batch_size"], shuffle=True, num_workers=NUM_WORKERS)
 
     final_model = FoundationClassifier(num_classes=NUM_FOUNDATION_CLASSES, freeze_backbone=True).to(DEVICE)
     criterion = nn.CrossEntropyLoss()
@@ -278,13 +277,13 @@ def train(args):
     # =====================================================================
     # Step 4: Test evaluation
     # =====================================================================
-    print("\n" + "=" * 60)
+    print("\n" + "=" * 60) 
     print("FINAL TEST EVALUATION")
     print("=" * 60)
     print(f"  Test: {len(test_idx)} patches from {len(test_svs)} SVS: {', '.join(sorted(test_svs))}")
 
     eval_ds = PatchDataset(args.data, transform=get_eval_transform(), class_names=FOUNDATION_CLASSES, label_remap=FOUNDATION_REMAP)
-    test_loader = DataLoader(Subset(eval_ds, test_idx), batch_size=cfg["batch_size"], shuffle=False, num_workers=0)
+    test_loader = DataLoader(Subset(eval_ds, test_idx), batch_size=cfg["batch_size"], shuffle=False, num_workers=NUM_WORKERS)
     test_results = evaluate(final_model, test_loader, criterion, DEVICE)
 
     print(f"\n  Test accuracy: {test_results['accuracy']:.2f}%")
