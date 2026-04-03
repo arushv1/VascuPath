@@ -74,6 +74,101 @@ def train_one_fold(fold, train_idx, val_idx, dataset_path, cfg, train_svs, val_s
 
     for epoch in range(1, cfg['epochs']+ 1):
         model.train()
+        
+        correct = 0
+        total = 0
+
+        pbar = tqdm(train_loader, desc=f"  Epoch {epoch}/{cfg['epochs']}", leave=False)
+        for images, labels in pbar:
+            images, labels = images.to(DEVICE), labels.to(DEVICE)
+            optimizer.zero_grad()
+
+            logits = model(images)
+            loss = criterion(logits, labels)
+            loss.backward()
+            optimizer.step()
+
+            preds = logits.argmax(dim=1)
+            correct += (preds == labels).sum().item()
+            total += images.size(0)
+            pbar.set_postfix(loss=f"{loss.item():.4f}", acc=f"{100*correct/total:.1f}")
+        
+        if scheduler:
+            scheduler.step()
+        
+        val_results = evaluate(model, criterion, val_loader, DEVICE)
+        print(f"  Epoch {epoch}: Train {100*correct/total:.1f}% | Val {val_results['accuracy']:.1f}% | Val loss {val_results['loss']:.4f}")
+
+        if val_results["accuracy"] > best_val_acc:
+            best_val_acc = val_results["accuracy"]
+            best_epoch = epoch
+            patience_counter = 0
+            best_state = model.state_dict().copy()
+        else:
+            patience_counter += 1
+            if patience_counter >= cfg["patience"]:
+                print(f" Early stopping at epoch: {epoch}")
+                break
+    
+    print(f"Fold {fold + 1} best: {best_val_acc:.2f}% at epoch {epoch}")
+    return {"fold": fold + 1, "best_val_acc": best_val_acc, "best_epoch": best_epoch,
+            "best_state": best_state, "train_svs": sorted(train_svs), "val_svs": sorted(val_svs),
+            "n_train": len(train_idx), "n_val": len(val_idx)}
+
+def train(args):
+    set_seed(TRAINING["seed"])
+    cfg = TRAINING['resnet']
+    n_folds = args.folds
+
+    if args.epochs:
+        cfg["epochs"] = args.epochs
+
+    print(f"Model: ResNet Classifier")
+    print(f"Device: {DEVICE}")
+    print(f"Data: {args.data}")
+    print(f"Folds: {n_folds}")
+    print(f"Epochs: {cfg['epochs']}")
+    print(f"LR: {cfg['learning_rate']}")
+
+    full_dataset = PatchDataset(args.data, transfrom=None, class_names=CLASS_NAMES)
+    n = len(full_dataset)
+    labels = np.array([label for _, label in full_dataset.samples])
+    group_ids = full_dataset.group_ids
+
+    print(f"\nTotal samples: {n}")
+    print(full_dataset.get_class_summary())
+    print(full_dataset.get_group_summary())
+
+    # Hold out test SVS files
+    unique_svs = sorted(full_dataset.unique_svs)
+    n_test_groups = max(1, len(unique_svs) // 5)
+
+    rng = np.random.RandomState(TRAINING["seed"])
+    shuffled_svs = unique_svs.copy()
+    rng.shuffle(shuffled_svs)
+    test_svs = set(shuffled_svs[:n_test_groups])
+    cv_svs = set(shuffled_svs[n_test_groups:])
+
+    test_idx = np.array([i for i in range(n) if full_dataset.groups[i] in test_svs])
+    cv_idx = np.array([i for i in range(n) if full_dataset.groups[i] in cv_svs])
+    cv_labels = labels[cv_idx]
+    cv_group_ids = group_ids[cv_idx]
+
+    print(f"\n  Test set:  {len(test_idx)} patches from {len(test_svs)} SVS: {', '.join(sorted(test_svs))}")
+    print(f"  CV set:    {len(cv_idx)} patches from {len(cv_svs)} SVS files")
+
+    # Group K-Fold CV
+    
+
+
+
+
+
+
+
+
+
+
 
 
     

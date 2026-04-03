@@ -16,7 +16,7 @@ SVS_DIR = DATA_DIR / "svs"
 
 #Model checkpoints
 CHECKPOINTS_DIR = PROJECT_ROOT / SRC_ROOT / "checkpoints"
-FOUNDATION_CHECKPOINT = PROJECT_ROOT / SRC_ROOT / "checkpoints" / "teacher_checkpoint.pth"
+FOUNDATION_CHECKPOINT = PROJECT_ROOT / SRC_ROOT / "checkpoints" / "neuropath_checkpoint.pth"
 
 #Outputs
 OUTPUTS_DIR = PROJECT_ROOT / SRC_ROOT / "outputs"
@@ -74,14 +74,14 @@ TRAINING = {
     # test = 1 - train - val = 0.15
 
     # ResNet classifier
-    "classifier": {
+    "resnet": {
         "architecture": "resnet18",
         "pretrained": True,
         "learning_rate": 1e-4,
         "weight_decay": 1e-4,
         "epochs": 10,
         "batch_size": 32,
-        "patience": 15,       # Early stopping patience
+        "patience": 10,       # Early stopping patience
         "scheduler": "cosine",
     },
 

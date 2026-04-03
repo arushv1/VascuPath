@@ -182,7 +182,7 @@ def train(args):
     # Step 1: Hold out test SVS files
     # =====================================================================
     unique_svs = sorted(full_dataset.unique_svs)
-    n_test_groups = max(1, len(unique_svs) // 5)
+    n_test_groups = max(1, len(unique_svs) // 5) # gives you a ~80/20 split
 
     rng = np.random.RandomState(TRAINING["seed"])
     shuffled_svs = unique_svs.copy()
