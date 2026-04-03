@@ -1,8 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torch.utils.data import DataLoader, random_split
-from torchvision import transforms, datasets
+from torchvision import models
 import sys
 from pathlib import Path
 from collections import Counter
@@ -49,3 +48,13 @@ class FoundationClassifier(nn.Module):
         return self.classifier(features)
     
 
+class StainSegmentor(nn.Module):
+    def __init__(self, num_classes=3, pretrained=True):
+        super().__init__()
+        self.resnet = models.resnet18(pretrained=pretrained)
+        in_features = self.resnet.fc.in_features
+
+        self.resnet.fc = nn.Linear(in_features, num_classes)
+
+    def forward(self, x):
+        return self.resnet(x)

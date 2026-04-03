@@ -119,7 +119,7 @@ def classify_stain(stats: dict) -> str:
         return "eosin"
     return "mixed"
 
-def load_reference_stats(path: str = "reference_stats.npz") -> dict:
+def load_reference_stats(path: str = None) -> dict:
     """
     Load reference LAB statistics from a .npz file.
 
@@ -132,6 +132,8 @@ def load_reference_stats(path: str = "reference_stats.npz") -> dict:
     -------
     dict with keys L_mean, L_std, a_mean, a_std, b_mean, b_std
     """
+    if path is None:
+        path = Path(__file__).parent.parent / "checkpoints" / "reference_stats.npz"
     norm = np.load(path, allow_pickle=True)
     return {
         "L_mean": norm["ref_L_mean"],

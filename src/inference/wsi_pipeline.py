@@ -29,33 +29,20 @@ from collections import Counter
 
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from config import DEVICE, OUTPUTS_DIR, BATCH_SIZE, NUM_WORKERS, CHECKPOINTS_DIR
+from config import DEVICE, OUTPUTS_DIR, BATCH_SIZE, NUM_WORKERS, CHECKPOINTS_DIR, QUPATH_COLORS
 from training.dataset import WSIDataset
 from normalization import normalize_image
 
 
-# Output class names for the full pipeline
 FINAL_CLASSES = ["background_h", "background_e", "vessel_h", "vessel_e", "white"]
-
-# QuPath colors per class (RGB)
-QUPATH_COLORS = {
-    "background_h": [100, 100, 255],   # blue
-    "background_e": [255, 182, 193],   # pink
-    "vessel_h": [255, 0, 0],           # red
-    "vessel_e": [255, 165, 0],         # orange
-    "white": [200, 200, 200],          # gray
-}
-
-# Stage 1 classes (foundation model output)
 STAGE1_CLASSES = ["background_h", "background_e", "white"]
-
 
 # =========================================================================
 # Model loading
 # =========================================================================
 
 def load_foundation_model(checkpoint_path=None, device=None):
-    """Load the trained foundation model for stain separation."""
+    """Load trained foundation model for stain separation."""
     device = device or DEVICE
     checkpoint_path = Path(checkpoint_path or (CHECKPOINTS_DIR / "best_foundation_model.pth"))
 
@@ -88,7 +75,7 @@ def load_resnet_model(stain, checkpoint_path=None, device=None):
     class_names = checkpoint.get("class_names", [f"background_{stain}", f"vessel_{stain}"])
     num_classes = len(class_names)
 
-    from models import ResNetClassifier
+    from models.vessel_detector import ResNetClassifier
     model = ResNetClassifier(num_classes=num_classes, pretrained=False).to(device)
     model.load_state_dict(checkpoint["model_state_dict"])
     model.eval()

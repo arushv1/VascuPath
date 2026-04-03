@@ -63,7 +63,7 @@ NORMALIZATION = {
 
     # How strongly to normalize a/b channels (0=none, 1=full Reinhard)
     # Lower values preserve stain-type identity while reducing scanner variation
-    "ab_strength": 0.3,
+    "ab_strength": 0.0,
 }
 
 # TRAINING SETTINGS
@@ -79,7 +79,7 @@ TRAINING = {
         "pretrained": True,
         "learning_rate": 1e-4,
         "weight_decay": 1e-4,
-        "epochs": 100,
+        "epochs": 10,
         "batch_size": 32,
         "patience": 15,       # Early stopping patience
         "scheduler": "cosine",

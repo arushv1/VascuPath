@@ -8,5 +8,6 @@ opencv-python
 torchvision
 tqdm
 openslide-python
+openslide-bin
 scikit-image
 xformers
