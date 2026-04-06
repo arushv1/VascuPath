@@ -10,7 +10,7 @@ Usage:
 """
 
 # Check gpu types: qconf -sel | head -20
-# Request gpu: qrsh -P rise2019 -l gpus=1 -l gpu_type=A100 -l h_rt=2:00:00
+# Request gpu: qrsh -P rise2019 -l gpus=1 -l gpu_type=A100|V100 -l h_rt=2:00:00 -pe omp 4
 
 import argparse
 from torch.utils.data import DataLoader, Subset
@@ -25,7 +25,7 @@ from models.stain_segmentor import FoundationClassifier
 from sklearn.metrics import confusion_matrix as cm_func
 from training.augmentations import get_eval_transform, get_train_transform
 from training.dataset import PatchDataset
-from config import (CLASS_NAMES, DEVICE, TRAINING, SEED, CHECKPOINTS_DIR, NORMALIZED_PATCHES_DIR, CLASS_NAMES, NUM_CLASSES, NUM_WORKERS)
+from config import (DEVICE, TRAINING, CHECKPOINTS_DIR, NORMALIZED_PATCHES_DIR, NUM_WORKERS)
 
 STAGE1_CLASSES = ["background_h", "background_e", "white"]
 NUM_STAGE1_CLASSES = len(STAGE1_CLASSES)
@@ -280,7 +280,8 @@ def train(args):
     # Save
 
     CHECKPOINTS_DIR.mkdir(parents=True, exist_ok=True)
-    save_path = CHECKPOINTS_DIR / "best_stage1_resnet_model.pth"
+    save_path = CHECKPOINTS_DIR / f"stage1_resnet_model_cv{mean_acc:.2f}_test{test_results['accuracy']:.2f}.pth"
+
 
     torch.save({
         "model_state_dict": final_model.state_dict(),
@@ -307,9 +308,3 @@ def main():
     args = parser.parse_args()
     train(args)
 
-
-
-
-    
-
-    

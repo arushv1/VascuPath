@@ -211,6 +211,7 @@ vascuenv/
 data/
 *.npz
 *.pth
-src/dinov2
+src/dinov2/
 src/normalization/reference_stats.npz
-src/checkpoints/teacher_checkpoint.pth
+src/checkpoints/
+*.svs

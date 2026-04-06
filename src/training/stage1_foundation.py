@@ -308,7 +308,7 @@ def train(args):
     # Step 5: Save
     # =====================================================================
     CHECKPOINTS_DIR.mkdir(parents=True, exist_ok=True)
-    save_path = CHECKPOINTS_DIR / "best_foundation_model.pth"
+    save_path = CHECKPOINTS_DIR / f"stage1_foundation_model_cv{mean_acc:.2f}_test{test_results['accuracy']:.2f}.pth"
 
     torch.save({
         "model_state_dict": final_model.state_dict(),
