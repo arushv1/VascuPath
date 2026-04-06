@@ -48,7 +48,7 @@ class FoundationClassifier(nn.Module):
         return self.classifier(features)
     
 
-class StainSegmentor(nn.Module):
+class ResNetClassifier(nn.Module):
     def __init__(self, num_classes=3, pretrained=True):
         super().__init__()
         self.resnet = models.resnet18(pretrained=pretrained)

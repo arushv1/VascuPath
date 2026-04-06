@@ -5,7 +5,6 @@ from torchvision import models
 from collections import Counter
 import random
 
-# MODEL DEFINITION
 class VesselDetector(nn.Module):
     """ResNet18 classifier with custom head"""
     def __init__(self, num_classes, pretrained=True):

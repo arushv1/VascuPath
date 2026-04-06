@@ -21,7 +21,7 @@ from tqdm import tqdm
 import sys
 import random
 from sklearn.model_selection import GroupKFold
-from models.stain_segmentor import FoundationClassifier
+from models.stain_segmentor import ResNetClassifier
 from sklearn.metrics import confusion_matrix as cm_func
 from training.augmentations import get_eval_transform, get_train_transform
 from training.dataset import PatchDataset
@@ -82,7 +82,7 @@ def train_one_fold(fold, train_idx, val_idx, dataset_path, cfg, train_svs, val_s
     train_loader = DataLoader(Subset(train_ds, train_idx), batch_size=cfg['batch_size'], shuffle=True, num_workers=NUM_WORKERS)
     val_loader = DataLoader(Subset(val_ds, val_idx), batch_size=cfg['batch_size'], shuffle=False, num_workers=NUM_WORKERS)
 
-    model = FoundationClassifier(num_classes=NUM_STAGE1_CLASSES, pretrained=cfg['pretrained']).to(DEVICE)
+    model = ResNetClassifier(num_classes=NUM_STAGE1_CLASSES, pretrained=cfg['pretrained']).to(DEVICE)
     
     criterion = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=cfg['learning_rate'], weight_decay=cfg['weight_decay'])
@@ -220,7 +220,7 @@ def train(args):
     train_ds = PatchDataset(args.data, transform=get_train_transform(), class_names=STAGE1_CLASSES, label_remap=STAGE1_REMAP)
     train_loader = DataLoader(Subset(train_ds, cv_idx), batch_size=cfg['batch_size'], shuffle=True, num_workers=NUM_WORKERS)
 
-    final_model = FoundationClassifier(num_classes=NUM_STAGE1_CLASSES, pretrained=cfg['pretrained']).to(DEVICE)
+    final_model = ResNetClassifier(num_classes=NUM_STAGE1_CLASSES, pretrained=cfg['pretrained']).to(DEVICE)
     criterion = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(final_model.parameters(), lr=cfg['learning_rate'], weight_decay=cfg['weight_decay'])
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=best_n_epochs) if cfg["scheduler"] == "cosine" else None
@@ -308,3 +308,6 @@ def main():
     args = parser.parse_args()
     train(args)
 
+
+if __name__ == "__main__":
+    main()
