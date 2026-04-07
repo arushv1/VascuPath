@@ -52,7 +52,7 @@ def evaluate(model, test_loader, criterion, device):
     all_labels = []
 
     with torch.no_grad():
-        for images, labels in tqdm(test_loader, desc="Evaluating"):
+        for images, labels in test_loader:
             images, labels = images.to(device), labels.to(device)
             outputs = model(images)
             loss = criterion(outputs, labels)
@@ -66,15 +66,20 @@ def evaluate(model, test_loader, criterion, device):
 
     return {
         "loss": total_loss / total,
-        "accuracy": correct / total,
-        "predictions": np.array(all_preds),
-        "labels": np.array(all_labels),
+        "accuracy": 100.0 * correct / total,
+        "predictions": np.concatenate(all_preds),
+        "labels": np.concatenate(all_labels),
     }
 
 
 def train_one_fold(fold, train_idx, val_idx, dataset_path, cfg, train_svs, val_svs):
     '''Train and evaluate one fold'''
     print(f"FOLD {fold+1}")
+    print(f"{'=' * 60}")
+    print(f"  Train: {len(train_idx)} patches from {len(train_svs)} SVS files")
+    print(f"    SVS: {', '.join(sorted(train_svs))}")
+    print(f"  Val:   {len(val_idx)} patches from {len(val_svs)} SVS files")
+    print(f"    SVS: {', '.join(sorted(val_svs))}")
     
     train_ds = PatchDataset(dataset_path, transform=get_train_transform(), class_names=STAGE1_CLASSES, label_remap=STAGE1_REMAP)
     val_ds = PatchDataset(dataset_path, transform=get_eval_transform(), class_names=STAGE1_CLASSES, label_remap=STAGE1_REMAP)

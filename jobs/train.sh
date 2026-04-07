@@ -20,5 +20,5 @@ source /projectnb/rise2019/arushv/VascuPath/vascuenv/bin/activate
 cd /projectnb/rise2019/arushv/VascuPath/src
 
 python -m training.stage1_resnet --folds 5 --epochs 10
-#python -m training.stage1_foundation --folds 5 --epochs 10
+python -m training.stage1_foundation --folds 5 --epochs 10
 
