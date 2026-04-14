@@ -28,7 +28,7 @@ from models.vessel_detector import VesselDetector
 from training.dataset import PatchDataset
 from training.augmentations import get_eval_transform, get_train_transform
 
-from config import (DEVICE, TRAINING, SEED, CHECKPOINTS_DIR, NORMALIZED_PATCHES_DIR, NUM_WORKERS)
+from config import (DEVICE, TRAINING, CHECKPOINTS_DIR, NORMALIZED_PATCHES_DIR, NUM_WORKERS)
 
 STAGE2_H_CLASSES = ["background_h", "vessel_h"]
 STAGE2_E_CLASSES = ["background_e", "vessel_e"]
@@ -67,14 +67,19 @@ def evaluate(model, loader, criterion, device):
     return {
         "loss": total_loss/total,
         "accuracy": 100.0 * correct / total,
-        "predictions": np.array(all_preds),
-        "labels": np.array(all_labels),
+        "predictions": np.concatenate(all_preds),
+        "labels": np.concatenate(all_labels),
     }
 
 def train_one_fold(fold, train_idx, val_idx, dataset_path, cfg, train_svs, val_svs, classes):
     '''Train and evaluate one fold'''
     print(f"FOLD {fold+1}")
-    
+    print(f"{'=' * 60}")
+    print(f"  Train: {len(train_idx)} patches from {len(train_svs)} SVS files")
+    print(f"    SVS: {', '.join(sorted(train_svs))}")
+    print(f"  Val:   {len(val_idx)} patches from {len(val_svs)} SVS files")
+    print(f"    SVS: {', '.join(sorted(val_svs))}")
+
     train_ds = PatchDataset(dataset_path, transform=get_train_transform(), class_names=classes)
     val_ds = PatchDataset(dataset_path, transform=get_eval_transform(), class_names=classes)
 

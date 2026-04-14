@@ -43,8 +43,7 @@ class FoundationClassifier(nn.Module):
 
     def forward(self, x):
         # backbone outputs class token features
-        with torch.no_grad() if not self.training else torch.enable_grad():
-            features = self.backbone(x)  # (B, 1024)
+        features = self.backbone(x)  # (B, 1024)
         return self.classifier(features)
     
 

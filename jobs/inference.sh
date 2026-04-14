@@ -6,7 +6,7 @@
 #$ -pe omp 4
 #$ -N vascupath_inference
 #$ -j y
-#$ -o /projectnb/rise2019/arushv/VascuPath/logs/
+#$ -o /projectnb/rise2019/arushv/VascuPath/logs/inference/
 
 module load cuda
 source /projectnb/rise2019/arushv/VascuPath/vascuenv/bin/activate
