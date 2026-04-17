@@ -135,7 +135,7 @@ def train_one_fold(fold, train_idx, val_idx, dataset_path, cfg, train_svs, val_s
                 print(f" Early stopping at epoch: {epoch}")
                 break
     
-    print(f"Fold {fold + 1} best: {best_val_acc:.2f}% at epoch {epoch}")
+    print(f"Fold {fold + 1} best: {best_val_acc:.2f}% at epoch {best_epoch}")
     return {"fold": fold + 1, "best_val_acc": best_val_acc, "best_epoch": best_epoch,
             "best_state": best_state, "train_svs": sorted(train_svs), "val_svs": sorted(val_svs),
             "n_train": len(train_idx), "n_val": len(val_idx)}

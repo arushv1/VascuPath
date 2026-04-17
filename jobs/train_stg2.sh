@@ -1,10 +1,12 @@
 #!/bin/bash -l
 #$ -P rise2019
 #$ -l gpus=1
-#$ -l gpu_type=A100|L40S|V100
+#$ -l gpu_type=A100|L40S
 #$ -l h_rt=6:00:00
 #$ -pe omp 4
 #$ -N vascupath_train_stg2
+#$ -m bea
+#$ -M arushv@bu.edu
 #$ -j y
 #$ -o /projectnb/rise2019/arushv/VascuPath/logs/training_stg2
 
@@ -20,5 +22,5 @@ source /projectnb/rise2019/arushv/VascuPath/vascuenv/bin/activate
 cd /projectnb/rise2019/arushv/VascuPath/src
 
 #python -m training.stage2_resnet --folds 5 --epochs 10
-python -m training.stage2_foundation --folds 5 --epochs 10
+python -m training.stage2_foundation --folds 5 --epochs 50
 

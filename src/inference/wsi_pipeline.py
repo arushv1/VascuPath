@@ -29,13 +29,17 @@ from collections import Counter
 
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from config import DEVICE, OUTPUTS_DIR, BATCH_SIZE, NUM_WORKERS, CHECKPOINTS_DIR, QUPATH_COLORS
+from config import DEVICE, OUTPUTS_DIR, BATCH_SIZE, NUM_WORKERS, CHECKPOINTS_DIR, QUPATH_COLORS, SRC_ROOT
 from training.dataset import WSIDataset
 from normalization import normalize_image
 
 
 FINAL_CLASSES = ["background_h", "background_e", "vessel_h", "vessel_e", "white"]
 STAGE1_CLASSES = ["background_h", "background_e", "white"]
+
+STAGE1_MODEL = SRC_ROOT / "checkpoint_test" / "stage1_foundation_model_cv99.00_test94.65.pth"
+STAGE2_H_MODEL = SRC_ROOT / 'checkpoint_test' / "stage2_resnetH_model_cv98.85_test99.22.pth"
+STAGE_E_MODEL = SRC_ROOT / "checkpoint_test" / "stage2_resnetE_model_cv97.88_test97.69.pth"
 
 # =========================================================================
 # Model loading

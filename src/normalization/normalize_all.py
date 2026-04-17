@@ -51,6 +51,7 @@ def normalize_folder(input_dir: Path, output_dir: Path, resume: bool = False):
         except Exception as e:
             errors += 1
             tqdm.write(f"  Error: {img_path.name}: {e}")
+            break
 
     total = len(images)
     processed = total - skipped - errors
@@ -59,8 +60,8 @@ def normalize_folder(input_dir: Path, output_dir: Path, resume: bool = False):
 
 def main():
     parser = argparse.ArgumentParser(description="Batch normalize training patches")
-    parser.add_argument("--input", type=Path, default=RAW_PATCHES_DIR)
-    parser.add_argument("--output", type=Path, default=NORMALIZED_PATCHES_DIR)
+    parser.add_argument("--input", type=Path, default=Path("..") / "data" / "raw" / "train_patches")
+    parser.add_argument("--output", type=Path, default=Path("..") / "data" / "norm")
     parser.add_argument("--resume", action="store_true", help="Skip already-processed files")
     args = parser.parse_args()
 
