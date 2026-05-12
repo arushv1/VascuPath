@@ -10,6 +10,9 @@
 
 module load cuda
 source /projectnb/rise2019/arushv/VascuPath/vascuenv/bin/activate
-cd /projectnb/rise2019/arushv/VascuPath/src
+cd /projectnb/rise2019/arushv/VascuPath
 
-python -m inference.class5_wsi_pipeline ../data/svs/10714.svs --output ../outputs/
+python -m src.inference.wsi_pipeline /projectnb/rise2019/arushv/images --batch --output outputs/ 
+
+
+

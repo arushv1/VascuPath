@@ -5,7 +5,7 @@ import os
 import sys
 from pathlib import Path
 #sys.path.insert(0, str(Path(__file__).parent.parent))
-from config import NORMALIZATION, TISSUE_DETECTION
+from src.config import NORMALIZATION, TISSUE_DETECTION
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
 
 

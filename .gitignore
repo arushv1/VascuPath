@@ -212,6 +212,4 @@ data/
 *.npz
 *.pth
 src/dinov2/
-src/normalization/reference_stats.npz
-src/checkpoints/
 *.svs

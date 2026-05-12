@@ -37,9 +37,9 @@ from normalization import normalize_image
 FINAL_CLASSES = ["background_h", "background_e", "vessel_h", "vessel_e", "white"]
 STAGE1_CLASSES = ["background_h", "background_e", "white"]
 
-STAGE1_MODEL = SRC_ROOT / "checkpoint_test" / "stage1_foundation_model_cv99.00_test94.65.pth"
-STAGE2_H_MODEL = SRC_ROOT / 'checkpoint_test' / "stage2_resnetH_model_cv98.85_test99.22.pth"
-STAGE_E_MODEL = SRC_ROOT / "checkpoint_test" / "stage2_resnetE_model_cv97.88_test97.69.pth"
+STAGE1_MODEL = SRC_ROOT / "checkpoints_test" / "stage1_foundation_model_cv99.00_test94.65.pth"
+STAGE2_H_MODEL = SRC_ROOT / 'checkpoints_test' / "stage2_resnetH_model_cv98.85_test99.22.pth"
+STAGE2_E_MODEL = SRC_ROOT / "checkpoints_test" / "stage2_resnetE_model_cv97.88_test97.69.pth"
 
 # =========================================================================
 # Model loading
@@ -48,7 +48,7 @@ STAGE_E_MODEL = SRC_ROOT / "checkpoint_test" / "stage2_resnetE_model_cv97.88_tes
 def load_foundation_model(checkpoint_path=None, device=None):
     """Load trained foundation model for stain separation."""
     device = device or DEVICE
-    checkpoint_path = Path(checkpoint_path or (CHECKPOINTS_DIR / "best_foundation_model.pth"))
+    checkpoint_path = Path(checkpoint_path or (STAGE1_MODEL))
 
     checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
     class_names = checkpoint.get("class_names", STAGE1_CLASSES)
@@ -79,8 +79,8 @@ def load_resnet_model(stain, checkpoint_path=None, device=None):
     class_names = checkpoint.get("class_names", [f"background_{stain}", f"vessel_{stain}"])
     num_classes = len(class_names)
 
-    from models.vessel_detector import ResNetClassifier
-    model = ResNetClassifier(num_classes=num_classes, pretrained=False).to(device)
+    from models.vessel_detector import VesselDetector
+    model = VesselDetector(num_classes=num_classes, pretrained=False).to(device)
     model.load_state_dict(checkpoint["model_state_dict"])
     model.eval()
 
@@ -339,7 +339,7 @@ def process_slide(svs_path, output_dir=None, foundation_model=None, resnet_h=Non
 
 def main():
     parser = argparse.ArgumentParser(description="Two-stage vascular analysis pipeline")
-    parser.add_argument("input", type=str, help="Path to .svs file or directory")
+    parser.add_argument("input", default="data/svs/10714", type=str, help="Path to .svs file or directory")
     parser.add_argument("--output", type=str, default=None)
     parser.add_argument("--batch", action="store_true")
     parser.add_argument("--no-normalize", action="store_true")
@@ -352,8 +352,8 @@ def main():
 
     resnet_h, resnet_e = None, None
     if not args.stage1_only:
-        resnet_h, _ = load_resnet_model("h")
-        resnet_e, _ = load_resnet_model("e")
+        resnet_h, _ = load_resnet_model(stain="h", checkpoint_path=STAGE2_H_MODEL)
+        resnet_e, _ = load_resnet_model(stain="e", checkpoint_path=STAGE2_E_MODEL)
 
     input_path = Path(args.input)
     normalize = not args.no_normalize
