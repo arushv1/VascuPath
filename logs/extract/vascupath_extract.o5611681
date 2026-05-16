@@ -1,0 +1,26 @@
+/projectnb/rise2019/arushv/VascuPath/src/dinov2/layers/swiglu_ffn.py:43: UserWarning: xFormers is available (SwiGLU)
+  warnings.warn("xFormers is available (SwiGLU)")
+/projectnb/rise2019/arushv/VascuPath/src/dinov2/layers/attention.py:27: UserWarning: xFormers is available (Attention)
+  warnings.warn("xFormers is available (Attention)")
+/projectnb/rise2019/arushv/VascuPath/src/dinov2/layers/block.py:33: UserWarning: xFormers is available (Block)
+  warnings.warn("xFormers is available (Block)")
+Found 10 SVS files
+Output: ../data/processed
+Device: cuda
+
+Loading DINOv2 ViT-Large backbone...
+Backbone loaded.
+
+[1/10] 10_12_163628 — exists, skipping
+[2/10] 10_13_135306 — exists, skipping
+[3/10] 10_13_151033 — exists, skipping
+[4/10] 10_14_203438 — exists, skipping
+[5/10] 10_16_102602 — exists, skipping
+[6/10] 10_16_190748 — exists, skipping
+[7/10] 10_20_170347 — exists, skipping
+[8/10] 10_21_110721 — exists, skipping
+[9/10] 10_21_191922 — exists, skipping
+[10/10] 10_23_111330 — exists, skipping
+
+Done. 0 total tiles in 0.0 minutes.
+Feature files: ../data/processed/

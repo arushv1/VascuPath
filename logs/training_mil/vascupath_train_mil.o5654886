@@ -1,0 +1,345 @@
+=== MIL Training ===
+Job ID: 5654886
+Host: scc-j08
+Date: Fri May 15 17:26:47 EDT 2026
+
+Device: cuda
+Features: data/processed/
+Labels: data/case_labels.xlsx
+
+======================================================================
+Comparison: Control vs RHI
+  Effect of head impacts without CTE pathology
+  Class 0: Control, Class 1: RHI
+
+  Labeled slides in spreadsheet: 165
+  Slides: 165,Class 0: 24, Class 1: 141,Cases: 165
+  Held-out test set: 24 slides (14.5%) — dist {1: 20, 0: 4}
+  Dev set (CV + final): 141 slides — dist {1: 121, 0: 20}
+  Class weights: [3.525      0.58264464]
+
+  --- Fold 1/5 ---
+  Train: 113 slides (113 cases), Val: 28 slides (28 cases)
+  Train dist: Counter({1: 97, 0: 16}), Val dist: Counter({1: 24, 0: 4})
+  Epoch   1/50 | Train loss: 0.9488, Train acc: 53.1% | Val acc: 53.6%, Val AUC: 0.792, Val balanced acc: 72.9%
+  Epoch   5/50 | Train loss: 0.2621, Train acc: 94.7% | Val acc: 78.6%, Val AUC: 0.948, Val balanced acc: 87.5%
+  Epoch  10/50 | Train loss: 0.1653, Train acc: 95.6% | Val acc: 85.7%, Val AUC: 0.958, Val balanced acc: 91.7%
+  Epoch  15/50 | Train loss: 0.0989, Train acc: 98.2% | Val acc: 92.9%, Val AUC: 0.969, Val balanced acc: 95.8%
+  Epoch  20/50 | Train loss: 0.2970, Train acc: 97.3% | Val acc: 89.3%, Val AUC: 0.958, Val balanced acc: 93.8%
+  Epoch  25/50 | Train loss: 0.0016, Train acc: 100.0% | Val acc: 89.3%, Val AUC: 0.948, Val balanced acc: 93.8%
+  Epoch  30/50 | Train loss: 0.0258, Train acc: 99.1% | Val acc: 89.3%, Val AUC: 0.938, Val balanced acc: 72.9%
+Early stopping at epoch 31 (patience 10)
+  Fold 1 best: AUC=0.979 at epoch 21
+
+  --- Fold 2/5 ---
+  Train: 113 slides (113 cases), Val: 28 slides (28 cases)
+  Train dist: Counter({1: 97, 0: 16}), Val dist: Counter({1: 24, 0: 4})
+  Epoch   1/50 | Train loss: 0.6341, Train acc: 61.9% | Val acc: 78.6%, Val AUC: 0.792, Val balanced acc: 66.7%
+  Epoch   5/50 | Train loss: 0.4292, Train acc: 91.2% | Val acc: 85.7%, Val AUC: 0.875, Val balanced acc: 81.2%
+  Epoch  10/50 | Train loss: 0.1616, Train acc: 96.5% | Val acc: 85.7%, Val AUC: 0.948, Val balanced acc: 81.2%
+  Epoch  15/50 | Train loss: 0.1504, Train acc: 98.2% | Val acc: 78.6%, Val AUC: 0.969, Val balanced acc: 87.5%
+  Epoch  20/50 | Train loss: 0.0896, Train acc: 99.1% | Val acc: 89.3%, Val AUC: 0.938, Val balanced acc: 83.3%
+  Epoch  25/50 | Train loss: 0.0915, Train acc: 99.1% | Val acc: 89.3%, Val AUC: 0.927, Val balanced acc: 83.3%
+Early stopping at epoch 25 (patience 10)
+  Fold 2 best: AUC=0.969 at epoch 15
+
+  --- Fold 3/5 ---
+  Train: 113 slides (113 cases), Val: 28 slides (28 cases)
+  Train dist: Counter({1: 97, 0: 16}), Val dist: Counter({1: 24, 0: 4})
+  Epoch   1/50 | Train loss: 0.9076, Train acc: 52.2% | Val acc: 14.3%, Val AUC: 0.969, Val balanced acc: 50.0%
+  Epoch   5/50 | Train loss: 0.4913, Train acc: 89.4% | Val acc: 92.9%, Val AUC: 0.958, Val balanced acc: 95.8%
+  Epoch  10/50 | Train loss: 0.2769, Train acc: 96.5% | Val acc: 85.7%, Val AUC: 0.979, Val balanced acc: 91.7%
+Early stopping at epoch 13 (patience 10)
+  Fold 3 best: AUC=0.990 at epoch 3
+
+  --- Fold 4/5 ---
+  Train: 112 slides (112 cases), Val: 29 slides (29 cases)
+  Train dist: Counter({1: 96, 0: 16}), Val dist: Counter({1: 25, 0: 4})
+  Epoch   1/50 | Train loss: 0.7487, Train acc: 57.1% | Val acc: 82.8%, Val AUC: 0.960, Val balanced acc: 90.0%
+  Epoch   5/50 | Train loss: 0.2084, Train acc: 95.5% | Val acc: 93.1%, Val AUC: 0.990, Val balanced acc: 96.0%
+  Epoch  10/50 | Train loss: 0.1910, Train acc: 97.3% | Val acc: 96.6%, Val AUC: 1.000, Val balanced acc: 87.5%
+  Epoch  15/50 | Train loss: 0.1564, Train acc: 98.2% | Val acc: 96.6%, Val AUC: 0.990, Val balanced acc: 87.5%
+Early stopping at epoch 17 (patience 10)
+  Fold 4 best: AUC=1.000 at epoch 7
+
+  --- Fold 5/5 ---
+  Train: 113 slides (113 cases), Val: 28 slides (28 cases)
+  Train dist: Counter({1: 97, 0: 16}), Val dist: Counter({1: 24, 0: 4})
+  Epoch   1/50 | Train loss: 0.6264, Train acc: 66.4% | Val acc: 60.7%, Val AUC: 0.823, Val balanced acc: 66.7%
+  Epoch   5/50 | Train loss: 0.3572, Train acc: 91.2% | Val acc: 78.6%, Val AUC: 0.906, Val balanced acc: 77.1%
+  Epoch  10/50 | Train loss: 0.2002, Train acc: 94.7% | Val acc: 85.7%, Val AUC: 0.938, Val balanced acc: 81.2%
+  Epoch  15/50 | Train loss: 0.0061, Train acc: 100.0% | Val acc: 89.3%, Val AUC: 0.969, Val balanced acc: 83.3%
+  Epoch  20/50 | Train loss: 0.1456, Train acc: 97.3% | Val acc: 92.9%, Val AUC: 0.969, Val balanced acc: 75.0%
+  Epoch  25/50 | Train loss: 0.0141, Train acc: 99.1% | Val acc: 85.7%, Val AUC: 0.938, Val balanced acc: 70.8%
+Early stopping at epoch 29 (patience 10)
+  Fold 5 best: AUC=0.979 at epoch 19
+
+  CV Results for Control vs RHI:
+  Mean AUC: 0.983 ± 0.011
+  Per-fold AUCs: ['0.979', '0.969', '0.990', '1.000', '0.979']
+  Mean best epoch: 13
+
+  Training final model on 141 dev slides...
+    Epoch 1/13 | Loss: 0.6264, Acc: 69.5%
+    Epoch 10/13 | Loss: 0.1328, Acc: 97.9%
+  Test set (24 slides, dist {1: 20, 0: 4}):
+    Test AUC: 1.000
+    Test Acc: 100.0%
+    Test Balanced Acc: 100.0%
+  Final model saved to mil/mil_control_vs_rhi.pth
+  CV AUC: 0.983 ± 0.011
+  Test AUC: 1.000
+
+======================================================================
+Comparison: RHI vs Low CTE
+  Onset of early CTE changes
+  Class 0: RHI, Class 1: Low CTE
+
+  Labeled slides in spreadsheet: 273
+  Slides: 273,Class 0: 141, Class 1: 132,Cases: 273
+  Held-out test set: 39 slides (14.3%) — dist {1: 19, 0: 20}
+  Dev set (CV + final): 234 slides — dist {1: 113, 0: 121}
+  Class weights: [0.96694213 1.0353982 ]
+
+  --- Fold 1/5 ---
+  Train: 187 slides (187 cases), Val: 47 slides (47 cases)
+  Train dist: Counter({0: 96, 1: 91}), Val dist: Counter({0: 25, 1: 22})
+  Epoch   1/50 | Train loss: 1.0796, Train acc: 48.7% | Val acc: 53.2%, Val AUC: 0.642, Val balanced acc: 50.0%
+  Epoch   5/50 | Train loss: 1.1358, Train acc: 53.5% | Val acc: 55.3%, Val AUC: 0.729, Val balanced acc: 52.5%
+  Epoch  10/50 | Train loss: 1.3755, Train acc: 63.1% | Val acc: 63.8%, Val AUC: 0.735, Val balanced acc: 65.2%
+  Epoch  15/50 | Train loss: 1.1001, Train acc: 72.7% | Val acc: 66.0%, Val AUC: 0.791, Val balanced acc: 68.0%
+  Epoch  20/50 | Train loss: 0.9229, Train acc: 72.7% | Val acc: 66.0%, Val AUC: 0.696, Val balanced acc: 66.6%
+  Epoch  25/50 | Train loss: 0.7136, Train acc: 80.2% | Val acc: 61.7%, Val AUC: 0.702, Val balanced acc: 61.8%
+Early stopping at epoch 25 (patience 10)
+  Fold 1 best: AUC=0.791 at epoch 15
+
+  --- Fold 2/5 ---
+  Train: 187 slides (187 cases), Val: 47 slides (47 cases)
+  Train dist: Counter({0: 97, 1: 90}), Val dist: Counter({0: 24, 1: 23})
+  Epoch   1/50 | Train loss: 0.7798, Train acc: 47.6% | Val acc: 51.1%, Val AUC: 0.420, Val balanced acc: 50.0%
+  Epoch   5/50 | Train loss: 0.9897, Train acc: 58.8% | Val acc: 46.8%, Val AUC: 0.493, Val balanced acc: 47.6%
+  Epoch  10/50 | Train loss: 1.3734, Train acc: 57.2% | Val acc: 51.1%, Val AUC: 0.505, Val balanced acc: 51.3%
+  Epoch  15/50 | Train loss: 1.0545, Train acc: 63.1% | Val acc: 48.9%, Val AUC: 0.525, Val balanced acc: 49.1%
+  Epoch  20/50 | Train loss: 1.2603, Train acc: 72.2% | Val acc: 46.8%, Val AUC: 0.534, Val balanced acc: 47.5%
+  Epoch  25/50 | Train loss: 0.9434, Train acc: 78.6% | Val acc: 55.3%, Val AUC: 0.529, Val balanced acc: 55.5%
+  Epoch  30/50 | Train loss: 0.8140, Train acc: 76.5% | Val acc: 53.2%, Val AUC: 0.534, Val balanced acc: 53.4%
+  Epoch  35/50 | Train loss: 0.4829, Train acc: 89.3% | Val acc: 53.2%, Val AUC: 0.542, Val balanced acc: 53.4%
+Early stopping at epoch 38 (patience 10)
+  Fold 2 best: AUC=0.551 at epoch 28
+
+  --- Fold 3/5 ---
+  Train: 187 slides (187 cases), Val: 47 slides (47 cases)
+  Train dist: Counter({0: 97, 1: 90}), Val dist: Counter({0: 24, 1: 23})
+  Epoch   1/50 | Train loss: 0.8552, Train acc: 45.5% | Val acc: 55.3%, Val AUC: 0.562, Val balanced acc: 55.0%
+  Epoch   5/50 | Train loss: 1.0860, Train acc: 55.1% | Val acc: 55.3%, Val AUC: 0.643, Val balanced acc: 55.6%
+  Epoch  10/50 | Train loss: 1.1519, Train acc: 63.1% | Val acc: 59.6%, Val AUC: 0.645, Val balanced acc: 59.0%
+  Epoch  15/50 | Train loss: 0.9011, Train acc: 74.3% | Val acc: 57.4%, Val AUC: 0.589, Val balanced acc: 56.9%
+Early stopping at epoch 18 (patience 10)
+  Fold 3 best: AUC=0.694 at epoch 8
+
+  --- Fold 4/5 ---
+  Train: 187 slides (187 cases), Val: 47 slides (47 cases)
+  Train dist: Counter({0: 97, 1: 90}), Val dist: Counter({0: 24, 1: 23})
+  Epoch   1/50 | Train loss: 1.1249, Train acc: 56.1% | Val acc: 51.1%, Val AUC: 0.507, Val balanced acc: 50.0%
+  Epoch   5/50 | Train loss: 1.2453, Train acc: 60.4% | Val acc: 55.3%, Val AUC: 0.598, Val balanced acc: 55.4%
+  Epoch  10/50 | Train loss: 0.9310, Train acc: 69.5% | Val acc: 59.6%, Val AUC: 0.639, Val balanced acc: 60.4%
+  Epoch  15/50 | Train loss: 0.9751, Train acc: 71.1% | Val acc: 51.1%, Val AUC: 0.580, Val balanced acc: 50.9%
+  Epoch  20/50 | Train loss: 0.9048, Train acc: 77.5% | Val acc: 53.2%, Val AUC: 0.598, Val balanced acc: 53.9%
+Early stopping at epoch 23 (patience 10)
+  Fold 4 best: AUC=0.668 at epoch 13
+
+  --- Fold 5/5 ---
+  Train: 188 slides (188 cases), Val: 46 slides (46 cases)
+  Train dist: Counter({0: 97, 1: 91}), Val dist: Counter({0: 24, 1: 22})
+  Epoch   1/50 | Train loss: 1.0451, Train acc: 53.7% | Val acc: 52.2%, Val AUC: 0.612, Val balanced acc: 50.0%
+  Epoch   5/50 | Train loss: 1.1687, Train acc: 53.7% | Val acc: 45.7%, Val AUC: 0.589, Val balanced acc: 47.7%
+  Epoch  10/50 | Train loss: 1.0690, Train acc: 53.2% | Val acc: 58.7%, Val AUC: 0.591, Val balanced acc: 59.5%
+Early stopping at epoch 13 (patience 10)
+  Fold 5 best: AUC=0.642 at epoch 3
+
+  CV Results for RHI vs Low CTE:
+  Mean AUC: 0.669 ± 0.078
+  Per-fold AUCs: ['0.791', '0.551', '0.694', '0.668', '0.642']
+  Mean best epoch: 13
+
+  Training final model on 234 dev slides...
+    Epoch 1/13 | Loss: 1.1963, Acc: 53.4%
+    Epoch 10/13 | Loss: 1.0348, Acc: 67.1%
+  Test set (39 slides, dist {1: 19, 0: 20}):
+    Test AUC: 0.655
+    Test Acc: 53.8%
+    Test Balanced Acc: 54.1%
+  Final model saved to mil/mil_rhi_vs_low.pth
+  CV AUC: 0.669 ± 0.078
+  Test AUC: 0.655
+
+======================================================================
+Comparison: Low CTE vs High CTE
+  Disease severity differentiation
+  Class 0: Low CTE, Class 1: High CTE
+
+  Labeled slides in spreadsheet: 312
+  Slides: 312,Class 0: 132, Class 1: 180,Cases: 312
+  Held-out test set: 45 slides (14.4%) — dist {0: 19, 1: 26}
+  Dev set (CV + final): 267 slides — dist {0: 113, 1: 154}
+  Class weights: [1.1814159 0.8668831]
+
+  --- Fold 1/5 ---
+  Train: 213 slides (213 cases), Val: 54 slides (54 cases)
+  Train dist: Counter({1: 123, 0: 90}), Val dist: Counter({1: 31, 0: 23})
+  Epoch   1/50 | Train loss: 0.7686, Train acc: 50.7% | Val acc: 68.5%, Val AUC: 0.694, Val balanced acc: 68.7%
+  Epoch   5/50 | Train loss: 0.9614, Train acc: 68.1% | Val acc: 68.5%, Val AUC: 0.757, Val balanced acc: 67.0%
+  Epoch  10/50 | Train loss: 0.9186, Train acc: 74.2% | Val acc: 70.4%, Val AUC: 0.777, Val balanced acc: 66.9%
+  Epoch  15/50 | Train loss: 0.7812, Train acc: 82.2% | Val acc: 68.5%, Val AUC: 0.790, Val balanced acc: 68.7%
+  Epoch  20/50 | Train loss: 0.6548, Train acc: 86.9% | Val acc: 68.5%, Val AUC: 0.753, Val balanced acc: 67.0%
+Early stopping at epoch 22 (patience 10)
+  Fold 1 best: AUC=0.799 at epoch 12
+
+  --- Fold 2/5 ---
+  Train: 213 slides (213 cases), Val: 54 slides (54 cases)
+  Train dist: Counter({1: 123, 0: 90}), Val dist: Counter({1: 31, 0: 23})
+  Epoch   1/50 | Train loss: 0.8233, Train acc: 49.3% | Val acc: 64.8%, Val AUC: 0.694, Val balanced acc: 59.8%
+  Epoch   5/50 | Train loss: 1.1517, Train acc: 67.6% | Val acc: 57.4%, Val AUC: 0.717, Val balanced acc: 61.8%
+  Epoch  10/50 | Train loss: 0.9533, Train acc: 77.5% | Val acc: 70.4%, Val AUC: 0.735, Val balanced acc: 68.0%
+  Epoch  15/50 | Train loss: 0.8307, Train acc: 83.6% | Val acc: 68.5%, Val AUC: 0.764, Val balanced acc: 68.1%
+  Epoch  20/50 | Train loss: 0.5724, Train acc: 87.3% | Val acc: 70.4%, Val AUC: 0.721, Val balanced acc: 68.0%
+Early stopping at epoch 22 (patience 10)
+  Fold 2 best: AUC=0.798 at epoch 12
+
+  --- Fold 3/5 ---
+  Train: 214 slides (214 cases), Val: 53 slides (53 cases)
+  Train dist: Counter({1: 123, 0: 91}), Val dist: Counter({1: 31, 0: 22})
+  Epoch   1/50 | Train loss: 0.7541, Train acc: 52.8% | Val acc: 58.5%, Val AUC: 0.735, Val balanced acc: 50.0%
+  Epoch   5/50 | Train loss: 0.8378, Train acc: 79.0% | Val acc: 60.4%, Val AUC: 0.721, Val balanced acc: 63.5%
+  Epoch  10/50 | Train loss: 0.9143, Train acc: 79.9% | Val acc: 66.0%, Val AUC: 0.789, Val balanced acc: 67.7%
+  Epoch  15/50 | Train loss: 0.7928, Train acc: 84.1% | Val acc: 69.8%, Val AUC: 0.758, Val balanced acc: 69.6%
+  Epoch  20/50 | Train loss: 0.4656, Train acc: 89.7% | Val acc: 67.9%, Val AUC: 0.830, Val balanced acc: 68.6%
+  Epoch  25/50 | Train loss: 0.6436, Train acc: 86.4% | Val acc: 67.9%, Val AUC: 0.777, Val balanced acc: 70.6%
+  Epoch  30/50 | Train loss: 0.4310, Train acc: 91.6% | Val acc: 67.9%, Val AUC: 0.765, Val balanced acc: 67.3%
+Early stopping at epoch 30 (patience 10)
+  Fold 3 best: AUC=0.830 at epoch 20
+
+  --- Fold 4/5 ---
+  Train: 214 slides (214 cases), Val: 53 slides (53 cases)
+  Train dist: Counter({1: 124, 0: 90}), Val dist: Counter({1: 30, 0: 23})
+  Epoch   1/50 | Train loss: 0.8930, Train acc: 53.3% | Val acc: 43.4%, Val AUC: 0.675, Val balanced acc: 50.0%
+  Epoch   5/50 | Train loss: 1.0362, Train acc: 65.4% | Val acc: 69.8%, Val AUC: 0.742, Val balanced acc: 69.3%
+  Epoch  10/50 | Train loss: 0.9099, Train acc: 74.8% | Val acc: 69.8%, Val AUC: 0.774, Val balanced acc: 69.8%
+  Epoch  15/50 | Train loss: 0.6713, Train acc: 79.4% | Val acc: 67.9%, Val AUC: 0.771, Val balanced acc: 68.6%
+  Epoch  20/50 | Train loss: 0.5546, Train acc: 85.5% | Val acc: 67.9%, Val AUC: 0.758, Val balanced acc: 66.6%
+Early stopping at epoch 21 (patience 10)
+  Fold 4 best: AUC=0.822 at epoch 11
+
+  --- Fold 5/5 ---
+  Train: 214 slides (214 cases), Val: 53 slides (53 cases)
+  Train dist: Counter({1: 123, 0: 91}), Val dist: Counter({1: 31, 0: 22})
+  Epoch   1/50 | Train loss: 1.0958, Train acc: 53.3% | Val acc: 58.5%, Val AUC: 0.811, Val balanced acc: 50.0%
+  Epoch   5/50 | Train loss: 1.1260, Train acc: 70.6% | Val acc: 79.2%, Val AUC: 0.814, Val balanced acc: 79.0%
+  Epoch  10/50 | Train loss: 1.0248, Train acc: 73.8% | Val acc: 83.0%, Val AUC: 0.811, Val balanced acc: 80.9%
+Early stopping at epoch 14 (patience 10)
+  Fold 5 best: AUC=0.837 at epoch 4
+
+  CV Results for Low CTE vs High CTE:
+  Mean AUC: 0.817 ± 0.016
+  Per-fold AUCs: ['0.799', '0.798', '0.830', '0.822', '0.837']
+  Mean best epoch: 12
+
+  Training final model on 267 dev slides...
+    Epoch 1/11 | Loss: 0.7598, Acc: 49.1%
+    Epoch 10/11 | Loss: 0.8989, Acc: 73.8%
+  Test set (45 slides, dist {0: 19, 1: 26}):
+    Test AUC: 0.713
+    Test Acc: 62.2%
+    Test Balanced Acc: 62.3%
+  Final model saved to mil/mil_low_vs_high.pth
+  CV AUC: 0.817 ± 0.016
+  Test AUC: 0.713
+
+======================================================================
+Comparison: No CTE vs CTE
+  Any CTE pathology vs none
+  Class 0: ['Control', 'RHI'], Class 1: ['Low CTE', 'High CTE']
+
+  Labeled slides in spreadsheet: 477
+  Slides: 477,Class 0: 165, Class 1: 312,Cases: 477
+  Held-out test set: 69 slides (14.5%) — dist {1: 45, 0: 24}
+  Dev set (CV + final): 408 slides — dist {1: 267, 0: 141}
+  Class weights: [1.4468085  0.76404494]
+
+  --- Fold 1/5 ---
+  Train: 326 slides (326 cases), Val: 82 slides (82 cases)
+  Train dist: Counter({1: 214, 0: 112}), Val dist: Counter({1: 53, 0: 29})
+  Epoch   1/50 | Train loss: 0.9485, Train acc: 51.2% | Val acc: 35.4%, Val AUC: 0.567, Val balanced acc: 50.0%
+  Epoch   5/50 | Train loss: 1.3168, Train acc: 56.1% | Val acc: 65.9%, Val AUC: 0.623, Val balanced acc: 54.1%
+  Epoch  10/50 | Train loss: 1.1808, Train acc: 69.9% | Val acc: 57.3%, Val AUC: 0.552, Val balanced acc: 54.5%
+  Epoch  15/50 | Train loss: 1.0699, Train acc: 71.8% | Val acc: 45.1%, Val AUC: 0.550, Val balanced acc: 49.0%
+Early stopping at epoch 15 (patience 10)
+  Fold 1 best: AUC=0.623 at epoch 5
+
+  --- Fold 2/5 ---
+  Train: 326 slides (326 cases), Val: 82 slides (82 cases)
+  Train dist: Counter({1: 213, 0: 113}), Val dist: Counter({1: 54, 0: 28})
+  Epoch   1/50 | Train loss: 0.8939, Train acc: 51.8% | Val acc: 34.1%, Val AUC: 0.495, Val balanced acc: 50.0%
+  Epoch   5/50 | Train loss: 1.1953, Train acc: 64.4% | Val acc: 64.6%, Val AUC: 0.631, Val balanced acc: 57.7%
+  Epoch  10/50 | Train loss: 1.2231, Train acc: 66.9% | Val acc: 59.8%, Val AUC: 0.609, Val balanced acc: 60.0%
+  Epoch  15/50 | Train loss: 1.1097, Train acc: 69.0% | Val acc: 58.5%, Val AUC: 0.529, Val balanced acc: 59.1%
+Early stopping at epoch 19 (patience 10)
+  Fold 2 best: AUC=0.653 at epoch 9
+
+  --- Fold 3/5 ---
+  Train: 327 slides (327 cases), Val: 81 slides (81 cases)
+  Train dist: Counter({1: 214, 0: 113}), Val dist: Counter({1: 53, 0: 28})
+  Epoch   1/50 | Train loss: 1.1509, Train acc: 53.5% | Val acc: 34.6%, Val AUC: 0.657, Val balanced acc: 50.0%
+  Epoch   5/50 | Train loss: 1.1705, Train acc: 68.2% | Val acc: 65.4%, Val AUC: 0.712, Val balanced acc: 63.5%
+  Epoch  10/50 | Train loss: 1.2460, Train acc: 70.6% | Val acc: 63.0%, Val AUC: 0.662, Val balanced acc: 61.6%
+Early stopping at epoch 13 (patience 10)
+  Fold 3 best: AUC=0.731 at epoch 3
+
+  --- Fold 4/5 ---
+  Train: 326 slides (326 cases), Val: 82 slides (82 cases)
+  Train dist: Counter({1: 213, 0: 113}), Val dist: Counter({1: 54, 0: 28})
+  Epoch   1/50 | Train loss: 0.8639, Train acc: 48.8% | Val acc: 34.1%, Val AUC: 0.601, Val balanced acc: 50.0%
+  Epoch   5/50 | Train loss: 1.1135, Train acc: 61.3% | Val acc: 70.7%, Val AUC: 0.655, Val balanced acc: 63.2%
+  Epoch  10/50 | Train loss: 1.2196, Train acc: 69.6% | Val acc: 65.9%, Val AUC: 0.626, Val balanced acc: 62.9%
+  Epoch  15/50 | Train loss: 1.0143, Train acc: 73.6% | Val acc: 65.9%, Val AUC: 0.659, Val balanced acc: 60.3%
+  Epoch  20/50 | Train loss: 0.7392, Train acc: 84.4% | Val acc: 69.5%, Val AUC: 0.659, Val balanced acc: 64.8%
+  Epoch  25/50 | Train loss: 0.6879, Train acc: 85.0% | Val acc: 63.4%, Val AUC: 0.726, Val balanced acc: 57.6%
+  Epoch  30/50 | Train loss: 0.4058, Train acc: 91.4% | Val acc: 63.4%, Val AUC: 0.650, Val balanced acc: 59.3%
+  Epoch  35/50 | Train loss: 0.3342, Train acc: 92.3% | Val acc: 70.7%, Val AUC: 0.625, Val balanced acc: 64.0%
+Early stopping at epoch 35 (patience 10)
+  Fold 4 best: AUC=0.726 at epoch 25
+
+  --- Fold 5/5 ---
+  Train: 327 slides (327 cases), Val: 81 slides (81 cases)
+  Train dist: Counter({1: 214, 0: 113}), Val dist: Counter({1: 53, 0: 28})
+  Epoch   1/50 | Train loss: 0.7888, Train acc: 48.0% | Val acc: 34.6%, Val AUC: 0.574, Val balanced acc: 50.0%
+  Epoch   5/50 | Train loss: 1.1234, Train acc: 62.4% | Val acc: 56.8%, Val AUC: 0.651, Val balanced acc: 62.8%
+  Epoch  10/50 | Train loss: 1.1076, Train acc: 69.4% | Val acc: 61.7%, Val AUC: 0.615, Val balanced acc: 55.6%
+  Epoch  15/50 | Train loss: 1.1328, Train acc: 71.3% | Val acc: 55.6%, Val AUC: 0.545, Val balanced acc: 51.7%
+Early stopping at epoch 15 (patience 10)
+  Fold 5 best: AUC=0.651 at epoch 5
+
+  CV Results for No CTE vs CTE:
+  Mean AUC: 0.677 ± 0.043
+  Per-fold AUCs: ['0.623', '0.653', '0.731', '0.726', '0.651']
+  Mean best epoch: 9
+
+  Training final model on 408 dev slides...
+    Epoch 1/9 | Loss: 0.9551, Acc: 49.0%
+  Test set (69 slides, dist {1: 45, 0: 24}):
+    Test AUC: 0.707
+    Test Acc: 62.3%
+    Test Balanced Acc: 59.4%
+  Final model saved to mil/mil_control_vs_CTE.pth
+  CV AUC: 0.677 ± 0.043
+  Test AUC: 0.707
+
+======================================================================
+SUMMARY
+======================================================================
+  Control vs RHI            | CV AUC: 0.983 ± 0.011 | Test AUC: 1.000 | Slides: 165 (test: 24)
+  RHI vs Low CTE            | CV AUC: 0.669 ± 0.078 | Test AUC: 0.655 | Slides: 273 (test: 39)
+  Low CTE vs High CTE       | CV AUC: 0.817 ± 0.016 | Test AUC: 0.713 | Slides: 312 (test: 45)
+  No CTE vs CTE             | CV AUC: 0.677 ± 0.043 | Test AUC: 0.707 | Slides: 477 (test: 69)
+
+=== Finished at Fri May 15 17:37:22 EDT 2026 ===

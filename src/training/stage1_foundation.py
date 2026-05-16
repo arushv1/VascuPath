@@ -11,7 +11,7 @@ Usage:
 """
 
 # Check gpu types: qconf -sel | head -20
-# Request gpu: qrsh -P rise2019 -l gpus=1 -l gpu_type=A100 -l h_rt=2:00:00
+# Request gpu: qrsh -P rise2019 -pe omp 4 -l gpus=1 -l gpu_type=A100 -l h_rt=2:00:00
 
 import argparse
 import random

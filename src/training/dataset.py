@@ -213,38 +213,89 @@ class WSIDataset(Dataset):
         self.coords = self._find_tissue_coords(dims, stride_px)
 
     def _find_tissue_coords(self, dims, stride_px):
-        """Find tile coordinates that contain tissue using thumbnail."""
+        """
+        Find tile coordinates that contain tissue using thumbnail.
+ 
+        Uses LAB color space with 3-criterion voting for robust detection
+        of both hematoxylin (dark blue/purple) and light eosin (pale pink)
+        tissue. Falls back to loosened brightness thresholds if skimage
+        is not available.
+ 
+        Criteria (vote >= 2 of 3 to be tissue):
+          1. L* brightness < 95 (not pure white)
+          2. Color magnitude sqrt(a*^2 + b*^2) > 3 (has stain color)
+          3. Local grayscale variance > 20 (has texture)
+        """
         # Get a small thumbnail for fast tissue detection
         thumb_scale = 32
         thumb_w = max(dims[0] // thumb_scale, 1)
         thumb_h = max(dims[1] // thumb_scale, 1)
         thumbnail = self.slide.get_thumbnail((thumb_w, thumb_h))
         thumb_arr = np.array(thumbnail.convert("RGB"))
-
+ 
         # Scale factors from thumbnail to level coordinates
         actual_h, actual_w = thumb_arr.shape[:2]
         sx = dims[0] / actual_w
         sy = dims[1] / actual_h
-
+ 
+        # Try LAB-based tissue detection
+        use_lab = False
+        tissue_mask = None
+        try:
+            from skimage import color as skcolor
+            from scipy import ndimage
+ 
+            thumb_lab = skcolor.rgb2lab(thumb_arr)
+            L = thumb_lab[:, :, 0]
+            a = thumb_lab[:, :, 1]
+            b = thumb_lab[:, :, 2]
+ 
+            # Criterion 1: brightness (not white)
+            l_mask = L < 95
+ 
+            # Criterion 2: color magnitude (has stain color)
+            color_mag = np.sqrt(a**2 + b**2)
+            color_mask = color_mag > 3
+ 
+            # Criterion 3: local variance (has texture)
+            gray = np.mean(thumb_arr.astype(np.float32), axis=2)
+            local_mean = ndimage.uniform_filter(gray, size=5)
+            local_sqmean = ndimage.uniform_filter(gray**2, size=5)
+            local_var = local_sqmean - local_mean**2
+            var_mask = local_var > 20
+ 
+            # Vote: tissue if >= 2 of 3 pass
+            tissue_mask = (
+                l_mask.astype(int) + color_mask.astype(int) + var_mask.astype(int)
+            ) >= 2
+            use_lab = True
+ 
+        except ImportError:
+            pass  # Fall back to simple thresholds below
+ 
         coords = []
         for y in range(0, dims[1] - self.read_size, stride_px):
             for x in range(0, dims[0] - self.read_size, stride_px):
-                # Check thumbnail region
                 tx0 = int(x / sx)
                 ty0 = int(y / sy)
                 tx1 = min(int((x + self.read_size) / sx), actual_w)
                 ty1 = min(int((y + self.read_size) / sy), actual_h)
-
+ 
                 if tx1 <= tx0 or ty1 <= ty0:
                     continue
-
-                region = thumb_arr[ty0:ty1, tx0:tx1]
-                # Quick tissue check: mean brightness < 230 and has color
-                mean_val = np.mean(region)
-                std_val = np.std(region)
-                if mean_val < 230 and std_val > 10:
-                    coords.append((x, y))
-
+ 
+                if use_lab:
+                    region = tissue_mask[ty0:ty1, tx0:tx1]
+                    if region.size > 0 and np.mean(region) > self.tissue_threshold:
+                        coords.append((x, y))
+                else:
+                    # Fallback: loosened simple thresholds
+                    region = thumb_arr[ty0:ty1, tx0:tx1]
+                    mean_val = np.mean(region)
+                    std_val = np.std(region)
+                    if mean_val < 240 and std_val > 5:
+                        coords.append((x, y))
+ 
         return coords
 
     def __len__(self):
