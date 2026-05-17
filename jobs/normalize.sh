@@ -1,7 +1,7 @@
 #!/bin/bash -l
 #$ -P rise2019
 #$ -l h_rt=4:00:00
-#$ -N vascupath_normalize
+#$ -N normalize
 #$ -m bea
 #$ -M arushv@bu.edu
 #$ -j y

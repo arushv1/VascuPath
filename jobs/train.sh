@@ -4,7 +4,7 @@
 #$ -l gpu_type=A100|L40S|V100|A40
 #$ -l h_rt=6:00:00
 #$ -pe omp 4
-#$ -N vascupath_train_stg1
+#$ -N train_stg1
 #$ -j y
 #$ -o /projectnb/rise2019/arushv/VascuPath/logs/training_stg1
 

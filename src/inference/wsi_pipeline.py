@@ -102,9 +102,22 @@ def run_stage1(svs_path, foundation_model, device=None, batch_size=BATCH_SIZE, n
     Returns dict with predictions, coords, dataset (kept open for stage 2).
     """
     device = device or DEVICE
-
-    dataset = WSIDataset(svs_path)
-    dataloader = DataLoader(dataset, batch_size=batch_size, num_workers=NUM_WORKERS, shuffle=False)
+    
+    dataset = WSIDataset(
+        svs_path=str(svs_path),
+        um_patch_size=500,
+        level=0,
+        overlap=0,
+        target_size=224,
+        tissue_threshold=0.3,
+    )
+    dataloader = DataLoader(
+        dataset,
+        batch_size=batch_size,
+        shuffle=False,
+        num_workers=NUM_WORKERS,
+        pin_memory=(DEVICE.type == "cuda")
+    )
 
     print(f"\nSlide: {Path(svs_path).name}")
     print(f"  Resolution: {dataset.slide.dimensions}, MPP: {dataset.mpp:.4f}")
@@ -305,13 +318,56 @@ def save_predictions_json(coords, final_labels, metadata, output_path):
     print(f"Saved predictions to {output_path}")
 
 
+def collect_vessel_patches(stage1_results, final_labels):
+    """Collect vessel patches as in-memory tensors. Returns dict or None if no vessels."""
+    dataset = stage1_results['dataset']
+
+    vessel_idxs = [i for i, label in enumerate(final_labels)
+                   if label in ("vessel_h", "vessel_e")]
+
+    if len(vessel_idxs) == 0:
+        return None
+
+    patches, coords, labels = [], [], []
+    for idx in vessel_idxs:
+        tensor, (x, y) = dataset[idx]  # WSIDataset.__getitem__: (3, 224, 224), float [0,1]
+        patches.append(tensor)
+        coords.append([x, y])
+        labels.append(final_labels[idx])
+
+    return {
+        "patches": torch.stack(patches),       # (N, 3, 224, 224)
+        "coords": torch.tensor(coords),        # (N, 2)
+        "labels": labels,                      # ["vessel_h", "vessel_e", ...]
+        "svs_name": stage1_results["svs_name"],
+        "mpp": stage1_results["mpp"],
+        "patch_size": stage1_results["patch_size"],
+        "downsample": stage1_results["downsample"],
+        "num_tiles": len(vessel_idxs),
+    }
+
+
+def save_vessel_patches(stage1_results, final_labels, output_path):
+    data = collect_vessel_patches(stage1_results, final_labels)
+    if data is None:
+        print("No vessel patches")
+        return 0
+    torch.save(data, output_path)
+    return data["num_tiles"]
+
+
+
 # =========================================================================
 # Main
 # =========================================================================
 
 def process_slide(svs_path, output_dir=None, foundation_model=None, resnet_h=None,
-                  resnet_e=None, normalize=True, stage1_only=False):
-    """Full pipeline for a single slide."""
+                  resnet_e=None, normalize=True, inference_only=False, save_patches=None):
+    """Full pipeline for a single slide.
+
+    Returns (final_labels, vessel_data) where vessel_data is the dict produced by
+    collect_vessel_patches (or None if there were no vessels / inference_only).
+    """
     svs_path = Path(svs_path)
     if output_dir is None:
         output_dir = OUTPUTS_DIR / svs_path.stem
@@ -322,19 +378,27 @@ def process_slide(svs_path, output_dir=None, foundation_model=None, resnet_h=Non
     # Stage 1
     stage1 = run_stage1(str(svs_path), foundation_model, normalize=normalize)
 
-    if stage1_only:
-        final_labels = [STAGE1_CLASSES[p] for p in stage1["predictions"]]
+    vessel_data = None
+    if inference_only:
+        final_labels, _ = run_stage2(stage1, resnet_h, resnet_e, normalize=normalize)
+        save_predictions_json(stage1["coords"], final_labels, stage1,
+                            str(output_dir / "predictions.json"))
+        export_geojson(stage1["coords"], final_labels, stage1["patch_size"],
+                    stage1["downsample"], str(output_dir / "predictions.geojson"))
     else:
         final_labels, _ = run_stage2(stage1, resnet_h, resnet_e, normalize=normalize)
-
-    # Export
-    save_predictions_json(stage1["coords"], final_labels, stage1,
-                          str(output_dir / "predictions.json"))
-    export_geojson(stage1["coords"], final_labels, stage1["patch_size"],
-                   stage1["downsample"], str(output_dir / "predictions.geojson"))
+        vessel_data = collect_vessel_patches(stage1, final_labels)
+        if save_patches and vessel_data is not None:
+            torch.save(vessel_data, output_dir / f"{svs_path.stem}.pt")
+        elif vessel_data is None:
+            print("No vessel patches")
+        save_predictions_json(stage1["coords"], final_labels, stage1,
+                            str(output_dir / "predictions.json"))
+        export_geojson(stage1["coords"], final_labels, stage1["patch_size"],
+                    stage1["downsample"], str(output_dir / "predictions.geojson"))
 
     stage1["dataset"].close()
-    return final_labels
+    return final_labels, vessel_data
 
 
 def main():
@@ -343,17 +407,15 @@ def main():
     parser.add_argument("--output", type=str, default=None)
     parser.add_argument("--batch", action="store_true")
     parser.add_argument("--no-normalize", action="store_true")
-    parser.add_argument("--stage1-only", action="store_true",
+    parser.add_argument("--inference-only", action="store_true",
                         help="Only run stain separation, skip vessel detection")
     args = parser.parse_args()
 
     print("Loading models...")
     foundation_model, _ = load_foundation_model()
 
-    resnet_h, resnet_e = None, None
-    if not args.stage1_only:
-        resnet_h, _ = load_resnet_model(stain="h", checkpoint_path=STAGE2_H_MODEL)
-        resnet_e, _ = load_resnet_model(stain="e", checkpoint_path=STAGE2_E_MODEL)
+    resnet_h, _ = load_resnet_model(stain="h", checkpoint_path=STAGE2_H_MODEL)
+    resnet_e, _ = load_resnet_model(stain="e", checkpoint_path=STAGE2_E_MODEL)
 
     input_path = Path(args.input)
     normalize = not args.no_normalize
@@ -364,10 +426,10 @@ def main():
         for svs in svs_files:
             print(f"\n{'=' * 60}")
             process_slide(svs, args.output, foundation_model, resnet_h, resnet_e,
-                          normalize, args.stage1_only)
+                          normalize, args.inference_only)
     else:
         process_slide(input_path, args.output, foundation_model, resnet_h, resnet_e,
-                      normalize, args.stage1_only)
+                      normalize, args.inference_only)
 
 
 if __name__ == "__main__":

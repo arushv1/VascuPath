@@ -4,7 +4,7 @@
 #$ -l gpu_type=A100
 #$ -l h_rt=4:00:00
 #$ -pe omp 4
-#$ -N vascupath_inference
+#$ -N inference
 #$ -j y
 #$ -o /projectnb/rise2019/arushv/VascuPath/logs/inference/
 

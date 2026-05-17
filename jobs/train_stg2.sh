@@ -4,7 +4,7 @@
 #$ -l gpu_type=A100|L40S
 #$ -l h_rt=6:00:00
 #$ -pe omp 4
-#$ -N vascupath_train_stg2
+#$ -N train_stg2
 #$ -m bea
 #$ -M arushv@bu.edu
 #$ -j y
