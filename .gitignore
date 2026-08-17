@@ -213,3 +213,5 @@ data/
 *.pth
 src/dinov2/
 *.svs
+
+outputs/
