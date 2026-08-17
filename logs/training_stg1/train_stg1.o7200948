@@ -1,0 +1,105 @@
+/projectnb/rise2019/arushv/VascuPath/src/dinov2/layers/swiglu_ffn.py:43: UserWarning: xFormers is available (SwiGLU)
+  warnings.warn("xFormers is available (SwiGLU)")
+/projectnb/rise2019/arushv/VascuPath/src/dinov2/layers/attention.py:27: UserWarning: xFormers is available (Attention)
+  warnings.warn("xFormers is available (Attention)")
+/projectnb/rise2019/arushv/VascuPath/src/dinov2/layers/block.py:33: UserWarning: xFormers is available (Block)
+  warnings.warn("xFormers is available (Block)")
+Model:   Foundation (DINOv2 ViT-Large + Multi-Linear Heads)
+Device:  cuda
+Data:    /projectnb/rise2019/arushv/VascuPath/data/norm/norm_train_patches
+Folds:   5
+Epochs:  30
+LR:      0.001
+  white: 321 patches
+  grey: 378 patches
+  background: 200 patches
+  vessel_white: 515 patches
+  vessel_grey: 394 patches
+28 unique SVS files:
+  100501: 60 patches
+  10_12_163628: 60 patches
+  110300: 60 patches
+  11_14_145916: 60 patches
+  12004: 60 patches
+  12_10_125750: 60 patches
+  13021: 60 patches
+  13_10_155725: 60 patches
+  168454: 60 patches
+  171495: 140 patches
+  1_14_135003: 60 patches
+  21317: 60 patches
+  2_11_165837: 60 patches
+  34266: 60 patches
+  3_10_143338: 60 patches
+  40282: 60 patches
+  4_12_140041: 60 patches
+  58158: 59 patches
+  5_11_182326: 60 patches
+  61879: 60 patches
+  6_14_085329: 60 patches
+  H20 33 004 A1 LFB: 78 patches
+  H20.33.002-A1-LFB: 91 patches
+  Ian oct18-002: 60 patches
+  K0098,7,LHE_171505: 60 patches
+  LHE-003: 60 patches
+  LHE-027: 60 patches
+  fee30289-2393-1e17-5f09-88b16a0977c8_174312: 60 patches
+
+  Test set:  398 patches from 5 SVS: 100501, 168454, 171495, H20 33 004 A1 LFB, LHE-003
+  CV set:    1410 patches from 23 SVS files
+
+============================================================
+FOLD 1
+============================================================
+  Epoch 1/30:   0%|          | 0/36 [00:00<?, ?it/s]                                                    Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/projectnb/rise2019/arushv/VascuPath/src/training/train_multi.py", line 370, in <module>
+    train(args)
+    ~~~~~^^^^^^
+  File "/projectnb/rise2019/arushv/VascuPath/src/training/train_multi.py", line 246, in train
+    result = train_one_fold(fold, train_idx_full, val_idx_full, args.data, cfg, train_svs_fold, val_svs_fold)
+  File "/projectnb/rise2019/arushv/VascuPath/src/training/train_multi.py", line 159, in train_one_fold
+    z_stain, z_vessel = model(images)
+                        ~~~~~^^^^^^^^
+  File "/projectnb/rise2019/arushv/VascuPath/vascuenv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/projectnb/rise2019/arushv/VascuPath/vascuenv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/projectnb/rise2019/arushv/VascuPath/src/models/vascupath_multi.py", line 53, in forward
+    f_cls = self.backbone(x) # (B, 1024)
+  File "/projectnb/rise2019/arushv/VascuPath/vascuenv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/projectnb/rise2019/arushv/VascuPath/vascuenv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/projectnb/rise2019/arushv/VascuPath/src/dinov2/models/vision_transformer.py", line 321, in forward
+    ret = self.forward_features(*args, **kwargs)
+  File "/projectnb/rise2019/arushv/VascuPath/src/dinov2/models/vision_transformer.py", line 254, in forward_features
+    x = self.prepare_tokens_with_masks(x, masks)
+  File "/projectnb/rise2019/arushv/VascuPath/src/dinov2/models/vision_transformer.py", line 211, in prepare_tokens_with_masks
+    x = self.patch_embed(x)
+  File "/projectnb/rise2019/arushv/VascuPath/vascuenv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/projectnb/rise2019/arushv/VascuPath/vascuenv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/projectnb/rise2019/arushv/VascuPath/src/dinov2/layers/patch_embed.py", line 75, in forward
+    x = self.proj(x)  # B C H W
+  File "/projectnb/rise2019/arushv/VascuPath/vascuenv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/projectnb/rise2019/arushv/VascuPath/vascuenv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/projectnb/rise2019/arushv/VascuPath/vascuenv/lib/python3.13/site-packages/torch/nn/modules/conv.py", line 553, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projectnb/rise2019/arushv/VascuPath/vascuenv/lib/python3.13/site-packages/torch/nn/modules/conv.py", line 548, in _conv_forward
+    return F.conv2d(
+           ~~~~~~~~^
+        input, weight, bias, self.stride, self.padding, self.dilation, self.groups
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+RuntimeError: GET was unable to find an engine to execute this computation

@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/projectnb/rise2019/arushv/VascuPath/src/ABMIL/extract_features_vessel.py", line 14, in <module>
+    from training.dataset import WSIDataset
+  File "/projectnb/rise2019/arushv/VascuPath/src/training/dataset.py", line 19, in <module>
+    from config import TARGET_SIZE_PX, TISSUE_DETECTION
+  File "/projectnb/rise2019/arushv/VascuPath/src/config.py", line 36, in <module>
+    VESSEL_INDICES = [CLASS_NAMES.index(cls) for cls in VESSEL_CLASSES]
+                      ~~~~~~~~~~~~~~~~~^^^^^
+ValueError: 'vessel_grey' is not in list

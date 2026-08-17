@@ -1,0 +1,115 @@
+/projectnb/rise2019/arushv/VascuPath/src/dinov2/layers/swiglu_ffn.py:43: UserWarning: xFormers is available (SwiGLU)
+  warnings.warn("xFormers is available (SwiGLU)")
+/projectnb/rise2019/arushv/VascuPath/src/dinov2/layers/attention.py:27: UserWarning: xFormers is available (Attention)
+  warnings.warn("xFormers is available (Attention)")
+/projectnb/rise2019/arushv/VascuPath/src/dinov2/layers/block.py:33: UserWarning: xFormers is available (Block)
+  warnings.warn("xFormers is available (Block)")
+Model:   Foundation (DINOv2 ViT-Large + Multi-Linear Heads)
+Device:  cuda
+Data:    /projectnb/rise2019/arushv/VascuPath/data/norm/norm_train_patches
+Folds:   5
+Epochs:  30
+LR:      0.001
+  white: 200 patches
+  grey: 0 patches
+  background: 0 patches
+  vessel_white: 0 patches
+  vessel_grey: 0 patches
+25 unique SVS files:
+  100501: 8 patches
+  10_12_163628: 8 patches
+  110300: 8 patches
+  11_14_145916: 8 patches
+  12004: 8 patches
+  12_10_125750: 8 patches
+  13021: 8 patches
+  13_10_155725: 8 patches
+  168454: 8 patches
+  1_14_135003: 8 patches
+  21317: 8 patches
+  2_11_165837: 8 patches
+  34266: 8 patches
+  3_10_143338: 8 patches
+  40282: 8 patches
+  4_12_140041: 8 patches
+  58158: 8 patches
+  5_11_182326: 8 patches
+  61879: 8 patches
+  6_14_085329: 8 patches
+  Ian oct18-002: 8 patches
+  K0098,7,LHE_171505: 8 patches
+  LHE-003: 8 patches
+  LHE-027: 8 patches
+  fee30289-2393-1e17-5f09-88b16a0977c8_174312: 8 patches
+
+  Test set:  40 patches from 5 SVS: 100501, 168454, 2_11_165837, 58158, LHE-027
+  CV set:    160 patches from 20 SVS files
+
+============================================================
+FOLD 1
+============================================================
+  Epoch 1/30:   0%|          | 0/4 [00:00<?, ?it/s]  Epoch 1/30:   0%|          | 0/4 [00:05<?, ?it/s, loss=1.1788, v_acc=87.5%]  Epoch 1/30:  25%|██▌       | 1/4 [00:05<00:16,  5.62s/it, loss=1.1788, v_acc=87.5%]  Epoch 1/30:  25%|██▌       | 1/4 [00:05<00:16,  5.62s/it, loss=0.3546, v_acc=92.2%]  Epoch 1/30:  50%|█████     | 2/4 [00:05<00:04,  2.39s/it, loss=0.3546, v_acc=92.2%]  Epoch 1/30:  50%|█████     | 2/4 [00:05<00:04,  2.39s/it, loss=0.1526, v_acc=93.8%]  Epoch 1/30:  75%|███████▌  | 3/4 [00:05<00:01,  1.37s/it, loss=0.1526, v_acc=93.8%]  Epoch 1/30:  75%|███████▌  | 3/4 [00:06<00:01,  1.37s/it, loss=0.0374, v_acc=95.3%]  Epoch 1/30: 100%|██████████| 4/4 [00:06<00:00,  1.13it/s, loss=0.0374, v_acc=95.3%]                                                                                       Epoch 1: Train V-Acc 95.3% | Val S-Acc 100.0% | Val V-Acc 100.0% | Val loss 0.3248
+  Epoch 2/30:   0%|          | 0/4 [00:00<?, ?it/s]  Epoch 2/30:   0%|          | 0/4 [00:01<?, ?it/s, loss=0.0323, v_acc=100.0%]  Epoch 2/30:  25%|██▌       | 1/4 [00:01<00:05,  1.78s/it, loss=0.0323, v_acc=100.0%]  Epoch 2/30:  25%|██▌       | 1/4 [00:01<00:05,  1.78s/it, loss=0.0069, v_acc=100.0%]  Epoch 2/30:  50%|█████     | 2/4 [00:01<00:01,  1.22it/s, loss=0.0069, v_acc=100.0%]  Epoch 2/30:  50%|█████     | 2/4 [00:02<00:01,  1.22it/s, loss=0.0070, v_acc=100.0%]  Epoch 2/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.95it/s, loss=0.0070, v_acc=100.0%]  Epoch 2/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.95it/s, loss=0.0029, v_acc=100.0%]  Epoch 2/30: 100%|██████████| 4/4 [00:02<00:00,  2.73it/s, loss=0.0029, v_acc=100.0%]                                                                                        Epoch 2: Train V-Acc 100.0% | Val S-Acc 100.0% | Val V-Acc 100.0% | Val loss 0.0986
+  Epoch 3/30:   0%|          | 0/4 [00:00<?, ?it/s]  Epoch 3/30:   0%|          | 0/4 [00:01<?, ?it/s, loss=0.0012, v_acc=100.0%]  Epoch 3/30:  25%|██▌       | 1/4 [00:01<00:05,  1.77s/it, loss=0.0012, v_acc=100.0%]  Epoch 3/30:  25%|██▌       | 1/4 [00:01<00:05,  1.77s/it, loss=0.0007, v_acc=100.0%]  Epoch 3/30:  50%|█████     | 2/4 [00:01<00:01,  1.23it/s, loss=0.0007, v_acc=100.0%]  Epoch 3/30:  50%|█████     | 2/4 [00:02<00:01,  1.23it/s, loss=0.0005, v_acc=100.0%]  Epoch 3/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.96it/s, loss=0.0005, v_acc=100.0%]  Epoch 3/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.96it/s, loss=0.0013, v_acc=100.0%]  Epoch 3/30: 100%|██████████| 4/4 [00:02<00:00,  2.74it/s, loss=0.0013, v_acc=100.0%]                                                                                        Epoch 3: Train V-Acc 100.0% | Val S-Acc 100.0% | Val V-Acc 100.0% | Val loss 0.0528
+  Epoch 4/30:   0%|          | 0/4 [00:00<?, ?it/s]  Epoch 4/30:   0%|          | 0/4 [00:01<?, ?it/s, loss=0.0004, v_acc=100.0%]  Epoch 4/30:  25%|██▌       | 1/4 [00:01<00:05,  1.76s/it, loss=0.0004, v_acc=100.0%]  Epoch 4/30:  25%|██▌       | 1/4 [00:01<00:05,  1.76s/it, loss=0.0005, v_acc=100.0%]  Epoch 4/30:  50%|█████     | 2/4 [00:01<00:01,  1.24it/s, loss=0.0005, v_acc=100.0%]  Epoch 4/30:  50%|█████     | 2/4 [00:02<00:01,  1.24it/s, loss=0.0001, v_acc=100.0%]  Epoch 4/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.97it/s, loss=0.0001, v_acc=100.0%]  Epoch 4/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.97it/s, loss=0.0007, v_acc=100.0%]  Epoch 4/30: 100%|██████████| 4/4 [00:02<00:00,  2.75it/s, loss=0.0007, v_acc=100.0%]                                                                                        Epoch 4: Train V-Acc 100.0% | Val S-Acc 100.0% | Val V-Acc 100.0% | Val loss 0.0362
+  Epoch 5/30:   0%|          | 0/4 [00:00<?, ?it/s]  Epoch 5/30:   0%|          | 0/4 [00:01<?, ?it/s, loss=0.0002, v_acc=100.0%]  Epoch 5/30:  25%|██▌       | 1/4 [00:01<00:05,  1.75s/it, loss=0.0002, v_acc=100.0%]  Epoch 5/30:  25%|██▌       | 1/4 [00:01<00:05,  1.75s/it, loss=0.0002, v_acc=100.0%]  Epoch 5/30:  50%|█████     | 2/4 [00:01<00:01,  1.24it/s, loss=0.0002, v_acc=100.0%]  Epoch 5/30:  50%|█████     | 2/4 [00:02<00:01,  1.24it/s, loss=0.0039, v_acc=100.0%]  Epoch 5/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.98it/s, loss=0.0039, v_acc=100.0%]  Epoch 5/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.98it/s, loss=0.0001, v_acc=100.0%]  Epoch 5/30: 100%|██████████| 4/4 [00:02<00:00,  2.75it/s, loss=0.0001, v_acc=100.0%]                                                                                        Epoch 5: Train V-Acc 100.0% | Val S-Acc 100.0% | Val V-Acc 100.0% | Val loss 0.0282
+  Epoch 6/30:   0%|          | 0/4 [00:00<?, ?it/s]  Epoch 6/30:   0%|          | 0/4 [00:01<?, ?it/s, loss=0.0001, v_acc=100.0%]  Epoch 6/30:  25%|██▌       | 1/4 [00:01<00:05,  1.79s/it, loss=0.0001, v_acc=100.0%]  Epoch 6/30:  25%|██▌       | 1/4 [00:01<00:05,  1.79s/it, loss=0.0009, v_acc=100.0%]  Epoch 6/30:  50%|█████     | 2/4 [00:01<00:01,  1.22it/s, loss=0.0009, v_acc=100.0%]  Epoch 6/30:  50%|█████     | 2/4 [00:02<00:01,  1.22it/s, loss=0.0009, v_acc=100.0%]  Epoch 6/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.95it/s, loss=0.0009, v_acc=100.0%]  Epoch 6/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.95it/s, loss=0.0001, v_acc=100.0%]  Epoch 6/30: 100%|██████████| 4/4 [00:02<00:00,  2.71it/s, loss=0.0001, v_acc=100.0%]                                                                                        Epoch 6: Train V-Acc 100.0% | Val S-Acc 100.0% | Val V-Acc 100.0% | Val loss 0.0237
+  Epoch 7/30:   0%|          | 0/4 [00:00<?, ?it/s]  Epoch 7/30:   0%|          | 0/4 [00:01<?, ?it/s, loss=0.0000, v_acc=100.0%]  Epoch 7/30:  25%|██▌       | 1/4 [00:01<00:04,  1.65s/it, loss=0.0000, v_acc=100.0%]  Epoch 7/30:  25%|██▌       | 1/4 [00:01<00:04,  1.65s/it, loss=0.0000, v_acc=100.0%]  Epoch 7/30:  50%|█████     | 2/4 [00:01<00:01,  1.31it/s, loss=0.0000, v_acc=100.0%]  Epoch 7/30:  50%|█████     | 2/4 [00:01<00:01,  1.31it/s, loss=0.0001, v_acc=100.0%]  Epoch 7/30:  75%|███████▌  | 3/4 [00:01<00:00,  2.07it/s, loss=0.0001, v_acc=100.0%]  Epoch 7/30:  75%|███████▌  | 3/4 [00:02<00:00,  2.07it/s, loss=0.0000, v_acc=100.0%]  Epoch 7/30: 100%|██████████| 4/4 [00:02<00:00,  2.85it/s, loss=0.0000, v_acc=100.0%]                                                                                        Epoch 7: Train V-Acc 100.0% | Val S-Acc 100.0% | Val V-Acc 100.0% | Val loss 0.0211
+  Epoch 8/30:   0%|          | 0/4 [00:00<?, ?it/s]  Epoch 8/30:   0%|          | 0/4 [00:01<?, ?it/s, loss=0.0000, v_acc=100.0%]  Epoch 8/30:  25%|██▌       | 1/4 [00:01<00:05,  1.84s/it, loss=0.0000, v_acc=100.0%]  Epoch 8/30:  25%|██▌       | 1/4 [00:01<00:05,  1.84s/it, loss=0.0000, v_acc=100.0%]  Epoch 8/30:  50%|█████     | 2/4 [00:01<00:01,  1.19it/s, loss=0.0000, v_acc=100.0%]  Epoch 8/30:  50%|█████     | 2/4 [00:02<00:01,  1.19it/s, loss=0.0000, v_acc=100.0%]  Epoch 8/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.90it/s, loss=0.0000, v_acc=100.0%]  Epoch 8/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.90it/s, loss=0.0003, v_acc=100.0%]  Epoch 8/30: 100%|██████████| 4/4 [00:02<00:00,  2.66it/s, loss=0.0003, v_acc=100.0%]                                                                                        Epoch 8: Train V-Acc 100.0% | Val S-Acc 100.0% | Val V-Acc 100.0% | Val loss 0.0195
+  Epoch 9/30:   0%|          | 0/4 [00:00<?, ?it/s]  Epoch 9/30:   0%|          | 0/4 [00:01<?, ?it/s, loss=0.0001, v_acc=100.0%]  Epoch 9/30:  25%|██▌       | 1/4 [00:01<00:05,  1.85s/it, loss=0.0001, v_acc=100.0%]  Epoch 9/30:  25%|██▌       | 1/4 [00:01<00:05,  1.85s/it, loss=0.0002, v_acc=100.0%]  Epoch 9/30:  50%|█████     | 2/4 [00:01<00:01,  1.18it/s, loss=0.0002, v_acc=100.0%]  Epoch 9/30:  50%|█████     | 2/4 [00:02<00:01,  1.18it/s, loss=0.0000, v_acc=100.0%]  Epoch 9/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.90it/s, loss=0.0000, v_acc=100.0%]  Epoch 9/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.90it/s, loss=0.0000, v_acc=100.0%]  Epoch 9/30: 100%|██████████| 4/4 [00:02<00:00,  2.65it/s, loss=0.0000, v_acc=100.0%]                                                                                        Epoch 9: Train V-Acc 100.0% | Val S-Acc 100.0% | Val V-Acc 100.0% | Val loss 0.0185
+  Epoch 10/30:   0%|          | 0/4 [00:00<?, ?it/s]  Epoch 10/30:   0%|          | 0/4 [00:01<?, ?it/s, loss=0.0001, v_acc=100.0%]  Epoch 10/30:  25%|██▌       | 1/4 [00:01<00:05,  1.69s/it, loss=0.0001, v_acc=100.0%]  Epoch 10/30:  25%|██▌       | 1/4 [00:01<00:05,  1.69s/it, loss=0.0001, v_acc=100.0%]  Epoch 10/30:  50%|█████     | 2/4 [00:01<00:01,  1.28it/s, loss=0.0001, v_acc=100.0%]  Epoch 10/30:  50%|█████     | 2/4 [00:01<00:01,  1.28it/s, loss=0.0000, v_acc=100.0%]  Epoch 10/30:  75%|███████▌  | 3/4 [00:01<00:00,  2.03it/s, loss=0.0000, v_acc=100.0%]  Epoch 10/30:  75%|███████▌  | 3/4 [00:02<00:00,  2.03it/s, loss=0.0001, v_acc=100.0%]  Epoch 10/30: 100%|██████████| 4/4 [00:02<00:00,  2.81it/s, loss=0.0001, v_acc=100.0%]                                                                                         Epoch 10: Train V-Acc 100.0% | Val S-Acc 100.0% | Val V-Acc 100.0% | Val loss 0.0179
+  Epoch 11/30:   0%|          | 0/4 [00:00<?, ?it/s]  Epoch 11/30:   0%|          | 0/4 [00:01<?, ?it/s, loss=0.0010, v_acc=100.0%]  Epoch 11/30:  25%|██▌       | 1/4 [00:01<00:05,  1.77s/it, loss=0.0010, v_acc=100.0%]  Epoch 11/30:  25%|██▌       | 1/4 [00:01<00:05,  1.77s/it, loss=0.0000, v_acc=100.0%]  Epoch 11/30:  50%|█████     | 2/4 [00:01<00:01,  1.23it/s, loss=0.0000, v_acc=100.0%]  Epoch 11/30:  50%|█████     | 2/4 [00:02<00:01,  1.23it/s, loss=0.0000, v_acc=100.0%]  Epoch 11/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.96it/s, loss=0.0000, v_acc=100.0%]  Epoch 11/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.96it/s, loss=0.0001, v_acc=100.0%]  Epoch 11/30: 100%|██████████| 4/4 [00:02<00:00,  2.73it/s, loss=0.0001, v_acc=100.0%]                                                                                         Epoch 11: Train V-Acc 100.0% | Val S-Acc 100.0% | Val V-Acc 100.0% | Val loss 0.0174
+  Early stopping at epoch 11
+  Fold 1 best Vessel Acc: 100.00% at epoch 1
+
+============================================================
+FOLD 2
+============================================================
+  Epoch 1/30:   0%|          | 0/4 [00:00<?, ?it/s]  Epoch 1/30:   0%|          | 0/4 [00:01<?, ?it/s, loss=1.5509, v_acc=71.9%]  Epoch 1/30:  25%|██▌       | 1/4 [00:01<00:05,  1.80s/it, loss=1.5509, v_acc=71.9%]  Epoch 1/30:  25%|██▌       | 1/4 [00:01<00:05,  1.80s/it, loss=0.4110, v_acc=85.9%]  Epoch 1/30:  50%|█████     | 2/4 [00:01<00:01,  1.21it/s, loss=0.4110, v_acc=85.9%]  Epoch 1/30:  50%|█████     | 2/4 [00:02<00:01,  1.21it/s, loss=0.0956, v_acc=90.6%]  Epoch 1/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.93it/s, loss=0.0956, v_acc=90.6%]  Epoch 1/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.93it/s, loss=0.0404, v_acc=93.0%]  Epoch 1/30: 100%|██████████| 4/4 [00:02<00:00,  2.69it/s, loss=0.0404, v_acc=93.0%]                                                                                       Epoch 1: Train V-Acc 93.0% | Val S-Acc 96.9% | Val V-Acc 100.0% | Val loss 0.1876
+  Epoch 2/30:   0%|          | 0/4 [00:00<?, ?it/s]  Epoch 2/30:   0%|          | 0/4 [00:01<?, ?it/s, loss=0.0142, v_acc=100.0%]  Epoch 2/30:  25%|██▌       | 1/4 [00:01<00:05,  1.97s/it, loss=0.0142, v_acc=100.0%]  Epoch 2/30:  25%|██▌       | 1/4 [00:02<00:05,  1.97s/it, loss=0.0073, v_acc=100.0%]  Epoch 2/30:  50%|█████     | 2/4 [00:02<00:01,  1.11it/s, loss=0.0073, v_acc=100.0%]  Epoch 2/30:  50%|█████     | 2/4 [00:02<00:01,  1.11it/s, loss=0.0195, v_acc=100.0%]  Epoch 2/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.80it/s, loss=0.0195, v_acc=100.0%]  Epoch 2/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.80it/s, loss=0.0042, v_acc=100.0%]  Epoch 2/30: 100%|██████████| 4/4 [00:02<00:00,  2.53it/s, loss=0.0042, v_acc=100.0%]                                                                                        Epoch 2: Train V-Acc 100.0% | Val S-Acc 100.0% | Val V-Acc 100.0% | Val loss 0.0856
+  Epoch 3/30:   0%|          | 0/4 [00:00<?, ?it/s]  Epoch 3/30:   0%|          | 0/4 [00:01<?, ?it/s, loss=0.0021, v_acc=100.0%]  Epoch 3/30:  25%|██▌       | 1/4 [00:01<00:05,  1.86s/it, loss=0.0021, v_acc=100.0%]  Epoch 3/30:  25%|██▌       | 1/4 [00:02<00:05,  1.86s/it, loss=0.0008, v_acc=100.0%]  Epoch 3/30:  50%|█████     | 2/4 [00:02<00:01,  1.18it/s, loss=0.0008, v_acc=100.0%]  Epoch 3/30:  50%|█████     | 2/4 [00:02<00:01,  1.18it/s, loss=0.0007, v_acc=100.0%]  Epoch 3/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.89it/s, loss=0.0007, v_acc=100.0%]  Epoch 3/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.89it/s, loss=0.0051, v_acc=100.0%]  Epoch 3/30: 100%|██████████| 4/4 [00:02<00:00,  2.64it/s, loss=0.0051, v_acc=100.0%]                                                                                        Epoch 3: Train V-Acc 100.0% | Val S-Acc 100.0% | Val V-Acc 100.0% | Val loss 0.0517
+  Epoch 4/30:   0%|          | 0/4 [00:00<?, ?it/s]  Epoch 4/30:   0%|          | 0/4 [00:01<?, ?it/s, loss=0.0002, v_acc=100.0%]  Epoch 4/30:  25%|██▌       | 1/4 [00:01<00:05,  1.80s/it, loss=0.0002, v_acc=100.0%]  Epoch 4/30:  25%|██▌       | 1/4 [00:02<00:05,  1.80s/it, loss=0.0005, v_acc=100.0%]  Epoch 4/30:  50%|█████     | 2/4 [00:02<00:01,  1.16it/s, loss=0.0005, v_acc=100.0%]  Epoch 4/30:  50%|█████     | 2/4 [00:02<00:01,  1.16it/s, loss=0.0003, v_acc=100.0%]  Epoch 4/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.87it/s, loss=0.0003, v_acc=100.0%]  Epoch 4/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.87it/s, loss=0.0002, v_acc=100.0%]  Epoch 4/30: 100%|██████████| 4/4 [00:02<00:00,  2.62it/s, loss=0.0002, v_acc=100.0%]                                                                                        Epoch 4: Train V-Acc 100.0% | Val S-Acc 100.0% | Val V-Acc 100.0% | Val loss 0.0370
+  Epoch 5/30:   0%|          | 0/4 [00:00<?, ?it/s]  Epoch 5/30:   0%|          | 0/4 [00:01<?, ?it/s, loss=0.0007, v_acc=100.0%]  Epoch 5/30:  25%|██▌       | 1/4 [00:01<00:05,  1.94s/it, loss=0.0007, v_acc=100.0%]  Epoch 5/30:  25%|██▌       | 1/4 [00:02<00:05,  1.94s/it, loss=0.0003, v_acc=100.0%]  Epoch 5/30:  50%|█████     | 2/4 [00:02<00:01,  1.13it/s, loss=0.0003, v_acc=100.0%]  Epoch 5/30:  50%|█████     | 2/4 [00:02<00:01,  1.13it/s, loss=0.0001, v_acc=100.0%]  Epoch 5/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.83it/s, loss=0.0001, v_acc=100.0%]  Epoch 5/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.83it/s, loss=0.0001, v_acc=100.0%]  Epoch 5/30: 100%|██████████| 4/4 [00:02<00:00,  2.57it/s, loss=0.0001, v_acc=100.0%]                                                                                        Epoch 5: Train V-Acc 100.0% | Val S-Acc 100.0% | Val V-Acc 100.0% | Val loss 0.0296
+  Epoch 6/30:   0%|          | 0/4 [00:00<?, ?it/s]  Epoch 6/30:   0%|          | 0/4 [00:02<?, ?it/s, loss=0.0001, v_acc=100.0%]  Epoch 6/30:  25%|██▌       | 1/4 [00:02<00:06,  2.02s/it, loss=0.0001, v_acc=100.0%]  Epoch 6/30:  25%|██▌       | 1/4 [00:02<00:06,  2.02s/it, loss=0.0001, v_acc=100.0%]  Epoch 6/30:  50%|█████     | 2/4 [00:02<00:01,  1.09it/s, loss=0.0001, v_acc=100.0%]  Epoch 6/30:  50%|█████     | 2/4 [00:02<00:01,  1.09it/s, loss=0.0001, v_acc=100.0%]  Epoch 6/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.77it/s, loss=0.0001, v_acc=100.0%]  Epoch 6/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.77it/s, loss=0.0001, v_acc=100.0%]  Epoch 6/30: 100%|██████████| 4/4 [00:02<00:00,  2.50it/s, loss=0.0001, v_acc=100.0%]                                                                                        Epoch 6: Train V-Acc 100.0% | Val S-Acc 100.0% | Val V-Acc 100.0% | Val loss 0.0254
+  Epoch 7/30:   0%|          | 0/4 [00:00<?, ?it/s]  Epoch 7/30:   0%|          | 0/4 [00:01<?, ?it/s, loss=0.0001, v_acc=100.0%]  Epoch 7/30:  25%|██▌       | 1/4 [00:01<00:05,  1.74s/it, loss=0.0001, v_acc=100.0%]  Epoch 7/30:  25%|██▌       | 1/4 [00:02<00:05,  1.74s/it, loss=0.0004, v_acc=100.0%]  Epoch 7/30:  50%|█████     | 2/4 [00:02<00:01,  1.07it/s, loss=0.0004, v_acc=100.0%]  Epoch 7/30:  50%|█████     | 2/4 [00:02<00:01,  1.07it/s, loss=0.0001, v_acc=100.0%]  Epoch 7/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.74it/s, loss=0.0001, v_acc=100.0%]  Epoch 7/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.74it/s, loss=0.0000, v_acc=100.0%]  Epoch 7/30: 100%|██████████| 4/4 [00:02<00:00,  2.47it/s, loss=0.0000, v_acc=100.0%]                                                                                        Epoch 7: Train V-Acc 100.0% | Val S-Acc 100.0% | Val V-Acc 100.0% | Val loss 0.0230
+  Epoch 8/30:   0%|          | 0/4 [00:00<?, ?it/s]  Epoch 8/30:   0%|          | 0/4 [00:02<?, ?it/s, loss=0.0001, v_acc=100.0%]  Epoch 8/30:  25%|██▌       | 1/4 [00:02<00:06,  2.03s/it, loss=0.0001, v_acc=100.0%]  Epoch 8/30:  25%|██▌       | 1/4 [00:02<00:06,  2.03s/it, loss=0.0003, v_acc=100.0%]  Epoch 8/30:  50%|█████     | 2/4 [00:02<00:01,  1.09it/s, loss=0.0003, v_acc=100.0%]  Epoch 8/30:  50%|█████     | 2/4 [00:02<00:01,  1.09it/s, loss=0.0015, v_acc=100.0%]  Epoch 8/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.76it/s, loss=0.0015, v_acc=100.0%]  Epoch 8/30:  75%|███████▌  | 3/4 [00:02<00:00,  1.76it/s, loss=0.0000, v_acc=100.0%]  Epoch 8/30: 100%|██████████| 4/4 [00:02<00:00,  2.49it/s, loss=0.0000, v_acc=100.0%]                                                                                        Epoch 8: Train V-Acc 100.0% | Val S-Acc 100.0% | Val V-Acc 100.0% | Val loss 0.0215
+  Epoch 9/30:   0%|          | 0/4 [00:00<?, ?it/s]                                                   Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/projectnb/rise2019/arushv/VascuPath/src/training/train_multi.py", line 370, in <module>
+    train(args)
+    ~~~~~^^^^^^
+  File "/projectnb/rise2019/arushv/VascuPath/src/training/train_multi.py", line 246, in train
+    result = train_one_fold(fold, train_idx_full, val_idx_full, args.data, cfg, train_svs_fold, val_svs_fold)
+  File "/projectnb/rise2019/arushv/VascuPath/src/training/train_multi.py", line 154, in train_one_fold
+    for images, labels in pbar:
+                          ^^^^
+  File "/projectnb/rise2019/arushv/VascuPath/vascuenv/lib/python3.13/site-packages/tqdm/std.py", line 1181, in __iter__
+    for obj in iterable:
+               ^^^^^^^^
+  File "/projectnb/rise2019/arushv/VascuPath/vascuenv/lib/python3.13/site-packages/torch/utils/data/dataloader.py", line 741, in __next__
+    data = self._next_data()
+  File "/projectnb/rise2019/arushv/VascuPath/vascuenv/lib/python3.13/site-packages/torch/utils/data/dataloader.py", line 1548, in _next_data
+    return self._process_data(data, worker_id)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/projectnb/rise2019/arushv/VascuPath/vascuenv/lib/python3.13/site-packages/torch/utils/data/dataloader.py", line 1586, in _process_data
+    data.reraise()
+    ~~~~~~~~~~~~^^
+  File "/projectnb/rise2019/arushv/VascuPath/vascuenv/lib/python3.13/site-packages/torch/_utils.py", line 775, in reraise
+    raise exception
+FileNotFoundError: Caught FileNotFoundError in DataLoader worker process 0.
+Original Traceback (most recent call last):
+  File "/projectnb/rise2019/arushv/VascuPath/vascuenv/lib/python3.13/site-packages/torch/utils/data/_utils/worker.py", line 358, in _worker_loop
+    data = fetcher.fetch(index)  # type: ignore[possibly-undefined]
+  File "/projectnb/rise2019/arushv/VascuPath/vascuenv/lib/python3.13/site-packages/torch/utils/data/_utils/fetch.py", line 52, in fetch
+    data = self.dataset.__getitems__(possibly_batched_index)
+  File "/projectnb/rise2019/arushv/VascuPath/vascuenv/lib/python3.13/site-packages/torch/utils/data/dataset.py", line 413, in __getitems__
+    return [self.dataset[self.indices[idx]] for idx in indices]
+            ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/projectnb/rise2019/arushv/VascuPath/src/training/dataset.py", line 138, in __getitem__
+    img = Image.open(img_path).convert("RGB")
+          ~~~~~~~~~~^^^^^^^^^^
+  File "/projectnb/rise2019/arushv/VascuPath/vascuenv/lib/python3.13/site-packages/PIL/Image.py", line 3512, in open
+    fp = builtins.open(filename, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: '/projectnb/rise2019/arushv/VascuPath/data/norm/norm_train_patches/white/6_14_085329_patch0055_x29384_y17638_500um.png'
+

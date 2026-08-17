@@ -1,0 +1,473 @@
+/projectnb/rise2019/arushv/VascuPath/src/dinov2/layers/swiglu_ffn.py:43: UserWarning: xFormers is available (SwiGLU)
+  warnings.warn("xFormers is available (SwiGLU)")
+/projectnb/rise2019/arushv/VascuPath/src/dinov2/layers/attention.py:27: UserWarning: xFormers is available (Attention)
+  warnings.warn("xFormers is available (Attention)")
+/projectnb/rise2019/arushv/VascuPath/src/dinov2/layers/block.py:33: UserWarning: xFormers is available (Block)
+  warnings.warn("xFormers is available (Block)")
+/projectnb/rise2019/arushv/VascuPath/vascuenv/lib/python3.13/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/projectnb/rise2019/arushv/VascuPath/vascuenv/lib/python3.13/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+Found 477 SVS files
+Output: data/processed_vessels
+Device: cuda
+
+Loading DINOv2 ViT-Large backbone...
+Backbone loaded.
+
+Loading foundation + resnet models
+Loaded foundation model: /projectnb/rise2019/arushv/VascuPath/src/checkpoints_test/stage1_foundation_model_cv99.00_test94.65.pth
+  Classes: ['background_h', 'background_e', 'white']
+  Test accuracy: 94.64882943143813%
+Loaded ResNet h-model: /projectnb/rise2019/arushv/VascuPath/src/checkpoints_test/stage2_resnetH_model_cv98.85_test99.22.pth
+  Classes: ['background_h', 'vessel_h']
+  Test accuracy: 99.2248062015504%
+Loaded ResNet e-model: /projectnb/rise2019/arushv/VascuPath/src/checkpoints_test/stage2_resnetE_model_cv97.88_test97.69.pth
+  Classes: ['background_e', 'vessel_e']
+  Test accuracy: 97.6923076923077%
+[1/477] 100501 — exists, skipping
+[2/477] 101059 — exists, skipping
+[3/477] 101223 — exists, skipping
+[4/477] 102489 — exists, skipping
+[5/477] 102724 — exists, skipping
+[6/477] 10655 — exists, skipping
+[7/477] 10685 — exists, skipping
+[8/477] 10714 — exists, skipping
+[9/477] 10827 — exists, skipping
+[10/477] 10828 — exists, skipping
+[11/477] 10837 — exists, skipping
+[12/477] 10844 — exists, skipping
+[13/477] 10847 — exists, skipping
+[14/477] 10859 — exists, skipping
+[15/477] 10887 — exists, skipping
+[16/477] 10934 — exists, skipping
+[17/477] 10_12_163628 — exists, skipping
+[18/477] 10_13_135306 — exists, skipping
+[19/477] 10_13_151033 — exists, skipping
+[20/477] 10_14_203438 — exists, skipping
+[21/477] 10_16_102602 — exists, skipping
+[22/477] 10_16_190748 — exists, skipping
+[23/477] 10_20_170347 — exists, skipping
+[24/477] 10_21_110721 — exists, skipping
+[25/477] 10_21_191922 — exists, skipping
+[26/477] 10_23_111330 — exists, skipping
+[27/477] 10_24_144848 — exists, skipping
+[28/477] 10_25_182439 — exists, skipping
+[29/477] 10_4_141519 — exists, skipping
+[30/477] 10_6_145156 — exists, skipping
+[31/477] 10_6_201047 — exists, skipping
+[32/477] 10_7_172156 — exists, skipping
+[33/477] 110300 — exists, skipping
+[34/477] 110914 — exists, skipping
+[35/477] 111069 — exists, skipping
+[36/477] 112688 — exists, skipping
+[37/477] 112844 — exists, skipping
+[38/477] 113241 — exists, skipping
+[39/477] 113611 — exists, skipping
+[40/477] 115971 — exists, skipping
+[41/477] 117117 — exists, skipping
+[42/477] 117226 — exists, skipping
+[43/477] 118462 — exists, skipping
+[44/477] 118543 — exists, skipping
+[45/477] 119190 — exists, skipping
+[46/477] 119650 — exists, skipping
+[47/477] 11997 — exists, skipping
+[48/477] 11_14_145916 — exists, skipping
+[49/477] 11_15_191448 — exists, skipping
+[50/477] 11_17_214523 — exists, skipping
+[51/477] 11_19_152305 — exists, skipping
+[52/477] 11_1_131417 — exists, skipping
+[53/477] 11_25_140945 — exists, skipping
+[54/477] 11_26_163540 — exists, skipping
+[55/477] 11_26_201354 — exists, skipping
+[56/477] 11_4_173854 — exists, skipping
+[57/477] 11_6_195549 — exists, skipping
+[58/477] 11_8_163614 — exists, skipping
+[59/477] 12004 — exists, skipping
+[60/477] 12050 — exists, skipping
+[61/477] 12339 — exists, skipping
+[62/477] 12409 — exists, skipping
+[63/477] 12438 — exists, skipping
+[64/477] 12464 — exists, skipping
+[65/477] 12511 — exists, skipping
+[66/477] 12514 — exists, skipping
+[67/477] 12520 — exists, skipping
+[68/477] 12534 — exists, skipping
+[69/477] 12717 — exists, skipping
+[70/477] 12722 — exists, skipping
+[71/477] 12737 — exists, skipping
+[72/477] 12755 — exists, skipping
+[73/477] 12781 — exists, skipping
+[74/477] 12789 — exists, skipping
+[75/477] 12817 — exists, skipping
+[76/477] 12833 — exists, skipping
+[77/477] 12838 — exists, skipping
+[78/477] 12844 — exists, skipping
+[79/477] 12853 — exists, skipping
+[80/477] 12869 — exists, skipping
+[81/477] 12880 — exists, skipping
+[82/477] 12886 — exists, skipping
+[83/477] 12899 — exists, skipping
+[84/477] 12905 — exists, skipping
+[85/477] 12921 — exists, skipping
+[86/477] 12925 — exists, skipping
+[87/477] 12985 — exists, skipping
+[88/477] 12993 — exists, skipping
+[89/477] 12_10_125750 — exists, skipping
+[90/477] 12_16_113344 — exists, skipping
+[91/477] 12_16_174102 — exists, skipping
+[92/477] 12_16_193039 — exists, skipping
+[93/477] 12_20_161203 — exists, skipping
+[94/477] 12_20_193824 — exists, skipping
+[95/477] 13021 — exists, skipping
+[96/477] 135254 — exists, skipping
+[97/477] 135284 — exists, skipping
+[98/477] 136470 — exists, skipping
+[99/477] 13_10_155725 — exists, skipping
+[100/477] 13_15_195502 — exists, skipping
+[101/477] 13_16_222519 — exists, skipping
+[102/477] 13_17_190141 — exists, skipping
+[103/477] 13_26_183702 — exists, skipping
+[104/477] 13_5_192721 — exists, skipping
+[105/477] 13_8_162729 — exists, skipping
+[106/477] 14_14_202459 — exists, skipping
+[107/477] 14_23_231338 — exists, skipping
+[108/477] 14_25_155549 — exists, skipping
+[109/477] 15_11_122358 — exists, skipping
+[110/477] 15_18_140853 — exists, skipping
+[111/477] 15_21_130856 — exists, skipping
+[112/477] 15_3_222828 — exists, skipping
+[113/477] 15_5_235333 — exists, skipping
+[114/477] 168454 — exists, skipping
+[115/477] 168460 — exists, skipping
+[116/477] 168468 — exists, skipping
+[117/477] 168934 — exists, skipping
+[118/477] 168940 — exists, skipping
+[119/477] 168951 — exists, skipping
+[120/477] 168957 — exists, skipping
+[121/477] 168963 — exists, skipping
+[122/477] 168972 — exists, skipping
+[123/477] 168980 — exists, skipping
+[124/477] 169375 — exists, skipping
+[125/477] 169381 — exists, skipping
+[126/477] 171490 — exists, skipping
+[127/477] 171493 — exists, skipping
+[128/477] 171495 — exists, skipping
+[129/477] 171497 — exists, skipping
+[130/477] 171502 — exists, skipping
+[131/477] 171505 — exists, skipping
+[132/477] 171508 — exists, skipping
+[133/477] 171514 — exists, skipping
+[134/477] 171518 — exists, skipping
+[135/477] 171521 — exists, skipping
+[136/477] 171525 — exists, skipping
+[137/477] 171527 — exists, skipping
+[138/477] 171530 — exists, skipping
+[139/477] 171532 — exists, skipping
+[140/477] 171535 — exists, skipping
+[141/477] 171537 — exists, skipping
+[142/477] 171539 — exists, skipping
+[143/477] 171542 — exists, skipping
+[144/477] 171552 — exists, skipping
+[145/477] 171634 — exists, skipping
+[146/477] 172604 — exists, skipping
+[147/477] 1_14_135003 — exists, skipping
+[148/477] 1_14_142405 — exists, skipping
+[149/477] 1_14_152120 — exists, skipping
+[150/477] 1_14_182931 — exists, skipping
+[151/477] 1_15_121728 — exists, skipping
+[152/477] 1_15_124737 — exists, skipping
+[153/477] 1_15_133518 — exists, skipping
+[154/477] 1_15_133636 — exists, skipping
+[155/477] 1_15_140435 — exists, skipping
+[156/477] 1_16_121142 — exists, skipping
+[157/477] 1_16_130450 — exists, skipping
+[158/477] 1_16_135516 — exists, skipping
+[159/477] 1_16_145838 — exists, skipping
+[160/477] 1_16_165743 — exists, skipping
+[161/477] 1_17_105536 — exists, skipping
+[162/477] 1_17_114715 — exists, skipping
+[163/477] 1_17_114841 — exists, skipping
+[164/477] 1_17_115907 — exists, skipping
+[165/477] 1_17_124534 — exists, skipping
+[166/477] 1_17_134646 — exists, skipping
+[167/477] 1_17_141022 — exists, skipping
+[168/477] 1_17_170957 — exists, skipping
+[169/477] 1_18_105934 — exists, skipping
+[170/477] 1_18_121110 — exists, skipping
+[171/477] 1_18_125615 — exists, skipping
+[172/477] 1_18_132154 — exists, skipping
+[173/477] 1_18_135946 — exists, skipping
+[174/477] 1_18_141744 — exists, skipping
+[175/477] 1_18_143025 — exists, skipping
+[176/477] 1_18_163730 — exists, skipping
+[177/477] 1_18_172951 — exists, skipping
+[178/477] 1_19_115145 — exists, skipping
+[179/477] 1_19_123631 — exists, skipping
+[180/477] 1_19_123643 — exists, skipping
+[181/477] 1_19_150757 — exists, skipping
+[182/477] 1_20_120609 — exists, skipping
+[183/477] 1_20_121001 — exists, skipping
+[184/477] 1_20_135936 — exists, skipping
+[185/477] 1_20_151632 — exists, skipping
+[186/477] 1_21_133552 — exists, skipping
+[187/477] 1_22_010313 — exists, skipping
+[188/477] 1_22_133853 — exists, skipping
+[189/477] 1_22_164602 — exists, skipping
+[190/477] 1_23_131500 — exists, skipping
+[191/477] 1_23_134935 — exists, skipping
+[192/477] 1_23_145805 — exists, skipping
+[193/477] 1_24_141616 — exists, skipping
+[194/477] 1_27_145855 — exists, skipping
+[195/477] 1_2_175549 — exists, skipping
+[196/477] 1_5_180421 — exists, skipping
+[197/477] 1_8_210258 — exists, skipping
+[198/477] 1_9_181506 — exists, skipping
+[199/477] 21317 — exists, skipping
+[200/477] 22481 — exists, skipping
+[201/477] 23921 — exists, skipping
+[202/477] 24053 — exists, skipping
+[203/477] 24514 — exists, skipping
+[204/477] 27028 — exists, skipping
+[205/477] 2_11_165837 — exists, skipping
+[206/477] 2_13_151816 — exists, skipping
+[207/477] 2_17_151921 — exists, skipping
+[208/477] 2_19_150135 — exists, skipping
+[209/477] 2_1_140502 — exists, skipping
+[210/477] 2_21_123248 — exists, skipping
+[211/477] 2_21_165655 — exists, skipping
+[212/477] 2_23_100809 — exists, skipping
+[213/477] 2_24_150420 — exists, skipping
+[214/477] 2_26_135951 — exists, skipping
+[215/477] 2_27_141151 — exists, skipping
+[216/477] 2_29_134055 — exists, skipping
+[217/477] 34266 — exists, skipping
+[218/477] 34449 — exists, skipping
+[219/477] 3_10_143338 — exists, skipping
+[220/477] 3_10_155715 — exists, skipping
+[221/477] 3_13_151114 — exists, skipping
+[222/477] 3_14_161123 — exists, skipping
+[223/477] 3_14_165639 — exists, skipping
+[224/477] 3_15_132808 — exists, skipping
+[225/477] 3_15_175201 — exists, skipping
+[226/477] 3_15_194415 — exists, skipping
+[227/477] 3_16_133633 — exists, skipping
+[228/477] 3_16_144347 — exists, skipping
+[229/477] 3_16_155542 — exists, skipping
+[230/477] 3_17_151820 — exists, skipping
+[231/477] 3_17_154626 — exists, skipping
+[232/477] 3_18_190554 — exists, skipping
+[233/477] 3_18_212251 — exists, skipping
+[234/477] 3_19_152148 — exists, skipping
+[235/477] 3_19_160007 — exists, skipping
+[236/477] 3_19_161315 — exists, skipping
+[237/477] 3_20_141834 — exists, skipping
+[238/477] 3_20_170126 — exists, skipping
+[239/477] 3_20_173735 — exists, skipping
+[240/477] 3_21_161648 — exists, skipping
+[241/477] 3_22_145906 — exists, skipping
+[242/477] 3_23_134311 — exists, skipping
+[243/477] 3_23_191120 — exists, skipping
+[244/477] 3_24_150249 — exists, skipping
+[245/477] 3_25_100025 — exists, skipping
+[246/477] 3_26_165523 — exists, skipping
+[247/477] 3_27_184942 — exists, skipping
+[248/477] 3_29_141030 — exists, skipping
+[249/477] 3_29_171245 — exists, skipping
+[250/477] 3_4_141536 — exists, skipping
+[251/477] 3_4_150948 — exists, skipping
+[252/477] 3_4_161254 — exists, skipping
+[253/477] 3_4_162335 — exists, skipping
+[254/477] 3_6_144933 — exists, skipping
+[255/477] 3_7_151733 — exists, skipping
+[256/477] 3_8_155244 — exists, skipping
+[257/477] 3_8_171155 — exists, skipping
+[258/477] 3_9_130933 — exists, skipping
+[259/477] 40282 — exists, skipping
+[260/477] 40366 — exists, skipping
+[261/477] 40597 — exists, skipping
+[262/477] 40856 — exists, skipping
+[263/477] 40927 — exists, skipping
+[264/477] 49348 — exists, skipping
+[265/477] 49834 — exists, skipping
+[266/477] 4_12_140041 — exists, skipping
+[267/477] 4_12_162410 — exists, skipping
+[268/477] 4_13_124040 — exists, skipping
+[269/477] 4_13_172306 — exists, skipping
+[270/477] 4_15_095627 — exists, skipping
+[271/477] 4_15_173115 — exists, skipping
+[272/477] 4_16_145840 — exists, skipping
+[273/477] 4_17_160828 — exists, skipping
+[274/477] 4_18_133217 — exists, skipping
+[275/477] 4_18_144325 — exists, skipping
+[276/477] 4_1_174339 — exists, skipping
+[277/477] 4_22_131042 — exists, skipping
+[278/477] 4_23_155023 — exists, skipping
+[279/477] 4_23_180154 — exists, skipping
+[280/477] 4_24_153803 — exists, skipping
+[281/477] 4_24_162606 — exists, skipping
+[282/477] 4_24_174828 — exists, skipping
+[283/477] 4_25_152716 — exists, skipping
+[284/477] 4_25_181044 — exists, skipping
+[285/477] 4_26_163036 — exists, skipping
+[286/477] 4_26_183819 — exists, skipping
+[287/477] 4_28_152123 — exists, skipping
+[288/477] 4_28_193602 — exists, skipping
+[289/477] 4_29_175507 — exists, skipping
+[290/477] 4_2_182827 — exists, skipping
+[291/477] 4_30_213748 — exists, skipping
+[292/477] 4_3_145847 — exists, skipping
+[293/477] 4_3_160840 — exists, skipping
+[294/477] 58158 — exists, skipping
+[295/477] 58159 — exists, skipping
+[296/477] 58162 — exists, skipping
+[297/477] 58163 — exists, skipping
+[298/477] 58167 — exists, skipping
+[299/477] 58174 — exists, skipping
+[300/477] 5_11_182326 — exists, skipping
+[301/477] 5_15_122339 — exists, skipping
+[302/477] 5_15_175821 — exists, skipping
+[303/477] 5_15_184330 — exists, skipping
+[304/477] 5_16_135101 — exists, skipping
+[305/477] 5_16_163126 — exists, skipping
+[306/477] 5_16_164614 — exists, skipping
+[307/477] 5_16_171522 — exists, skipping
+[308/477] 5_16_174634 — exists, skipping
+[309/477] 5_16_175257 — exists, skipping
+[310/477] 5_16_181919 — exists, skipping
+[311/477] 5_16_183559 — exists, skipping
+[312/477] 5_16_192612 — exists, skipping
+[313/477] 5_17_180255 — exists, skipping
+[314/477] 5_18_170415 — exists, skipping
+[315/477] 5_18_172535 — exists, skipping
+[316/477] 5_21_184019 — exists, skipping
+[317/477] 5_22_103928 — exists, skipping
+[318/477] 5_25_191856 — exists, skipping
+[319/477] 5_26_205957 — exists, skipping
+[320/477] 5_29_164417 — exists, skipping
+[321/477] 5_29_203417 — exists, skipping
+[322/477] 5_2_171234 — exists, skipping
+[323/477] 5_5_171608 — exists, skipping
+[324/477] 5_7_165130 — exists, skipping
+[325/477] 5_8_162626 — exists, skipping
+[326/477] 5_8_170407 — exists, skipping
+[327/477] 61879 — exists, skipping
+[328/477] 61948 — exists, skipping
+[329/477] 62022 — exists, skipping
+[330/477] 62172 — exists, skipping
+[331/477] 62941 — exists, skipping
+[332/477] 63472 — exists, skipping
+[333/477] 64156 — exists, skipping
+[334/477] 65455 — exists, skipping
+[335/477] 65721 — exists, skipping
+[336/477] 66477 — exists, skipping
+[337/477] 67261 — exists, skipping
+[338/477] 67714 — exists, skipping
+[339/477] 67833 — exists, skipping
+[340/477] 67910 — exists, skipping
+[341/477] 68120 — exists, skipping
+[342/477] 68201 — exists, skipping
+[343/477] 68285 — exists, skipping
+[344/477] 68354 — exists, skipping
+[345/477] 68961 — exists, skipping
+[346/477] 69012 — exists, skipping
+[347/477] 6_14_085329 — exists, skipping
+[348/477] 6_15_154957 — exists, skipping
+[349/477] 6_15_191710 — exists, skipping
+[350/477] 6_16_201514 — exists, skipping
+[351/477] 6_18_112725 — exists, skipping
+[352/477] 6_19_184414 — exists, skipping
+[353/477] 6_19_185032 — exists, skipping
+[354/477] 6_20_203907 — exists, skipping
+[355/477] 6_21_192439 — exists, skipping
+[356/477] 6_26_171844 — exists, skipping
+[357/477] 6_26_205551 — exists, skipping
+[358/477] 6_27_181740 — exists, skipping
+[359/477] 6_3_185734 — exists, skipping
+[360/477] 6_3_193608 — exists, skipping
+[361/477] 6_5_164238 — exists, skipping
+[362/477] 6_8_200045 — exists, skipping
+[363/477] 6_9_174620 — exists, skipping
+[364/477] 6_9_183322 — exists, skipping
+[365/477] 73483 — exists, skipping
+[366/477] 73651 — exists, skipping
+[367/477] 73740 — exists, skipping
+[368/477] 7_11_200524 — exists, skipping
+[369/477] 7_13_182403 — exists, skipping
+[370/477] 7_16_193558 — exists, skipping
+[371/477] 7_17_231717 — exists, skipping
+[372/477] 7_19_193537 — exists, skipping
+[373/477] 7_20_194111 — exists, skipping
+[374/477] 7_21_141313 — exists, skipping
+[375/477] 7_21_150730 — exists, skipping
+[376/477] 7_22_184437 — exists, skipping
+[377/477] 7_26_131922 — exists, skipping
+[378/477] 7_30_103948 — exists, skipping
+[379/477] 7_3_184550 — exists, skipping
+[380/477] 7_4_211104 — exists, skipping
+[381/477] 8497 — exists, skipping
+[382/477] 87212
+
+Slide: 87212.svs
+  Resolution: (79679, 45025), MPP: 0.5031
+  Patch size: 993px (500um)
+  Tissue tiles: 1654
+Stage 1 (stain separation):   0%|          | 0/104 [00:00<?, ?it/s]Stage 1 (stain separation):   1%|          | 1/104 [00:04<07:36,  4.44s/it]Stage 1 (stain separation):   2%|▏         | 2/104 [00:04<03:17,  1.94s/it]Stage 1 (stain separation):   3%|▎         | 3/104 [00:04<01:55,  1.14s/it]Stage 1 (stain separation):   4%|▍         | 4/104 [00:05<01:16,  1.31it/s]Stage 1 (stain separation):   5%|▍         | 5/104 [00:05<00:55,  1.79it/s]Stage 1 (stain separation):   6%|▌         | 6/104 [00:05<00:42,  2.31it/s]Stage 1 (stain separation):   7%|▋         | 7/104 [00:05<00:34,  2.82it/s]Stage 1 (stain separation):   8%|▊         | 8/104 [00:05<00:29,  3.29it/s]Stage 1 (stain separation):   9%|▊         | 9/104 [00:05<00:25,  3.68it/s]Stage 1 (stain separation):  10%|▉         | 10/104 [00:06<00:23,  4.03it/s]Stage 1 (stain separation):  11%|█         | 11/104 [00:06<00:21,  4.30it/s]Stage 1 (stain separation):  12%|█▏        | 12/104 [00:06<00:20,  4.50it/s]Stage 1 (stain separation):  12%|█▎        | 13/104 [00:06<00:23,  3.84it/s]Stage 1 (stain separation):  13%|█▎        | 14/104 [00:07<00:21,  4.15it/s]Stage 1 (stain separation):  14%|█▍        | 15/104 [00:07<00:28,  3.13it/s]Stage 1 (stain separation):  15%|█▌        | 16/104 [00:07<00:24,  3.52it/s]Stage 1 (stain separation):  16%|█▋        | 17/104 [00:08<00:24,  3.51it/s]Stage 1 (stain separation):  17%|█▋        | 18/104 [00:08<00:23,  3.65it/s]Stage 1 (stain separation):  18%|█▊        | 19/104 [00:08<00:27,  3.10it/s]Stage 1 (stain separation):  19%|█▉        | 20/104 [00:09<00:26,  3.17it/s]Stage 1 (stain separation):  20%|██        | 21/104 [00:09<00:27,  2.97it/s]Stage 1 (stain separation):  21%|██        | 22/104 [00:09<00:25,  3.26it/s]Stage 1 (stain separation):  22%|██▏       | 23/104 [00:10<00:35,  2.26it/s]Stage 1 (stain separation):  23%|██▎       | 24/104 [00:10<00:29,  2.73it/s]Stage 1 (stain separation):  24%|██▍       | 25/104 [00:10<00:26,  3.01it/s]Stage 1 (stain separation):  25%|██▌       | 26/104 [00:11<00:22,  3.43it/s]Stage 1 (stain separation):  26%|██▌       | 27/104 [00:11<00:27,  2.81it/s]Stage 1 (stain separation):  27%|██▋       | 28/104 [00:11<00:23,  3.25it/s]Stage 1 (stain separation):  28%|██▊       | 29/104 [00:12<00:22,  3.28it/s]Stage 1 (stain separation):  29%|██▉       | 30/104 [00:12<00:20,  3.68it/s]Stage 1 (stain separation):  30%|██▉       | 31/104 [00:12<00:23,  3.05it/s]Stage 1 (stain separation):  31%|███       | 32/104 [00:12<00:20,  3.49it/s]Stage 1 (stain separation):  32%|███▏      | 33/104 [00:13<00:21,  3.32it/s]Stage 1 (stain separation):  33%|███▎      | 34/104 [00:13<00:18,  3.71it/s]Stage 1 (stain separation):  34%|███▎      | 35/104 [00:13<00:21,  3.18it/s]Stage 1 (stain separation):  35%|███▍      | 36/104 [00:14<00:19,  3.57it/s]Stage 1 (stain separation):  36%|███▌      | 37/104 [00:14<00:26,  2.55it/s]Stage 1 (stain separation):  37%|███▋      | 38/104 [00:14<00:21,  3.00it/s]Stage 1 (stain separation):  38%|███▊      | 39/104 [00:15<00:18,  3.44it/s]Stage 1 (stain separation):  38%|███▊      | 40/104 [00:15<00:17,  3.60it/s]Stage 1 (stain separation):  39%|███▉      | 41/104 [00:16<00:25,  2.48it/s]Stage 1 (stain separation):  40%|████      | 42/104 [00:16<00:21,  2.94it/s]Stage 1 (stain separation):  41%|████▏     | 43/104 [00:16<00:18,  3.38it/s]Stage 1 (stain separation):  42%|████▏     | 44/104 [00:16<00:15,  3.78it/s]Stage 1 (stain separation):  43%|████▎     | 45/104 [00:17<00:22,  2.68it/s]Stage 1 (stain separation):  44%|████▍     | 46/104 [00:17<00:18,  3.13it/s]Stage 1 (stain separation):  45%|████▌     | 47/104 [00:17<00:16,  3.55it/s]Stage 1 (stain separation):  46%|████▌     | 48/104 [00:17<00:14,  3.93it/s]Stage 1 (stain separation):  47%|████▋     | 49/104 [00:18<00:19,  2.82it/s]Stage 1 (stain separation):  48%|████▊     | 50/104 [00:18<00:16,  3.27it/s]Stage 1 (stain separation):  49%|████▉     | 51/104 [00:18<00:14,  3.68it/s]Stage 1 (stain separation):  50%|█████     | 52/104 [00:19<00:12,  4.04it/s]Stage 1 (stain separation):  51%|█████     | 53/104 [00:19<00:17,  2.85it/s]Stage 1 (stain separation):  52%|█████▏    | 54/104 [00:19<00:15,  3.29it/s]Stage 1 (stain separation):  53%|█████▎    | 55/104 [00:20<00:13,  3.69it/s]Stage 1 (stain separation):  54%|█████▍    | 56/104 [00:20<00:11,  4.04it/s]Stage 1 (stain separation):  55%|█████▍    | 57/104 [00:20<00:18,  2.55it/s]Stage 1 (stain separation):  56%|█████▌    | 58/104 [00:21<00:15,  3.02it/s]Stage 1 (stain separation):  57%|█████▋    | 59/104 [00:21<00:13,  3.45it/s]Stage 1 (stain separation):  58%|█████▊    | 60/104 [00:21<00:11,  3.84it/s]Stage 1 (stain separation):  59%|█████▊    | 61/104 [00:22<00:15,  2.70it/s]Stage 1 (stain separation):  60%|█████▉    | 62/104 [00:22<00:13,  3.16it/s]Stage 1 (stain separation):  61%|██████    | 63/104 [00:22<00:11,  3.58it/s]Stage 1 (stain separation):  62%|██████▏   | 64/104 [00:22<00:10,  3.95it/s]Stage 1 (stain separation):  62%|██████▎   | 65/104 [00:23<00:15,  2.50it/s]Stage 1 (stain separation):  63%|██████▎   | 66/104 [00:23<00:12,  2.96it/s]Stage 1 (stain separation):  64%|██████▍   | 67/104 [00:23<00:10,  3.40it/s]Stage 1 (stain separation):  65%|██████▌   | 68/104 [00:24<00:09,  3.80it/s]Stage 1 (stain separation):  66%|██████▋   | 69/104 [00:24<00:12,  2.73it/s]Stage 1 (stain separation):  67%|██████▋   | 70/104 [00:24<00:10,  3.19it/s]Stage 1 (stain separation):  68%|██████▊   | 71/104 [00:25<00:09,  3.60it/s]Stage 1 (stain separation):  69%|██████▉   | 72/104 [00:25<00:08,  3.96it/s]Stage 1 (stain separation):  70%|███████   | 73/104 [00:25<00:11,  2.79it/s]Stage 1 (stain separation):  71%|███████   | 74/104 [00:26<00:09,  3.23it/s]Stage 1 (stain separation):  72%|███████▏  | 75/104 [00:26<00:07,  3.64it/s]Stage 1 (stain separation):  73%|███████▎  | 76/104 [00:26<00:06,  4.00it/s]Stage 1 (stain separation):  74%|███████▍  | 77/104 [00:26<00:09,  2.83it/s]Stage 1 (stain separation):  75%|███████▌  | 78/104 [00:27<00:07,  3.28it/s]Stage 1 (stain separation):  76%|███████▌  | 79/104 [00:27<00:06,  3.68it/s]Stage 1 (stain separation):  77%|███████▋  | 80/104 [00:27<00:05,  4.03it/s]Stage 1 (stain separation):  78%|███████▊  | 81/104 [00:28<00:08,  2.79it/s]Stage 1 (stain separation):  79%|███████▉  | 82/104 [00:28<00:06,  3.23it/s]Stage 1 (stain separation):  80%|███████▉  | 83/104 [00:28<00:05,  3.64it/s]Stage 1 (stain separation):  81%|████████  | 84/104 [00:28<00:05,  3.99it/s]Stage 1 (stain separation):  82%|████████▏ | 85/104 [00:29<00:07,  2.48it/s]Stage 1 (stain separation):  83%|████████▎ | 86/104 [00:29<00:06,  2.94it/s]Stage 1 (stain separation):  84%|████████▎ | 87/104 [00:29<00:05,  3.37it/s]Stage 1 (stain separation):  85%|████████▍ | 88/104 [00:30<00:04,  3.75it/s]Stage 1 (stain separation):  86%|████████▌ | 89/104 [00:30<00:05,  2.68it/s]Stage 1 (stain separation):  87%|████████▋ | 90/104 [00:30<00:04,  3.07it/s]Stage 1 (stain separation):  88%|████████▊ | 91/104 [00:31<00:03,  3.42it/s]Stage 1 (stain separation):  88%|████████▊ | 92/104 [00:31<00:03,  3.74it/s]Stage 1 (stain separation):  89%|████████▉ | 93/104 [00:32<00:04,  2.65it/s]Stage 1 (stain separation):  90%|█████████ | 94/104 [00:32<00:03,  3.09it/s]Stage 1 (stain separation):  91%|█████████▏| 95/104 [00:32<00:02,  3.52it/s]Stage 1 (stain separation):  92%|█████████▏| 96/104 [00:32<00:02,  3.89it/s]Stage 1 (stain separation):  93%|█████████▎| 97/104 [00:33<00:02,  2.69it/s]Stage 1 (stain separation):  94%|█████████▍| 98/104 [00:33<00:01,  3.14it/s]Stage 1 (stain separation):  95%|█████████▌| 99/104 [00:33<00:01,  3.57it/s]Stage 1 (stain separation):  96%|█████████▌| 100/104 [00:33<00:01,  3.96it/s]Stage 1 (stain separation):  97%|█████████▋| 101/104 [00:34<00:01,  2.50it/s]Stage 1 (stain separation):  98%|█████████▊| 102/104 [00:34<00:00,  2.97it/s]Stage 1 (stain separation):  99%|█████████▉| 103/104 [00:34<00:00,  3.42it/s]Stage 1 (stain separation): 100%|██████████| 104/104 [00:35<00:00,  2.97it/s]
+  background_h: 447 tiles
+  background_e: 1045 tiles
+  white: 162 tiles
+  Stage 1 duration: 35.0s
+
+Stage 2: Running H-model on 447 hematoxylin tiles...
+  H vessels: 117 / 447
+Stage 2: Running E-model on 1045 eosin tiles...
+  E vessels: 143 / 1045
+  Stage 2 duration: 119.2s
+
+Final classification:
+  background_h: 330 tiles
+  background_e: 902 tiles
+  vessel_h: 117 tiles
+  vessel_e: 143 tiles
+  white: 162 tiles
+  Total vessel tiles: 260
+Saved predictions to outputs/87212/predictions.json
+Saved 1654 annotations to outputs/87212/predictions.geojson
+DINOv2:   0%|          | 0/5 [00:00<?, ?it/s]DINOv2:  20%|██        | 1/5 [00:00<00:01,  2.46it/s]DINOv2:  40%|████      | 2/5 [00:00<00:01,  2.98it/s]DINOv2:  60%|██████    | 3/5 [00:00<00:00,  3.19it/s]DINOv2:  80%|████████  | 4/5 [00:01<00:00,  3.26it/s]                                                       -> 260 tiles, shape torch.Size([260, 1024]), saved to 87212.pt
+[383/477] 87285
+
+Slide: 87285.svs
+  Resolution: (67727, 45000), MPP: 0.5031
+  Patch size: 993px (500um)
+  Tissue tiles: 2486
+Stage 1 (stain separation):   0%|          | 0/156 [00:00<?, ?it/s]Stage 1 (stain separation):   1%|          | 1/156 [00:02<06:41,  2.59s/it]Stage 1 (stain separation):   1%|▏         | 2/156 [00:03<04:11,  1.63s/it]Stage 1 (stain separation):   2%|▏         | 3/156 [00:03<02:29,  1.02it/s]Stage 1 (stain separation):   3%|▎         | 4/156 [00:03<01:41,  1.50it/s]Stage 1 (stain separation):   3%|▎         | 5/156 [00:04<01:50,  1.36it/s]Stage 1 (stain separation):   4%|▍         | 6/156 [00:04<01:22,  1.82it/s]Stage 1 (stain separation):   4%|▍         | 7/156 [00:05<01:04,  2.31it/s]Stage 1 (stain separation):   5%|▌         | 8/156 [00:05<00:52,  2.81it/s]Stage 1 (stain separation):   6%|▌         | 9/156 [00:05<01:03,  2.30it/s]Stage 1 (stain separation):   6%|▋         | 10/156 [00:06<00:52,  2.78it/s]Stage 1 (stain separation):   7%|▋         | 11/156 [00:06<00:44,  3.24it/s]Stage 1 (stain separation):   8%|▊         | 12/156 [00:06<00:39,  3.65it/s]Stage 1 (stain separation):   8%|▊         | 13/156 [00:07<00:49,  2.89it/s]Stage 1 (stain separation):   9%|▉         | 14/156 [00:07<00:42,  3.35it/s]Stage 1 (stain separation):  10%|▉         | 15/156 [00:07<00:37,  3.75it/s]Stage 1 (stain separation):  10%|█         | 16/156 [00:07<00:34,  4.10it/s]Stage 1 (stain separation):  11%|█         | 17/156 [00:08<00:46,  3.00it/s]Stage 1 (stain separation):  12%|█▏        | 18/156 [00:08<00:39,  3.45it/s]Stage 1 (stain separation):  12%|█▏        | 19/156 [00:08<00:35,  3.84it/s]Stage 1 (stain separation):  13%|█▎        | 20/156 [00:08<00:32,  4.17it/s]Stage 1 (stain separation):  13%|█▎        | 21/156 [00:09<00:46,  2.93it/s]Stage 1 (stain separation):  14%|█▍        | 22/156 [00:09<00:39,  3.36it/s]Stage 1 (stain separation):  15%|█▍        | 23/156 [00:09<00:35,  3.75it/s]Stage 1 (stain separation):  15%|█▌        | 24/156 [00:09<00:32,  4.11it/s]Stage 1 (stain separation):  16%|█▌        | 25/156 [00:10<00:51,  2.53it/s]Stage 1 (stain separation):  17%|█▋        | 26/156 [00:10<00:43,  2.99it/s]Stage 1 (stain separation):  17%|█▋        | 27/156 [00:11<00:37,  3.42it/s]Stage 1 (stain separation):  18%|█▊        | 28/156 [00:11<00:33,  3.80it/s]Stage 1 (stain separation):  19%|█▊        | 29/156 [00:11<00:46,  2.73it/s]Stage 1 (stain separation):  19%|█▉        | 30/156 [00:12<00:39,  3.18it/s]Stage 1 (stain separation):  20%|█▉        | 31/156 [00:12<00:34,  3.60it/s]Stage 1 (stain separation):  21%|██        | 32/156 [00:12<00:31,  3.97it/s]Stage 1 (stain separation):  21%|██        | 33/156 [00:13<00:45,  2.70it/s]Stage 1 (stain separation):  22%|██▏       | 34/156 [00:13<00:38,  3.15it/s]Stage 1 (stain separation):  22%|██▏       | 35/156 [00:13<00:33,  3.58it/s]Stage 1 (stain separation):  23%|██▎       | 36/156 [00:13<00:30,  3.96it/s]Stage 1 (stain separation):  24%|██▎       | 37/156 [00:14<00:43,  2.73it/s]Stage 1 (stain separation):  24%|██▍       | 38/156 [00:14<00:37,  3.19it/s]Stage 1 (stain separation):  25%|██▌       | 39/156 [00:14<00:32,  3.61it/s]Stage 1 (stain separation):  26%|██▌       | 40/156 [00:14<00:29,  3.98it/s]Stage 1 (stain separation):  26%|██▋       | 41/156 [00:15<00:42,  2.71it/s]Stage 1 (stain separation):  27%|██▋       | 42/156 [00:15<00:35,  3.17it/s]Stage 1 (stain separation):  28%|██▊       | 43/156 [00:15<00:31,  3.60it/s]Stage 1 (stain separation):  28%|██▊       | 44/156 [00:16<00:28,  3.96it/s]Stage 1 (stain separation):  29%|██▉       | 45/156 [00:16<00:39,  2.82it/s]Stage 1 (stain separation):  29%|██▉       | 46/156 [00:16<00:33,  3.26it/s]Stage 1 (stain separation):  30%|███       | 47/156 [00:17<00:29,  3.69it/s]Stage 1 (stain separation):  31%|███       | 48/156 [00:17<00:26,  4.04it/s]Stage 1 (stain separation):  31%|███▏      | 49/156 [00:17<00:42,  2.51it/s]Stage 1 (stain separation):  32%|███▏      | 50/156 [00:18<00:35,  2.98it/s]Stage 1 (stain separation):  33%|███▎      | 51/156 [00:18<00:30,  3.42it/s]Stage 1 (stain separation):  33%|███▎      | 52/156 [00:18<00:27,  3.78it/s]Stage 1 (stain separation):  34%|███▍      | 53/156 [00:19<00:36,  2.79it/s]Stage 1 (stain separation):  35%|███▍      | 54/156 [00:19<00:31,  3.24it/s]Stage 1 (stain separation):  35%|███▌      | 55/156 [00:19<00:27,  3.66it/s]Stage 1 (stain separation):  36%|███▌      | 56/156 [00:19<00:24,  4.01it/s]Stage 1 (stain separation):  37%|███▋      | 57/156 [00:20<00:34,  2.85it/s]Stage 1 (stain separation):  37%|███▋      | 58/156 [00:20<00:29,  3.30it/s]Stage 1 (stain separation):  38%|███▊      | 59/156 [00:20<00:26,  3.71it/s]Stage 1 (stain separation):  38%|███▊      | 60/156 [00:20<00:23,  4.06it/s]Stage 1 (stain separation):  39%|███▉      | 61/156 [00:21<00:34,  2.77it/s]Stage 1 (stain separation):  40%|███▉      | 62/156 [00:21<00:29,  3.22it/s]Stage 1 (stain separation):  40%|████      | 63/156 [00:21<00:25,  3.64it/s]Stage 1 (stain separation):  41%|████      | 64/156 [00:22<00:23,  4.00it/s]Stage 1 (stain separation):  42%|████▏     | 65/156 [00:22<00:33,  2.70it/s]Stage 1 (stain separation):  42%|████▏     | 66/156 [00:22<00:28,  3.16it/s]Stage 1 (stain separation):  43%|████▎     | 67/156 [00:23<00:24,  3.57it/s]Stage 1 (stain separation):  44%|████▎     | 68/156 [00:23<00:22,  3.94it/s]Stage 1 (stain separation):  44%|████▍     | 69/156 [00:23<00:32,  2.70it/s]Stage 1 (stain separation):  45%|████▍     | 70/156 [00:24<00:27,  3.13it/s]Stage 1 (stain separation):  46%|████▌     | 71/156 [00:24<00:23,  3.56it/s]Stage 1 (stain separation):  46%|████▌     | 72/156 [00:24<00:21,  3.94it/s]Stage 1 (stain separation):  47%|████▋     | 73/156 [00:25<00:33,  2.48it/s]Stage 1 (stain separation):  47%|████▋     | 74/156 [00:25<00:27,  2.94it/s]Stage 1 (stain separation):  48%|████▊     | 75/156 [00:25<00:23,  3.39it/s]Stage 1 (stain separation):  49%|████▊     | 76/156 [00:25<00:21,  3.79it/s]Stage 1 (stain separation):  49%|████▉     | 77/156 [00:26<00:29,  2.68it/s]Stage 1 (stain separation):  50%|█████     | 78/156 [00:26<00:24,  3.13it/s]Stage 1 (stain separation):  51%|█████     | 79/156 [00:26<00:21,  3.56it/s]Stage 1 (stain separation):  51%|█████▏    | 80/156 [00:27<00:19,  3.93it/s]Stage 1 (stain separation):  52%|█████▏    | 81/156 [00:27<00:26,  2.85it/s]Stage 1 (stain separation):  53%|█████▎    | 82/156 [00:27<00:22,  3.27it/s]Stage 1 (stain separation):  53%|█████▎    | 83/156 [00:28<00:19,  3.69it/s]Stage 1 (stain separation):  54%|█████▍    | 84/156 [00:28<00:17,  4.06it/s]Stage 1 (stain separation):  54%|█████▍    | 85/156 [00:28<00:24,  2.90it/s]Stage 1 (stain separation):  55%|█████▌    | 86/156 [00:29<00:20,  3.34it/s]Stage 1 (stain separation):  56%|█████▌    | 87/156 [00:29<00:18,  3.75it/s]Stage 1 (stain separation):  56%|█████▋    | 88/156 [00:29<00:16,  4.09it/s]Stage 1 (stain separation):  57%|█████▋    | 89/156 [00:29<00:23,  2.82it/s]Stage 1 (stain separation):  58%|█████▊    | 90/156 [00:30<00:20,  3.27it/s]Stage 1 (stain separation):  58%|█████▊    | 91/156 [00:30<00:17,  3.69it/s]Stage 1 (stain separation):  59%|█████▉    | 92/156 [00:30<00:15,  4.06it/s]Stage 1 (stain separation):  60%|█████▉    | 93/156 [00:31<00:22,  2.85it/s]Stage 1 (stain separation):  60%|██████    | 94/156 [00:31<00:18,  3.29it/s]Stage 1 (stain separation):  61%|██████    | 95/156 [00:31<00:16,  3.69it/s]Stage 1 (stain separation):  62%|██████▏   | 96/156 [00:31<00:14,  4.05it/s]Stage 1 (stain separation):  62%|██████▏   | 97/156 [00:32<00:21,  2.75it/s]Stage 1 (stain separation):  63%|██████▎   | 98/156 [00:32<00:18,  3.20it/s]Stage 1 (stain separation):  63%|██████▎   | 99/156 [00:32<00:15,  3.63it/s]Stage 1 (stain separation):  64%|██████▍   | 100/156 [00:32<00:14,  3.97it/s]Stage 1 (stain separation):  65%|██████▍   | 101/156 [00:33<00:19,  2.78it/s]Stage 1 (stain separation):  65%|██████▌   | 102/156 [00:33<00:16,  3.21it/s]Stage 1 (stain separation):  66%|██████▌   | 103/156 [00:33<00:14,  3.63it/s]Stage 1 (stain separation):  67%|██████▋   | 104/156 [00:34<00:13,  3.99it/s]Stage 1 (stain separation):  67%|██████▋   | 105/156 [00:34<00:21,  2.42it/s]Stage 1 (stain separation):  68%|██████▊   | 106/156 [00:35<00:17,  2.88it/s]Stage 1 (stain separation):  69%|██████▊   | 107/156 [00:35<00:14,  3.34it/s]Stage 1 (stain separation):  69%|██████▉   | 108/156 [00:35<00:12,  3.75it/s]Stage 1 (stain separation):  70%|██████▉   | 109/156 [00:36<00:17,  2.65it/s]Stage 1 (stain separation):  71%|███████   | 110/156 [00:36<00:14,  3.11it/s]Stage 1 (stain separation):  71%|███████   | 111/156 [00:36<00:12,  3.54it/s]Stage 1 (stain separation):  72%|███████▏  | 112/156 [00:36<00:11,  3.93it/s]Stage 1 (stain separation):  72%|███████▏  | 113/156 [00:37<00:15,  2.76it/s]Stage 1 (stain separation):  73%|███████▎  | 114/156 [00:37<00:13,  3.21it/s]Stage 1 (stain separation):  74%|███████▎  | 115/156 [00:37<00:11,  3.63it/s]Stage 1 (stain separation):  74%|███████▍  | 116/156 [00:37<00:10,  3.99it/s]Stage 1 (stain separation):  75%|███████▌  | 117/156 [00:38<00:13,  2.82it/s]Stage 1 (stain separation):  76%|███████▌  | 118/156 [00:38<00:11,  3.27it/s]Stage 1 (stain separation):  76%|███████▋  | 119/156 [00:38<00:10,  3.69it/s]Stage 1 (stain separation):  77%|███████▋  | 120/156 [00:39<00:08,  4.05it/s]Stage 1 (stain separation):  78%|███████▊  | 121/156 [00:39<00:12,  2.90it/s]Stage 1 (stain separation):  78%|███████▊  | 122/156 [00:39<00:10,  3.35it/s]Stage 1 (stain separation):  79%|███████▉  | 123/156 [00:40<00:08,  3.75it/s]Stage 1 (stain separation):  79%|███████▉  | 124/156 [00:40<00:07,  4.09it/s]Stage 1 (stain separation):  80%|████████  | 125/156 [00:40<00:10,  2.91it/s]Stage 1 (stain separation):  81%|████████  | 126/156 [00:41<00:08,  3.34it/s]Stage 1 (stain separation):  81%|████████▏ | 127/156 [00:41<00:07,  3.74it/s]Stage 1 (stain separation):  82%|████████▏ | 128/156 [00:41<00:06,  4.10it/s]Stage 1 (stain separation):  83%|████████▎ | 129/156 [00:41<00:09,  2.89it/s]Stage 1 (stain separation):  83%|████████▎ | 130/156 [00:42<00:07,  3.33it/s]Stage 1 (stain separation):  84%|████████▍ | 131/156 [00:42<00:06,  3.73it/s]Stage 1 (stain separation):  85%|████████▍ | 132/156 [00:42<00:05,  4.08it/s]Stage 1 (stain separation):  85%|████████▌ | 133/156 [00:43<00:09,  2.55it/s]Stage 1 (stain separation):  86%|████████▌ | 134/156 [00:43<00:07,  3.00it/s]Stage 1 (stain separation):  87%|████████▋ | 135/156 [00:43<00:06,  3.44it/s]Stage 1 (stain separation):  87%|████████▋ | 136/156 [00:43<00:05,  3.84it/s]Stage 1 (stain separation):  88%|████████▊ | 137/156 [00:44<00:06,  2.73it/s]Stage 1 (stain separation):  88%|████████▊ | 138/156 [00:44<00:05,  3.19it/s]Stage 1 (stain separation):  89%|████████▉ | 139/156 [00:44<00:04,  3.61it/s]Stage 1 (stain separation):  90%|████████▉ | 140/156 [00:45<00:04,  3.98it/s]Stage 1 (stain separation):  90%|█████████ | 141/156 [00:45<00:05,  2.85it/s]Stage 1 (stain separation):  91%|█████████ | 142/156 [00:45<00:04,  3.30it/s]Stage 1 (stain separation):  92%|█████████▏| 143/156 [00:46<00:03,  3.72it/s]Stage 1 (stain separation):  92%|█████████▏| 144/156 [00:46<00:02,  4.07it/s]Stage 1 (stain separation):  93%|█████████▎| 145/156 [00:46<00:03,  2.84it/s]Stage 1 (stain separation):  94%|█████████▎| 146/156 [00:46<00:03,  3.28it/s]Stage 1 (stain separation):  94%|█████████▍| 147/156 [00:47<00:02,  3.71it/s]Stage 1 (stain separation):  95%|█████████▍| 148/156 [00:47<00:01,  4.08it/s]Stage 1 (stain separation):  96%|█████████▌| 149/156 [00:47<00:02,  2.83it/s]Stage 1 (stain separation):  96%|█████████▌| 150/156 [00:48<00:01,  3.28it/s]Stage 1 (stain separation):  97%|█████████▋| 151/156 [00:48<00:01,  3.71it/s]Stage 1 (stain separation):  97%|█████████▋| 152/156 [00:48<00:00,  4.07it/s]Stage 1 (stain separation):  98%|█████████▊| 153/156 [00:49<00:01,  2.42it/s]Stage 1 (stain separation):  99%|█████████▊| 154/156 [00:49<00:00,  2.90it/s]Stage 1 (stain separation):  99%|█████████▉| 155/156 [00:49<00:00,  3.36it/s]Stage 1 (stain separation): 100%|██████████| 156/156 [00:49<00:00,  3.13it/s]
+  background_h: 982 tiles
+  background_e: 1390 tiles
+  white: 114 tiles
+  Stage 1 duration: 49.8s
+
+Stage 2: Running H-model on 982 hematoxylin tiles...
+  H vessels: 171 / 982
+Stage 2: Running E-model on 1390 eosin tiles...
+  E vessels: 188 / 1390
+  Stage 2 duration: 187.7s
+
+Final classification:
+  background_h: 811 tiles
+  background_e: 1202 tiles
+  vessel_h: 171 tiles
+  vessel_e: 188 tiles
+  white: 114 tiles
+  Total vessel tiles: 359
+Saved predictions to outputs/87285/predictions.json
+Saved 2486 annotations to outputs/87285/predictions.geojson
+DINOv2:   0%|          | 0/6 [00:00<?, ?it/s]DINOv2:  17%|█▋        | 1/6 [00:00<00:01,  3.52it/s]DINOv2:  33%|███▎      | 2/6 [00:00<00:01,  3.50it/s]DINOv2:  50%|█████     | 3/6 [00:00<00:00,  3.48it/s]DINOv2:  67%|██████▋   | 4/6 [00:01<00:00,  3.42it/s]DINOv2:  83%|████████▎ | 5/6 [00:01<00:00,  3.43it/s]DINOv2: 100%|██████████| 6/6 [00:01<00:00,  3.96it/s]                                                       -> 359 tiles, shape torch.Size([359, 1024]), saved to 87285.pt
+[384/477] 87369
+
+Slide: 87369.svs
+  Resolution: (71711, 45009), MPP: 0.5031
+  Patch size: 993px (500um)
+  Tissue tiles: 2612
+Stage 1 (stain separation):   0%|          | 0/164 [00:00<?, ?it/s]Stage 1 (stain separation):   1%|          | 1/164 [00:02<07:01,  2.59s/it]Stage 1 (stain separation):   1%|          | 2/164 [00:03<04:00,  1.48s/it]Stage 1 (stain separation):   2%|▏         | 3/164 [00:03<02:23,  1.12it/s]Stage 1 (stain separation):   2%|▏         | 4/164 [00:03<01:38,  1.63it/s]Stage 1 (stain separation):   3%|▎         | 5/164 [00:03<01:19,  2.00it/s]Stage 1 (stain separation):   4%|▎         | 6/164 [00:04<01:37,  1.62it/s]Stage 1 (stain separation):   4%|▍         | 7/164 [00:05<01:15,  2.09it/s]Stage 1 (stain separation):   5%|▍         | 8/164 [00:05<01:00,  2.59it/s]Stage 1 (stain separation):   5%|▌         | 9/164 [00:05<01:13,  2.12it/s]Stage 1 (stain separation):   6%|▌         | 10/164 [00:06<00:59,  2.58it/s]Stage 1 (stain separation):   7%|▋         | 11/164 [00:06<00:50,  3.05it/s]Stage 1 (stain separation):   7%|▋         | 12/164 [00:06<01:01,  2.46it/s]Stage 1 (stain separation):   8%|▊         | 13/164 [00:07<00:54,  2.75it/s]Stage 1 (stain separation):   9%|▊         | 14/164 [00:07<00:46,  3.21it/s]Stage 1 (stain separation):   9%|▉         | 15/164 [00:07<00:40,  3.64it/s]Stage 1 (stain separation):  10%|▉         | 16/164 [00:08<00:58,  2.52it/s]Stage 1 (stain separation):  10%|█         | 17/164 [00:08<00:49,  2.98it/s]Stage 1 (stain separation):  11%|█         | 18/164 [00:08<00:42,  3.40it/s]Stage 1 (stain separation):  12%|█▏        | 19/164 [00:08<00:37,  3.82it/s]Stage 1 (stain separation):  12%|█▏        | 20/164 [00:09<00:53,  2.68it/s]Stage 1 (stain separation):  13%|█▎        | 21/164 [00:09<00:45,  3.15it/s]Stage 1 (stain separation):  13%|█▎        | 22/164 [00:09<00:39,  3.58it/s]Stage 1 (stain separation):  14%|█▍        | 23/164 [00:09<00:35,  3.96it/s]Stage 1 (stain separation):  15%|█▍        | 24/164 [00:10<00:57,  2.44it/s]Stage 1 (stain separation):  15%|█▌        | 25/164 [00:10<00:47,  2.90it/s]Stage 1 (stain separation):  16%|█▌        | 26/164 [00:11<00:41,  3.35it/s]Stage 1 (stain separation):  16%|█▋        | 27/164 [00:11<00:36,  3.77it/s]Stage 1 (stain separation):  17%|█▋        | 28/164 [00:11<00:50,  2.70it/s]Stage 1 (stain separation):  18%|█▊        | 29/164 [00:12<00:42,  3.15it/s]Stage 1 (stain separation):  18%|█▊        | 30/164 [00:12<00:37,  3.56it/s]Stage 1 (stain separation):  19%|█▉        | 31/164 [00:12<00:33,  3.93it/s]Stage 1 (stain separation):  20%|█▉        | 32/164 [00:13<00:47,  2.76it/s]Stage 1 (stain separation):  20%|██        | 33/164 [00:13<00:40,  3.22it/s]Stage 1 (stain separation):  21%|██        | 34/164 [00:13<00:35,  3.65it/s]Stage 1 (stain separation):  21%|██▏       | 35/164 [00:13<00:32,  3.98it/s]Stage 1 (stain separation):  22%|██▏       | 36/164 [00:14<00:45,  2.80it/s]Stage 1 (stain separation):  23%|██▎       | 37/164 [00:14<00:39,  3.23it/s]Stage 1 (stain separation):  23%|██▎       | 38/164 [00:14<00:34,  3.66it/s]Stage 1 (stain separation):  24%|██▍       | 39/164 [00:14<00:31,  4.03it/s]Stage 1 (stain separation):  24%|██▍       | 40/164 [00:15<00:43,  2.88it/s]Stage 1 (stain separation):  25%|██▌       | 41/164 [00:15<00:37,  3.32it/s]Stage 1 (stain separation):  26%|██▌       | 42/164 [00:15<00:32,  3.74it/s]Stage 1 (stain separation):  26%|██▌       | 43/164 [00:16<00:29,  4.09it/s]Stage 1 (stain separation):  27%|██▋       | 44/164 [00:16<00:42,  2.81it/s]Stage 1 (stain separation):  27%|██▋       | 45/164 [00:16<00:36,  3.27it/s]Stage 1 (stain separation):  28%|██▊       | 46/164 [00:17<00:31,  3.70it/s]Stage 1 (stain separation):  29%|██▊       | 47/164 [00:17<00:28,  4.05it/s]Stage 1 (stain separation):  29%|██▉       | 48/164 [00:17<00:41,  2.76it/s]Stage 1 (stain separation):  30%|██▉       | 49/164 [00:18<00:35,  3.21it/s]Stage 1 (stain separation):  30%|███       | 50/164 [00:18<00:31,  3.63it/s]Stage 1 (stain separation):  31%|███       | 51/164 [00:18<00:28,  4.01it/s]Stage 1 (stain separation):  32%|███▏      | 52/164 [00:19<00:47,  2.36it/s]Stage 1 (stain separation):  32%|███▏      | 53/164 [00:19<00:39,  2.82it/s]Stage 1 (stain separation):  33%|███▎      | 54/164 [00:19<00:33,  3.27it/s]Stage 1 (stain separation):  34%|███▎      | 55/164 [00:19<00:29,  3.69it/s]Stage 1 (stain separation):  34%|███▍      | 56/164 [00:20<00:40,  2.70it/s]Stage 1 (stain separation):  35%|███▍      | 57/164 [00:20<00:33,  3.16it/s]Stage 1 (stain separation):  35%|███▌      | 58/164 [00:20<00:29,  3.60it/s]Stage 1 (stain separation):  36%|███▌      | 59/164 [00:20<00:26,  3.97it/s]Stage 1 (stain separation):  37%|███▋      | 60/164 [00:21<00:37,  2.75it/s]Stage 1 (stain separation):  37%|███▋      | 61/164 [00:21<00:33,  3.06it/s]Stage 1 (stain separation):  38%|███▊      | 62/164 [00:22<00:29,  3.49it/s]Stage 1 (stain separation):  38%|███▊      | 63/164 [00:22<00:26,  3.87it/s]Stage 1 (stain separation):  39%|███▉      | 64/164 [00:22<00:36,  2.77it/s]Stage 1 (stain separation):  40%|███▉      | 65/164 [00:23<00:31,  3.10it/s]Stage 1 (stain separation):  40%|████      | 66/164 [00:23<00:27,  3.52it/s]Stage 1 (stain separation):  41%|████      | 67/164 [00:23<00:24,  3.91it/s]Stage 1 (stain separation):  41%|████▏     | 68/164 [00:24<00:34,  2.76it/s]Stage 1 (stain separation):  42%|████▏     | 69/164 [00:24<00:29,  3.22it/s]Stage 1 (stain separation):  43%|████▎     | 70/164 [00:24<00:25,  3.64it/s]Stage 1 (stain separation):  43%|████▎     | 71/164 [00:24<00:23,  4.02it/s]Stage 1 (stain separation):  44%|████▍     | 72/164 [00:25<00:33,  2.76it/s]Stage 1 (stain separation):  45%|████▍     | 73/164 [00:25<00:28,  3.22it/s]Stage 1 (stain separation):  45%|████▌     | 74/164 [00:25<00:24,  3.63it/s]Stage 1 (stain separation):  46%|████▌     | 75/164 [00:25<00:22,  4.01it/s]Stage 1 (stain separation):  46%|████▋     | 76/164 [00:26<00:35,  2.48it/s]Stage 1 (stain separation):  47%|████▋     | 77/164 [00:26<00:29,  2.94it/s]Stage 1 (stain separation):  48%|████▊     | 78/164 [00:26<00:25,  3.38it/s]Stage 1 (stain separation):  48%|████▊     | 79/164 [00:27<00:22,  3.79it/s]Stage 1 (stain separation):  49%|████▉     | 80/164 [00:27<00:30,  2.73it/s]Stage 1 (stain separation):  49%|████▉     | 81/164 [00:27<00:26,  3.19it/s]Stage 1 (stain separation):  50%|█████     | 82/164 [00:28<00:22,  3.61it/s]Stage 1 (stain separation):  51%|█████     | 83/164 [00:28<00:20,  3.98it/s]Stage 1 (stain separation):  51%|█████     | 84/164 [00:28<00:28,  2.79it/s]Stage 1 (stain separation):  52%|█████▏    | 85/164 [00:29<00:24,  3.24it/s]Stage 1 (stain separation):  52%|█████▏    | 86/164 [00:29<00:21,  3.67it/s]Stage 1 (stain separation):  53%|█████▎    | 87/164 [00:29<00:19,  4.03it/s]Stage 1 (stain separation):  54%|█████▎    | 88/164 [00:30<00:26,  2.82it/s]Stage 1 (stain separation):  54%|█████▍    | 89/164 [00:30<00:22,  3.27it/s]Stage 1 (stain separation):  55%|█████▍    | 90/164 [00:30<00:20,  3.69it/s]Stage 1 (stain separation):  55%|█████▌    | 91/164 [00:30<00:18,  4.05it/s]Stage 1 (stain separation):  56%|█████▌    | 92/164 [00:31<00:25,  2.84it/s]Stage 1 (stain separation):  57%|█████▋    | 93/164 [00:31<00:21,  3.30it/s]Stage 1 (stain separation):  57%|█████▋    | 94/164 [00:31<00:18,  3.70it/s]Stage 1 (stain separation):  58%|█████▊    | 95/164 [00:31<00:17,  4.05it/s]Stage 1 (stain separation):  59%|█████▊    | 96/164 [00:32<00:24,  2.78it/s]Stage 1 (stain separation):  59%|█████▉    | 97/164 [00:32<00:20,  3.22it/s]Stage 1 (stain separation):  60%|█████▉    | 98/164 [00:32<00:18,  3.65it/s]Stage 1 (stain separation):  60%|██████    | 99/164 [00:33<00:16,  4.01it/s]Stage 1 (stain separation):  61%|██████    | 100/164 [00:33<00:22,  2.81it/s]Stage 1 (stain separation):  62%|██████▏   | 101/164 [00:33<00:19,  3.21it/s]Stage 1 (stain separation):  62%|██████▏   | 102/164 [00:34<00:17,  3.62it/s]Stage 1 (stain separation):  63%|██████▎   | 103/164 [00:34<00:15,  3.98it/s]Stage 1 (stain separation):  63%|██████▎   | 104/164 [00:34<00:21,  2.84it/s]Stage 1 (stain separation):  64%|██████▍   | 105/164 [00:35<00:20,  2.94it/s]Stage 1 (stain separation):  65%|██████▍   | 106/164 [00:35<00:17,  3.38it/s]Stage 1 (stain separation):  65%|██████▌   | 107/164 [00:35<00:15,  3.78it/s]Stage 1 (stain separation):  66%|██████▌   | 108/164 [00:36<00:21,  2.59it/s]Stage 1 (stain separation):  66%|██████▋   | 109/164 [00:36<00:18,  2.97it/s]Stage 1 (stain separation):  67%|██████▋   | 110/164 [00:36<00:15,  3.41it/s]Stage 1 (stain separation):  68%|██████▊   | 111/164 [00:36<00:13,  3.81it/s]Stage 1 (stain separation):  68%|██████▊   | 112/164 [00:37<00:18,  2.77it/s]Stage 1 (stain separation):  69%|██████▉   | 113/164 [00:37<00:16,  3.08it/s]Stage 1 (stain separation):  70%|██████▉   | 114/164 [00:37<00:14,  3.51it/s]Stage 1 (stain separation):  70%|███████   | 115/164 [00:38<00:12,  3.90it/s]Stage 1 (stain separation):  71%|███████   | 116/164 [00:38<00:16,  2.83it/s]Stage 1 (stain separation):  71%|███████▏  | 117/164 [00:38<00:15,  3.03it/s]Stage 1 (stain separation):  72%|███████▏  | 118/164 [00:39<00:13,  3.46it/s]Stage 1 (stain separation):  73%|███████▎  | 119/164 [00:39<00:11,  3.86it/s]Stage 1 (stain separation):  73%|███████▎  | 120/164 [00:39<00:15,  2.84it/s]Stage 1 (stain separation):  74%|███████▍  | 121/164 [00:40<00:14,  3.07it/s]Stage 1 (stain separation):  74%|███████▍  | 122/164 [00:40<00:11,  3.51it/s]Stage 1 (stain separation):  75%|███████▌  | 123/164 [00:40<00:10,  3.90it/s]Stage 1 (stain separation):  76%|███████▌  | 124/164 [00:41<00:13,  2.91it/s]Stage 1 (stain separation):  76%|███████▌  | 125/164 [00:41<00:12,  3.16it/s]Stage 1 (stain separation):  77%|███████▋  | 126/164 [00:41<00:10,  3.58it/s]Stage 1 (stain separation):  77%|███████▋  | 127/164 [00:41<00:09,  3.95it/s]Stage 1 (stain separation):  78%|███████▊  | 128/164 [00:42<00:12,  2.89it/s]Stage 1 (stain separation):  79%|███████▊  | 129/164 [00:42<00:11,  3.12it/s]Stage 1 (stain separation):  79%|███████▉  | 130/164 [00:42<00:09,  3.56it/s]Stage 1 (stain separation):  80%|███████▉  | 131/164 [00:42<00:08,  3.93it/s]Stage 1 (stain separation):  80%|████████  | 132/164 [00:43<00:13,  2.46it/s]Stage 1 (stain separation):  81%|████████  | 133/164 [00:43<00:11,  2.77it/s]Stage 1 (stain separation):  82%|████████▏ | 134/164 [00:44<00:09,  3.23it/s]Stage 1 (stain separation):  82%|████████▏ | 135/164 [00:44<00:07,  3.65it/s]Stage 1 (stain separation):  83%|████████▎ | 136/164 [00:44<00:10,  2.79it/s]Stage 1 (stain separation):  84%|████████▎ | 137/164 [00:45<00:08,  3.04it/s]Stage 1 (stain separation):  84%|████████▍ | 138/164 [00:45<00:07,  3.48it/s]Stage 1 (stain separation):  85%|████████▍ | 139/164 [00:45<00:06,  3.88it/s]Stage 1 (stain separation):  85%|████████▌ | 140/164 [00:46<00:08,  2.83it/s]Stage 1 (stain separation):  86%|████████▌ | 141/164 [00:46<00:07,  3.09it/s]Stage 1 (stain separation):  87%|████████▋ | 142/164 [00:46<00:06,  3.51it/s]Stage 1 (stain separation):  87%|████████▋ | 143/164 [00:46<00:05,  3.92it/s]Stage 1 (stain separation):  88%|████████▊ | 144/164 [00:47<00:06,  2.87it/s]Stage 1 (stain separation):  88%|████████▊ | 145/164 [00:47<00:06,  3.10it/s]Stage 1 (stain separation):  89%|████████▉ | 146/164 [00:47<00:05,  3.54it/s]Stage 1 (stain separation):  90%|████████▉ | 147/164 [00:47<00:04,  3.93it/s]Stage 1 (stain separation):  90%|█████████ | 148/164 [00:48<00:05,  2.91it/s]Stage 1 (stain separation):  91%|█████████ | 149/164 [00:48<00:04,  3.13it/s]Stage 1 (stain separation):  91%|█████████▏| 150/164 [00:48<00:03,  3.57it/s]Stage 1 (stain separation):  92%|█████████▏| 151/164 [00:49<00:03,  3.95it/s]Stage 1 (stain separation):  93%|█████████▎| 152/164 [00:49<00:04,  2.99it/s]/projectnb/rise2019/arushv/VascuPath/src/normalization/__init__.py:211: UserWarning: Conversion from CIE-LAB, via XYZ to sRGB color space resulted in 4 negative Z values that have been clipped to zero
+  img_rgb = color.lab2rgb(img_lab)
+Stage 1 (stain separation):  93%|█████████▎| 153/164 [00:49<00:03,  3.12it/s]Stage 1 (stain separation):  94%|█████████▍| 154/164 [00:50<00:02,  3.55it/s]Stage 1 (stain separation):  95%|█████████▍| 155/164 [00:50<00:02,  3.92it/s]Stage 1 (stain separation):  95%|█████████▌| 156/164 [00:50<00:02,  3.02it/s]Stage 1 (stain separation):  96%|█████████▌| 157/164 [00:51<00:02,  2.80it/s]Stage 1 (stain separation):  96%|█████████▋| 158/164 [00:51<00:01,  3.26it/s]Stage 1 (stain separation):  97%|█████████▋| 159/164 [00:51<00:01,  3.67it/s]Stage 1 (stain separation):  98%|█████████▊| 160/164 [00:52<00:01,  2.98it/s]Stage 1 (stain separation):  98%|█████████▊| 161/164 [00:52<00:00,  3.10it/s]Stage 1 (stain separation):  99%|█████████▉| 162/164 [00:52<00:00,  3.55it/s]Stage 1 (stain separation):  99%|█████████▉| 163/164 [00:52<00:00,  3.95it/s]Stage 1 (stain separation): 100%|██████████| 164/164 [00:52<00:00,  3.10it/s]

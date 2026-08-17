@@ -1,0 +1,28 @@
+/projectnb/rise2019/arushv/VascuPath/src/dinov2/layers/swiglu_ffn.py:43: UserWarning: xFormers is available (SwiGLU)
+  warnings.warn("xFormers is available (SwiGLU)")
+/projectnb/rise2019/arushv/VascuPath/src/dinov2/layers/attention.py:27: UserWarning: xFormers is available (Attention)
+  warnings.warn("xFormers is available (Attention)")
+/projectnb/rise2019/arushv/VascuPath/src/dinov2/layers/block.py:33: UserWarning: xFormers is available (Block)
+  warnings.warn("xFormers is available (Block)")
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/projectnb/rise2019/arushv/VascuPath/src/training/train_multi.py", line 376, in <module>
+    train(args)
+    ~~~~~^^^^^^
+  File "/projectnb/rise2019/arushv/VascuPath/src/training/train_multi.py", line 204, in train
+    d_model_fm = torch.hub.load('facebookresearch/dinov2', 'dinov2_vitl14')
+  File "/projectnb/rise2019/arushv/VascuPath/vascuenv/lib/python3.13/site-packages/torch/hub.py", line 656, in load
+    model = _load_local(repo_or_dir, model, *args, **kwargs)
+  File "/projectnb/rise2019/arushv/VascuPath/vascuenv/lib/python3.13/site-packages/torch/hub.py", line 686, in _load_local
+    hub_module = _import_module(MODULE_HUBCONF, hubconf_path)
+  File "/projectnb/rise2019/arushv/VascuPath/vascuenv/lib/python3.13/site-packages/torch/hub.py", line 115, in _import_module
+    spec.loader.exec_module(module)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1027, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/usr4/ugrad/arushv/.cache/torch/hub/facebookresearch_dinov2_main/hubconf.py", line 9, in <module>
+    from dinov2.hub.cell_dino.backbones import cell_dino_cp_vits8, cell_dino_hpa_vitl16, cell_dino_hpa_vitl14, channel_adaptive_dino_vitl16
+ModuleNotFoundError: No module named 'dinov2.hub.cell_dino'
+Loading Foundation Backbone...
+Downloading: "https://github.com/facebookresearch/dinov2/zipball/main" to /usr4/ugrad/arushv/.cache/torch/hub/main.zip

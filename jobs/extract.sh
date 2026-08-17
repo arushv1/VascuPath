@@ -14,6 +14,6 @@ module load cuda
 source /projectnb/rise2019/arushv/VascuPath/vascuenv/bin/activate
 cd /projectnb/rise2019/arushv/VascuPath
 
-python -m src.ABMIL.extract_features --svs-dir "/projectnb/rise2019/JC_CTE_Images/AI export/Frontal Cortex" --output-dir data/processed/ --batch-size 64 --num-workers 4 --resume
+python -m src.ABMIL.extract_features --svs-dir "/projectnb/rise2019/JC_CTE_Images/AI export/AD" --output-dir data/processed_AD/ --batch-size 64 --num-workers 4 --resume
 
 

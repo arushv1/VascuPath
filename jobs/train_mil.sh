@@ -30,7 +30,7 @@ cd /projectnb/rise2019/arushv/VascuPath/
 
 #python -m training.stage2_resnet --folds 5 --epochs 10
 python -m src.ABMIL.train_eval \
-    --comparison "control_vs_CTE" \
+    --comparison "all" \
     --output-dir mil/ \
     --epochs 80 \
     --lr 1e-4 \
