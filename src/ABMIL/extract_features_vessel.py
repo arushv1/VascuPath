@@ -13,15 +13,13 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from training.dataset import WSIDataset
 from src.inference.wsi_pipeline import process_slide, load_foundation_model, load_resnet_model
-from config import DEVICE, SRC_ROOT
+from config import DEVICE, SRC_ROOT, CLASS_NAMES, STAGE1_CLASSES
 
 # Config
-FINAL_CLASSES = ["background_h", "background_e", "vessel_h", "vessel_e", "white"]
-STAGE1_CLASSES = ["background_h", "background_e", "white"]
-
+FINAL_CLASSES = CLASS_NAMES
 STAGE1_MODEL = SRC_ROOT / "checkpoints_test" / "stage1_foundation_model_cv99.00_test94.65.pth"
-STAGE2_H_MODEL = SRC_ROOT / 'checkpoints_test' / "stage2_resnetH_model_cv98.85_test99.22.pth"
-STAGE2_E_MODEL = SRC_ROOT / "checkpoints_test" / "stage2_resnetE_model_cv97.88_test97.69.pth"
+STAGE2_W_MODEL = SRC_ROOT / 'checkpoints_test' / "stage2_resnetH_model_cv98.85_test99.22.pth"
+STAGE2_G_MODEL = SRC_ROOT / "checkpoints_test" / "stage2_resnetE_model_cv97.88_test97.69.pth"
 
 DINOV2_PATH = SRC_ROOT / "dinov2"
 CHECKPOINT_PATH = "/projectnb/rise2019/arushv/VascuPath/src/checkpoints/neuropath_checkpoint.pth"
@@ -72,31 +70,43 @@ def load_dinov2_backbone(checkpoint_path=CHECKPOINT_PATH, dinov2_path=DINOV2_PAT
     
     return model.to(DEVICE)
 
+# Vessel-type options: each maps to the labels it keeps and gets its own
+# output subfolder under the processed_vessels directory.
+VESSEL_TYPES = {
+    "all": ("vessel_white", "vessel_grey"),
+    "vessels_g": ("vessel_grey",),
+    "vessels_w": ("vessel_white",),
+}
+
+
 # Extract features for one slide
 @torch.no_grad()
 def extract_slide_features(model, svs_path, batch_size=32, num_workers=4,
-                           foundation_model=None, resnet_h=None, resnet_e=None):
+                           foundation_model=None, resnet_w=None, resnet_g=None):
     """
-    Run the two-stage vessel pipeline and extract DINOv2 CLS features for vessel tiles.
+    Run the two-stage vessel pipeline and extract DINOv2 CLS features for every
+    vessel tile in the slide.
 
-    Returns (features, coords, mpp) or (None, None, None) if no vessels found.
+    Returns (features, coords, labels, mpp) or (None, None, None, None) if no
+    vessels were found.
     """
     final_labels, vessel_data = process_slide(
         svs_path,
         output_dir="outputs/",
         foundation_model=foundation_model,
-        resnet_h=resnet_h,
-        resnet_e=resnet_e,
+        resnet_w=resnet_w,
+        resnet_g=resnet_g,
         normalize=True,
         inference_only=False,
         save_patches=False,
     )
 
     if vessel_data is None:
-        return None, None, None
+        return None, None, None, None
 
     patches = vessel_data["patches"]    # (N, 3, 224, 224) float [0, 1]
     coords = vessel_data["coords"]      # (N, 2)
+    labels = vessel_data["labels"]      # ["vessel_white", "vessel_grey", ...]
     mpp = vessel_data["mpp"]
 
     imagenet_norm = get_dinov2_transform()
@@ -114,7 +124,7 @@ def extract_slide_features(model, svs_path, batch_size=32, num_workers=4,
         all_features.append(feats.cpu())
 
     features = torch.cat(all_features, dim=0)   # (N, 1024)
-    return features, coords, mpp
+    return features, coords, labels, mpp
 
 
 def main():
@@ -122,19 +132,25 @@ def main():
     parser.add_argument("--svs-dir", type=str, required=True,
                         help="Directory containing SVS files")
     parser.add_argument("--output-dir", type=str, required=True,
-                        help="Directory to save .pt feature files")
+                        help="processed_vessels directory; one subfolder per "
+                             "vessel type (all/, vessels_g/, vessels_w/) is created inside")
     parser.add_argument("--checkpoint", type=str, default=CHECKPOINT_PATH)
     parser.add_argument("--dinov2-path", type=str, default=DINOV2_PATH)
     parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--num-workers", type=int, default=4)
+    #parser.add_argument("--stain", type=str, defualt="both")
     parser.add_argument("--resume", action="store_true",
                         help="Skip slides that already have .pt output")
     args = parser.parse_args()
  
     svs_dir = Path(args.svs_dir)
     output_dir = Path(args.output_dir)
-    output_dir.mkdir(parents=True, exist_ok=True)
- 
+
+    # One output subfolder per vessel type, all under processed_vessels.
+    type_dirs = {vt: output_dir / vt for vt in VESSEL_TYPES}
+    for d in type_dirs.values():
+        d.mkdir(parents=True, exist_ok=True)
+
     svs_files = sorted(svs_dir.glob("*.svs"))
     if not svs_files:
         print(f"No .svs files found in {svs_dir}")
@@ -155,44 +171,58 @@ def main():
     print("Loading foundation + resnet models")
     foundation_model, _ = load_foundation_model()
 
-    resnet_h, _ = load_resnet_model(stain="h", checkpoint_path=STAGE2_H_MODEL)
-    resnet_e, _ = load_resnet_model(stain="e", checkpoint_path=STAGE2_E_MODEL)
+    resnet_w, _ = load_resnet_model(stain="w", checkpoint_path=STAGE2_W_MODEL)
+    resnet_g, _ = load_resnet_model(stain="g", checkpoint_path=STAGE2_G_MODEL)
 
     for i, svs_path in enumerate(svs_files):
         svs_name = svs_path.stem
-        output_path = output_dir / f"{svs_name}.pt"
- 
-        if args.resume and output_path.exists():
-            print(f"[{i+1}/{len(svs_files)}] {svs_name} — exists, skipping")
+        out_paths = {vt: type_dirs[vt] / f"{svs_name}.pt" for vt in VESSEL_TYPES}
+
+        if args.resume and all(p.exists() for p in out_paths.values()):
+            print(f"[{i+1}/{len(svs_files)}] {svs_name} — all outputs exist, skipping")
             continue
- 
+
         print(f"[{i+1}/{len(svs_files)}] {svs_name}")
-        
+
         try:
-            features, coords, mpp = extract_slide_features(
+            features, coords, labels, mpp = extract_slide_features(
                 model, svs_path,
                 batch_size=args.batch_size,
                 num_workers=args.num_workers,
                 foundation_model=foundation_model,
-                resnet_h=resnet_h,
-                resnet_e=resnet_e,
+                resnet_w=resnet_w,
+                resnet_g=resnet_g,
             )
- 
+
             if features is None:
+                print("  no vessels found")
                 continue
- 
-            torch.save({
-                "features": features,       # (N, 1024)
-                "coords": coords,           # (N, 2)
-                "svs_name": svs_name,
-                "mpp": mpp,
-                "num_tiles": features.shape[0],
-                "feature_dim": features.shape[1],
-            }, output_path)
- 
-            total_tiles += features.shape[0]
-            print(f"  -> {features.shape[0]} tiles, shape {features.shape}, saved to {output_path.name}")
- 
+
+            labels_arr = np.array(labels)
+
+            # Save one .pt per vessel type into its own subfolder.
+            for vt, keep_labels in VESSEL_TYPES.items():
+                mask = torch.from_numpy(np.isin(labels_arr, keep_labels))
+                n = int(mask.sum().item())
+                if n == 0:
+                    print(f"  {vt}: 0 tiles, skipped")
+                    continue
+
+                vt_features = features[mask]
+                torch.save({
+                    "features": vt_features,            # (n, 1024)
+                    "coords": coords[mask],             # (n, 2)
+                    "labels": [l for l, k in zip(labels, mask.tolist()) if k],
+                    "svs_name": svs_name,
+                    "mpp": mpp,
+                    "num_tiles": n,
+                    "feature_dim": vt_features.shape[1],
+                    "vessel_type": vt,
+                }, out_paths[vt])
+
+                total_tiles += n
+                print(f"  {vt}: {n} tiles, saved to {vt}/{out_paths[vt].name}")
+
         except Exception as e:
             print(f"  ERROR: {e}")
             import traceback

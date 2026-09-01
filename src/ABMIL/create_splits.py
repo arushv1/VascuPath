@@ -36,6 +36,12 @@ COMPARISONS = {
         "name": "No CTE vs CTE",
         "description": "Any CTE pathology vs none",
     },
+    "rhi_vs_highCTE": {
+        "class_0": "RHI",
+        "class_1": "High CTE",
+        "name": "RHI vs High CTE",
+        "description": "Onset of early CTE vs high CTE severity"
+    }
 }
 
 # Label File Parsing

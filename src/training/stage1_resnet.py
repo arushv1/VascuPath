@@ -25,13 +25,12 @@ from models.stain_segmentor import ResNetClassifier
 from sklearn.metrics import confusion_matrix as cm_func
 from training.augmentations import get_eval_transform, get_train_transform
 from training.dataset import PatchDataset
-from config import (DEVICE, TRAINING, CHECKPOINTS_DIR, NORMALIZED_PATCHES_DIR, NUM_WORKERS)
+from config import (DEVICE, TRAINING, CHECKPOINTS_DIR, NORMALIZED_PATCHES_DIR, NUM_WORKERS, STAGE1_CLASSES)
 
-STAGE1_CLASSES = ["background_h", "background_e", "white"]
 NUM_STAGE1_CLASSES = len(STAGE1_CLASSES)
 STAGE1_REMAP = {
-    "vessel_h": "background_h",
-    "vessel_e": "background_e",
+    "vessel_white": "white",
+    "vessel_grey": "grey",
 }
 
 def set_seed(seed):

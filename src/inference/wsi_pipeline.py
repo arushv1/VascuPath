@@ -29,17 +29,14 @@ from collections import Counter
 
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from config import DEVICE, OUTPUTS_DIR, BATCH_SIZE, NUM_WORKERS, CHECKPOINTS_DIR, QUPATH_COLORS, SRC_ROOT
+from config import DEVICE, OUTPUTS_DIR, BATCH_SIZE, NUM_WORKERS, CHECKPOINTS_DIR, QUPATH_COLORS, SRC_ROOT, CLASS_NAMES, STAGE1_CLASSES
 from training.dataset import WSIDataset
 from normalization import normalize_image
 
 
-FINAL_CLASSES = ["background_h", "background_e", "vessel_h", "vessel_e", "white"]
-STAGE1_CLASSES = ["background_h", "background_e", "white"]
-
 STAGE1_MODEL = SRC_ROOT / "checkpoints_test" / "stage1_foundation_model_cv99.00_test94.65.pth"
-STAGE2_H_MODEL = SRC_ROOT / 'checkpoints_test' / "stage2_resnetH_model_cv98.85_test99.22.pth"
-STAGE2_E_MODEL = SRC_ROOT / "checkpoints_test" / "stage2_resnetE_model_cv97.88_test97.69.pth"
+STAGE2_W_MODEL = SRC_ROOT / 'checkpoints_test' / "stage2_resnetH_model_cv98.85_test99.22.pth"
+STAGE2_G_MODEL = SRC_ROOT / "checkpoints_test" / "stage2_resnetE_model_cv97.88_test97.69.pth"
 
 # =========================================================================
 # Model loading
@@ -97,7 +94,7 @@ def load_resnet_model(stain, checkpoint_path=None, device=None):
 
 def run_stage1(svs_path, foundation_model, device=None, batch_size=BATCH_SIZE, normalize=True):
     """
-    Classify all tiles as background_h, background_e, or white.
+    Classify all tiles as white, grey, or background.
 
     Returns dict with predictions, coords, dataset (kept open for stage 2).
     """
@@ -174,7 +171,7 @@ def run_stage1(svs_path, foundation_model, device=None, batch_size=BATCH_SIZE, n
 # Stage 2: Vessel detection
 # =========================================================================
 
-def run_stage2(stage1_results, resnet_h, resnet_e, device=None, batch_size=BATCH_SIZE, normalize=True):
+def run_stage2(stage1_results, resnet_w, resnet_g, device=None, batch_size=BATCH_SIZE, normalize=True):
     """
     Run ResNet vessel detectors on H and E tiles from stage 1.
 
@@ -184,39 +181,39 @@ def run_stage2(stage1_results, resnet_h, resnet_e, device=None, batch_size=BATCH
     dataset = stage1_results["dataset"]
     s1_preds = stage1_results["predictions"]
 
-    h_idx = STAGE1_CLASSES.index("background_h")
-    e_idx = STAGE1_CLASSES.index("background_e")
+    w_idx = STAGE1_CLASSES.index("white")
+    g_idx = STAGE1_CLASSES.index("grey")
 
     # Start with stage 1 labels
     final_labels = [STAGE1_CLASSES[p] for p in s1_preds]
 
     t0 = time.time()
 
-    # --- H tiles ---
-    h_tile_indices = [i for i, p in enumerate(s1_preds) if p == h_idx]
-    if resnet_h is not None and len(h_tile_indices) > 0:
-        print(f"\nStage 2: Running H-model on {len(h_tile_indices)} hematoxylin tiles...")
-        h_preds = _run_resnet_on_tiles(dataset, h_tile_indices, resnet_h, device, batch_size, normalize)
-        for tile_i, pred in zip(h_tile_indices, h_preds):
-            if pred == 1:  # index 1 = vessel in [background_h, vessel_h]
-                final_labels[tile_i] = "vessel_h"
-        vessel_count = sum(1 for p in h_preds if p == 1)
-        print(f"  H vessels: {vessel_count} / {len(h_tile_indices)}")
+    # --- White matter tiles ---
+    w_tile_indices = [i for i, p in enumerate(s1_preds) if p == w_idx]
+    if resnet_w is not None and len(w_tile_indices) > 0:
+        print(f"\nStage 2: Running White-matter-model on {len(w_tile_indices)} white matter tiles...")
+        w_preds = _run_resnet_on_tiles(dataset, w_tile_indices, resnet_w, device, batch_size, normalize)
+        for tile_i, pred in zip(w_tile_indices, w_preds):
+            if pred == 1:  # index 1 = vessel in [white, vessel_white]
+                final_labels[tile_i] = "vessel_white"
+        vessel_count = sum(1 for p in w_preds if p == 1)
+        print(f"  White matter vessels: {vessel_count} / {len(w_tile_indices)}")
     else:
-        print(f"\nStage 2: Skipping H-model ({'no model' if resnet_h is None else 'no H tiles'})")
+        print(f"\nStage 2: Skipping White-matter-model ({'no model' if resnet_w is None else 'no White matter tiles'})")
 
-    # --- E tiles ---
-    e_tile_indices = [i for i, p in enumerate(s1_preds) if p == e_idx]
-    if resnet_e is not None and len(e_tile_indices) > 0:
-        print(f"Stage 2: Running E-model on {len(e_tile_indices)} eosin tiles...")
-        e_preds = _run_resnet_on_tiles(dataset, e_tile_indices, resnet_e, device, batch_size, normalize)
-        for tile_i, pred in zip(e_tile_indices, e_preds):
-            if pred == 1:  # index 1 = vessel in [background_e, vessel_e]
-                final_labels[tile_i] = "vessel_e"
-        vessel_count = sum(1 for p in e_preds if p == 1)
-        print(f"  E vessels: {vessel_count} / {len(e_tile_indices)}")
+    # --- Grey matter tiles ---
+    g_tile_indices = [i for i, p in enumerate(s1_preds) if p == g_idx]
+    if resnet_g is not None and len(g_tile_indices) > 0:
+        print(f"Stage 2: Running Grey-matter-model on {len(g_tile_indices)} grey matter tiles...")
+        g_preds = _run_resnet_on_tiles(dataset, g_tile_indices, resnet_g, device, batch_size, normalize)
+        for tile_i, pred in zip(g_tile_indices, g_preds):
+            if pred == 1:  # index 1 = vessel in [grey, vessel_grey]
+                final_labels[tile_i] = "vessel_grey"
+        vessel_count = sum(1 for p in g_preds if p == 1)
+        print(f"  Grey matter vessels: {vessel_count} / {len(g_tile_indices)}")
     else:
-        print(f"Stage 2: Skipping E-model ({'no model' if resnet_e is None else 'no E tiles'})")
+        print(f"Stage 2: Skipping Grey-matter-model ({'no model' if resnet_g is None else 'no Grey matter tiles'})")
 
     duration = time.time() - t0
     print(f"  Stage 2 duration: {duration:.1f}s")
@@ -224,9 +221,9 @@ def run_stage2(stage1_results, resnet_h, resnet_e, device=None, batch_size=BATCH
     # Final summary
     counts = Counter(final_labels)
     print(f"\nFinal classification:")
-    for cls in FINAL_CLASSES:
+    for cls in CLASS_NAMES:
         print(f"  {cls}: {counts.get(cls, 0)} tiles")
-    total_vessels = counts.get("vessel_h", 0) + counts.get("vessel_e", 0)
+    total_vessels = counts.get("vessel_white", 0) + counts.get("vessel_grey", 0)
     print(f"  Total vessel tiles: {total_vessels}")
 
     return final_labels, duration
@@ -306,7 +303,7 @@ def save_predictions_json(coords, final_labels, metadata, output_path):
         "svs_name": metadata["svs_name"],
         "mpp": metadata["mpp"],
         "patch_size": metadata["patch_size"],
-        "final_classes": FINAL_CLASSES,
+        "final_classes": CLASS_NAMES,
         "tiles": [
             {"x": x, "y": y, "class": label}
             for (x, y), label in zip(coords, final_labels)
@@ -323,7 +320,7 @@ def collect_vessel_patches(stage1_results, final_labels):
     dataset = stage1_results['dataset']
 
     vessel_idxs = [i for i, label in enumerate(final_labels)
-                   if label in ("vessel_h", "vessel_e")]
+                   if label in ("vessel_white", "vessel_grey")]
 
     if len(vessel_idxs) == 0:
         return None
@@ -338,7 +335,7 @@ def collect_vessel_patches(stage1_results, final_labels):
     return {
         "patches": torch.stack(patches),       # (N, 3, 224, 224)
         "coords": torch.tensor(coords),        # (N, 2)
-        "labels": labels,                      # ["vessel_h", "vessel_e", ...]
+        "labels": labels,                      # ["vessel_white", "vessel_grey", ...]
         "svs_name": stage1_results["svs_name"],
         "mpp": stage1_results["mpp"],
         "patch_size": stage1_results["patch_size"],
@@ -361,8 +358,8 @@ def save_vessel_patches(stage1_results, final_labels, output_path):
 # Main
 # =========================================================================
 
-def process_slide(svs_path, output_dir=None, foundation_model=None, resnet_h=None,
-                  resnet_e=None, normalize=True, inference_only=False, save_patches=None):
+def process_slide(svs_path, output_dir=None, foundation_model=None, resnet_w=None,
+                  resnet_g=None, normalize=True, inference_only=False, save_patches=None):
     """Full pipeline for a single slide.
 
     Returns (final_labels, vessel_data) where vessel_data is the dict produced by
@@ -380,13 +377,13 @@ def process_slide(svs_path, output_dir=None, foundation_model=None, resnet_h=Non
 
     vessel_data = None
     if inference_only:
-        final_labels, _ = run_stage2(stage1, resnet_h, resnet_e, normalize=normalize)
+        final_labels, _ = run_stage2(stage1, resnet_w, resnet_g, normalize=normalize)
         save_predictions_json(stage1["coords"], final_labels, stage1,
                             str(output_dir / "predictions.json"))
         export_geojson(stage1["coords"], final_labels, stage1["patch_size"],
                     stage1["downsample"], str(output_dir / "predictions.geojson"))
     else:
-        final_labels, _ = run_stage2(stage1, resnet_h, resnet_e, normalize=normalize)
+        final_labels, _ = run_stage2(stage1, resnet_w, resnet_g, normalize=normalize)
         vessel_data = collect_vessel_patches(stage1, final_labels)
         if save_patches and vessel_data is not None:
             torch.save(vessel_data, output_dir / f"{svs_path.stem}.pt")
@@ -414,8 +411,8 @@ def main():
     print("Loading models...")
     foundation_model, _ = load_foundation_model()
 
-    resnet_h, _ = load_resnet_model(stain="h", checkpoint_path=STAGE2_H_MODEL)
-    resnet_e, _ = load_resnet_model(stain="e", checkpoint_path=STAGE2_E_MODEL)
+    resnet_w, _ = load_resnet_model(stain="w", checkpoint_path=STAGE2_W_MODEL)
+    resnet_g, _ = load_resnet_model(stain="g", checkpoint_path=STAGE2_G_MODEL)
 
     input_path = Path(args.input)
     normalize = not args.no_normalize
@@ -425,10 +422,10 @@ def main():
         print(f"\nFound {len(svs_files)} SVS files")
         for svs in svs_files:
             print(f"\n{'=' * 60}")
-            process_slide(svs, args.output, foundation_model, resnet_h, resnet_e,
+            process_slide(svs, args.output, foundation_model, resnet_w, resnet_g,
                           normalize, args.inference_only)
     else:
-        process_slide(input_path, args.output, foundation_model, resnet_h, resnet_e,
+        process_slide(input_path, args.output, foundation_model, resnet_w, resnet_g,
                       normalize, args.inference_only)
 
 

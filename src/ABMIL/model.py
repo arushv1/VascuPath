@@ -80,6 +80,7 @@ class AttentionMIL(nn.Module):
         self.attention_W = nn.Linear(attention_dim, 1)
         
         self.classifier = nn.Sequential(
+            nn.Dropout(dropout),
             nn.Linear(hidden_dim, 64),
             nn.ReLU(),
             nn.Dropout(dropout),

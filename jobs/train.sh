@@ -30,6 +30,6 @@ echo "CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-not set}"
 nvidia-smi
 
 
-python -m training.train_multi --folds 5 --epochs 30
+python -m training.train_multi --folds 5 --epochs 50
 
 

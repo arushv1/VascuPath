@@ -30,22 +30,22 @@ cd /projectnb/rise2019/arushv/VascuPath/
 
 #python -m training.stage2_resnet --folds 5 --epochs 10
 python -m src.ABMIL.train_eval \
-    --features-dir data/processed_vessels/vessels_g \
-    --comparison "all" \
+    --features-dir data/processed_vessels/all \
+    --comparison "rhi_vs_highCTE" \
     --output-dir mil_vessels/ \
     --epochs 50 \
     --lr 1e-4 \
-    --patience 8 \
+    --patience 20 \
     --folds 5
 
-python -m src.ABMIL.train_eval \
-    --features-dir data/processed_vessels/vessels_w \
-    --comparison "all" \
-    --output-dir mil_vessels/ \
-    --epochs 50 \
-    --lr 1e-4 \
-    --patience 8 \
-    --folds 5
+#python -m src.ABMIL.train_eval \
+#    --features-dir data/processed_vessels/vessels_w \
+#    --comparison "rhi_vs_highCTE" \
+#    --output-dir mil_vessels/ \
+#    --epochs 50 \
+#    --lr 1e-4 \
+#    --patience 20 \
+#    --folds 5
 
 #python -m src.ABMIL.train_eval \
 #    --comparison "all" \

@@ -29,5 +29,5 @@ python -m src.visualization.wsi_viewer \
     --slide-dir "$SLIDE_DIR" \
     --pred-dir  "$PRED_DIR" \
     --port "$PORT" \
-    --features-dir data/processed_vessels \
+    --features-dir data/processed_vessels/all \
     --mil-dir mil_vessels \

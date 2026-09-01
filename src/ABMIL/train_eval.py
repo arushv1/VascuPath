@@ -4,12 +4,15 @@ import random
 import torch
 import torch.nn as nn
 import numpy as np
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
 from torch.utils.data import Dataset, DataLoader, WeightedRandomSampler
 import torch.nn.functional as F 
 from sklearn.model_selection import StratifiedGroupKFold
 from sklearn.metrics import (
     accuracy_score, balanced_accuracy_score, roc_auc_score,
-    classification_report, confusion_matrix
+    classification_report, confusion_matrix, ConfusionMatrixDisplay
 )
 from tqdm import tqdm
 from src.ABMIL.model import AttentionMIL, MILSlideDataset
@@ -90,8 +93,8 @@ def train_one_fold(model, train_dataset, val_dataset, class_weights, cfg):
         num_workers=4,
     )
 
-    criterion = nn.CrossEntropyLoss()
-    optimizer = torch.optim.Adam(model.parameters(), lr=cfg['lr'], weight_decay=cfg['weight_decay'])
+    criterion = nn.CrossEntropyLoss(label_smoothing=0.1)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=cfg['lr'], weight_decay=cfg['weight_decay'])
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=cfg['epochs'])
 
     best_val_auc = 0.0
@@ -178,6 +181,7 @@ def evaluate_model(model, loader):
     metrics = {
         "accuracy": 100 * accuracy_score(all_labels, all_preds),
         "balanced_accuracy": 100 * balanced_accuracy_score(all_labels, all_preds),
+        "confusion_matrix": confusion_matrix(all_labels, all_preds, labels=[0, 1]),
         "predictions": all_preds,
         "labels": all_labels,
         "probabilties": all_probs,
@@ -251,7 +255,7 @@ def run_comparison(comparison_key, args):
     cfg = {
         "epochs": args.epochs,
         "lr": args.lr,
-        "weight_decay": 1e-4,
+        "weight_decay": 1e-3,
         "patience": args.patience,
         "folds": args.folds,
     }
@@ -301,7 +305,7 @@ def run_comparison(comparison_key, args):
             input_dim=1024,
             hidden_dim=256,
             attention_dim=128,
-            dropout=0.25,
+            dropout=0.5,
         ).to(DEVICE)
  
         best_state, best_auc, best_epoch = train_one_fold(
@@ -334,12 +338,12 @@ def run_comparison(comparison_key, args):
         input_dim=1024,
         hidden_dim=256,
         attention_dim=128,
-        dropout=0.25,
+        dropout=0.5,
     ).to(DEVICE)
 
-    # Use mean best epoch from CV as epoch count
+    # Use median best epoch from CV as epoch count * 1.2
     cfg_final = cfg.copy()
-    cfg_final["epochs"] = max(int(np.mean(epochs)), 1)
+    cfg_final["epochs"] = max(int(np.median(epochs) * 1.2), 1)
     cfg_final["patience"] = cfg_final["epochs"]  # no early stopping
 
     final_sampler = get_balanced_sampler(dev_dataset)
@@ -348,8 +352,8 @@ def run_comparison(comparison_key, args):
         collate_fn=mil_collate, num_workers=2,
     )
 
-    criterion = nn.CrossEntropyLoss()
-    optimizer = torch.optim.Adam(
+    criterion = nn.CrossEntropyLoss(label_smoothing=0.1)
+    optimizer = torch.optim.AdamW(
         final_model.parameters(), lr=cfg["lr"], weight_decay=cfg["weight_decay"]
     )
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
@@ -388,6 +392,9 @@ def run_comparison(comparison_key, args):
                 f"Acc: {100*epoch_correct/epoch_total:.1f}%"
             )
  
+    output_dir = Path(args.output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
     # ---- Evaluate on held-out test set ----
     test_metrics = None
     if test_dataset is not None and len(test_dataset) > 0:
@@ -402,9 +409,23 @@ def run_comparison(comparison_key, args):
         print(f"    Test Acc: {test_metrics['accuracy']:.1f}%")
         print(f"    Test Balanced Acc: {test_metrics['balanced_accuracy']:.1f}%")
 
+        cm = test_metrics["confusion_matrix"]
+        print(f"    Test confusion matrix (rows=true, columns=predicted):")
+        print(f"      {cm}")
+
+        cm_path = output_dir / f"mil_{comparison_key}_test_confusion_matrix.png"
+        display = ConfusionMatrixDisplay(
+            confusion_matrix=cm,
+            display_labels=[comp["class_0"], comp["class_1"]],
+        )
+        display.plot(cmap="Blues", values_format="d", colorbar=False)
+        display.ax_.set_title(f"{comp['name']} - Held-out Test Set")
+        display.figure_.tight_layout()
+        display.figure_.savefig(cm_path, dpi=200, bbox_inches="tight")
+        plt.close(display.figure_)
+        print(f"    Test confusion matrix saved to {cm_path}")
+
     # Save final model
-    output_dir = Path(args.output_dir)
-    output_dir.mkdir(parents=True, exist_ok=True)
     save_path = output_dir / f"mil_{comparison_key}.pth"
 
     checkpoint = {
@@ -429,6 +450,7 @@ def run_comparison(comparison_key, args):
         checkpoint["test_auc"] = float(test_metrics["auc"])
         checkpoint["test_accuracy"] = float(test_metrics["accuracy"])
         checkpoint["test_balanced_accuracy"] = float(test_metrics["balanced_accuracy"])
+        checkpoint["test_confusion_matrix"] = test_metrics["confusion_matrix"].tolist()
     torch.save(checkpoint, save_path)
 
     print(f"  Final model saved to {save_path}")
@@ -455,7 +477,7 @@ def main():
     parser = argparse.ArgumentParser(description="Train Attention MIL for CTE staging")
     parser.add_argument("--comparison", type=str, required=True,
                         choices=["control_vs_rhi", "rhi_vs_low", "low_vs_high",
-                                 "control_vs_CTE", "all"],
+                                 "control_vs_CTE", "rhi_vs_highCTE", "all"],
                         help="Which binary comparison to train")
     parser.add_argument("--features-dir", type=str, default="data/processed/",
                         help="Directory containing per-slide .pt feature files")
@@ -464,9 +486,9 @@ def main():
                         help="Path to label spreadsheet")
     parser.add_argument("--output-dir", type=str, default="../checkpoints/mil/",
                         help="Directory to save trained models")
-    parser.add_argument("--epochs", type=int, default=100)
+    parser.add_argument("--epochs", type=int, default=50)
     parser.add_argument("--lr", type=float, default=1e-4)
-    parser.add_argument("--patience", type=int, default=20,
+    parser.add_argument("--patience", type=int, default=10,
                         help="Early stopping patience")
     parser.add_argument("--folds", type=int, default=5,
                         help="Number of GroupKFold splits")
@@ -490,7 +512,7 @@ def main():
  
     if args.comparison == "all":
         results = []
-        for comp_key in ["control_vs_rhi", "rhi_vs_low", "low_vs_high", "control_vs_CTE"]:
+        for comp_key in ["control_vs_rhi", "rhi_vs_low", "low_vs_high", "control_vs_CTE", "rhi_vs_highCTE"]:
             result = run_comparison(comp_key, args)
             if result:
                 results.append(result)

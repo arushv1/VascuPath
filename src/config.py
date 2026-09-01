@@ -29,17 +29,18 @@ def get_device():
 DEVICE = get_device()
 
 #CLASSES
-CLASS_NAMES = ["background_e", "background_h", "vessel_e", "vessel_h", "white"]
-NUM_CLASSES = len(CLASS_NAMES)
+ORIGINAL_CLASSES = ["white", "grey", "background", "vessel_white", "vessel_grey"]
+STAIN_CLASSES = ["white", "grey", "background"]
+NUM_STAIN_CLASSES = len(STAIN_CLASSES)
 
-VESSEL_CLASSES = {"vessel_e", "vessel_h"}
-VESSEL_INDICES = [CLASS_NAMES.index(cls) for cls in VESSEL_CLASSES]
+VESSEL_CLASSES = {"vessel_grey", "vessel_white"}
+VESSEL_INDICES = [ORIGINAL_CLASSES.index(cls) for cls in VESSEL_CLASSES]
 
 # PATCH / TILE SETTINGS
 PATCH_SIZE_UM = 500
 TARGET_SIZE_PX = 224
 TILE_OVERLAP = 0
-BATCH_SIZE = 16
+BATCH_SIZE = 32
 NUM_WORKERS = 4
 
 
@@ -100,7 +101,7 @@ TRAINING = {
     "augmentation": {
         "horizontal_flip": True,
         "vertical_flip": True,
-        "random_rotation": 15,   # degrees
+        "random_rotation": [0, 90, 180, 270],   # degrees
         "color_jitter": {
             "brightness": 0.1,
             "contrast": 0.1,
@@ -113,9 +114,9 @@ TRAINING = {
 }
 
 QUPATH_COLORS = {
-    "background_e": [255, 182, 193],  # pink
-    "background_h": [0, 0, 255],      # blue
-    "vessel_e": [255, 0, 0],          # red
-    "vessel_h": [128, 0, 128],        # purple
-    "white": [200, 200, 200],         # gray
+    "grey": [255, 182, 193],  # pink
+    "white": [0, 0, 255],      # blue
+    "vessel_grey": [255, 0, 0],          # red
+    "vessel_white": [128, 0, 128],        # purple
+    "background": [200, 200, 200],         # gray
 }

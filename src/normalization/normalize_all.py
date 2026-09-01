@@ -22,8 +22,8 @@ from config import RAW_PATCHES_DIR, NORMALIZED_PATCHES_DIR
 from normalization import normalize_image
 
 
-# Folders to process (skip white — no tissue to normalize)
-FOLDERS = ["background_h", "background_e", "vessel_h", "vessel_e"]
+# Folders to process (skip bqckground — no tissue to normalize)
+FOLDERS = ["white", "grey", "vessel_white", "vessel_grey"]
 
 
 def normalize_folder(input_dir: Path, output_dir: Path, resume: bool = False):
@@ -82,12 +82,12 @@ def main():
         normalize_folder(input_folder, output_folder, resume=args.resume)
 
     # Copy white folder as-is (no normalization needed)
-    white_src = args.input / "white"
-    white_dst = args.output / "white"
-    if white_src.exists() and not white_dst.exists():
+    bkgd_src = args.input / "background"
+    bkgd_dst = args.output / "background"
+    if bkgd_src.exists() and not bkgd_dst.exists():
         import shutil
-        shutil.copytree(white_src, white_dst)
-        print(f"\nCopied white folder ({len(list(white_dst.glob('*')))} files)")
+        shutil.copytree(bkgd_src, bkgd_dst)
+        print(f"\nCopied background folder ({len(list(bkgd_dst.glob('*')))} files)")
 
     print("\nDone!")
 

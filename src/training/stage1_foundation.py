@@ -161,7 +161,7 @@ def train(args):
     if args.epochs:
         cfg["epochs"] = args.epochs
 
-    print(f"Model:   Foundation (DINOv2 ViT-Large + Linear Head)")
+    print(f"Model:   Foundation (DINOv2 ViT-Large + Multi-Linear Heads)")
     print(f"Device:  {DEVICE}")
     print(f"Data:    {args.data}")
     print(f"Folds:   {n_folds}")

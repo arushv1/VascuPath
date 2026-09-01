@@ -1,0 +1,20 @@
+/projectnb/rise2019/arushv/VascuPath/src/dinov2/layers/swiglu_ffn.py:43: UserWarning: xFormers is available (SwiGLU)
+  warnings.warn("xFormers is available (SwiGLU)")
+/projectnb/rise2019/arushv/VascuPath/src/dinov2/layers/attention.py:27: UserWarning: xFormers is available (Attention)
+  warnings.warn("xFormers is available (Attention)")
+/projectnb/rise2019/arushv/VascuPath/src/dinov2/layers/block.py:33: UserWarning: xFormers is available (Block)
+  warnings.warn("xFormers is available (Block)")
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/projectnb/rise2019/arushv/VascuPath/src/inference/wsi_multi_pipeline.py", line 299, in <module>
+    main()
+    ~~~~^^
+  File "/projectnb/rise2019/arushv/VascuPath/src/inference/wsi_multi_pipeline.py", line 283, in main
+    model, _ = load_model()
+               ~~~~~~~~~~^^
+  File "/projectnb/rise2019/arushv/VascuPath/src/inference/wsi_multi_pipeline.py", line 38, in load_model
+    model.load_state_dict(checkpoint["model_state_dict"])
+                          ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+KeyError: 'model_state_dict'
+Loading models...

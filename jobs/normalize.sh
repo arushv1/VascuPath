@@ -9,6 +9,6 @@
 
 module load cuda
 source /projectnb/rise2019/arushv/VascuPath/vascuenv/bin/activate
-cd /projectnb/rise2019/arushv/VascuPath/src
+cd /projectnb/rise2019/arushv/VascuPath
 
-python -m normalization.normalize_all --input ../data/raw/train_patches/ --output ../data/norm/norm_train_patches/
+python -m src.normalization.normalize_all --input data/raw/train_patches/ --output data/norm/norm_train_patches/

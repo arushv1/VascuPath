@@ -1,0 +1,54 @@
+=== GPU assigned to this job ===
+0, NVIDIA A40, GPU-8d5ead41-300d-ec9f-0545-3d8ec594a2a4, 46068 MiB
+1, NVIDIA A40, GPU-4bc16997-1d40-d826-d46e-2f8932979239, 46068 MiB
+2, NVIDIA A40, GPU-ff178dbe-4141-4565-6cd8-f572b8b2c395, 46068 MiB
+3, NVIDIA A40, GPU-4560dc05-2b5f-879a-0c2e-dcb0af7061b1, 46068 MiB
+CUDA_VISIBLE_DEVICES=0
+Sun Aug 30 05:28:26 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 610.57.04              KMD Version: 610.57.04     CUDA UMD Version: 13.3     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A40                     On  |   00000000:17:00.0 Off |                    0 |
+|  0%   27C    P8             13W /  300W |       0MiB /  46068MiB |      0%   E. Process |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA A40                     On  |   00000000:65:00.0 Off |                    0 |
+|  0%   26C    P8             14W /  300W |       0MiB /  46068MiB |      0%   E. Process |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA A40                     On  |   00000000:CA:00.0 Off |                    0 |
+|  0%   27C    P8             21W /  300W |       0MiB /  46068MiB |      0%   E. Process |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   3  NVIDIA A40                     On  |   00000000:E3:00.0 Off |                    0 |
+|  0%   27C    P8             14W /  300W |       0MiB /  46068MiB |      0%   E. Process |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+/projectnb/rise2019/arushv/VascuPath/src/dinov2/layers/swiglu_ffn.py:43: UserWarning: xFormers is available (SwiGLU)
+  warnings.warn("xFormers is available (SwiGLU)")
+/projectnb/rise2019/arushv/VascuPath/src/dinov2/layers/attention.py:27: UserWarning: xFormers is available (Attention)
+  warnings.warn("xFormers is available (Attention)")
+/projectnb/rise2019/arushv/VascuPath/src/dinov2/layers/block.py:33: UserWarning: xFormers is available (Block)
+  warnings.warn("xFormers is available (Block)")
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/projectnb/rise2019/arushv/VascuPath/src/training/train_multi.py", line 35, in <module>
+    from training.augmentations import get_train_transform, get_eval_transform
+  File "/projectnb/rise2019/arushv/VascuPath/src/training/augmentations.py", line 10, in <module>
+    from config import ( TARGET_SIZE_PX, NORMALIZED_PATCHES_DIR, CHECKPOINTS_DIR, DEVICE,
+        CLASS_NAMES, NUM_CLASSES, TRAINING
+    )
+ImportError: cannot import name 'CLASS_NAMES' from 'config' (/projectnb/rise2019/arushv/VascuPath/src/config.py)

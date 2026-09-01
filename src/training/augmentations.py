@@ -7,12 +7,20 @@ from torchvision import transforms
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from config import ( TARGET_SIZE_PX, NORMALIZED_PATCHES_DIR, CHECKPOINTS_DIR, DEVICE,
-    CLASS_NAMES, NUM_CLASSES, TRAINING
-)
+from config import TARGET_SIZE_PX, TRAINING
 
 _aug = TRAINING["augmentation"]
 _cj = _aug["color_jitter"]
+
+
+def _rotation_transform():
+    """Build either a ranged rotation or a choice of discrete angles."""
+    degrees = _aug["random_rotation"]
+    if isinstance(degrees, (list, tuple)) and len(degrees) > 2:
+        return transforms.RandomChoice([
+            transforms.RandomRotation((angle, angle)) for angle in degrees
+        ])
+    return transforms.RandomRotation(degrees)
 
 
 def get_train_transform(target_size: int = TARGET_SIZE_PX):
@@ -21,7 +29,7 @@ def get_train_transform(target_size: int = TARGET_SIZE_PX):
         transforms.Resize((target_size, target_size)),
         transforms.RandomHorizontalFlip() if _aug["horizontal_flip"] else transforms.Lambda(lambda x: x),
         transforms.RandomVerticalFlip() if _aug["vertical_flip"] else transforms.Lambda(lambda x: x),
-        transforms.RandomRotation(_aug["random_rotation"]),
+        _rotation_transform(),
         transforms.ColorJitter(
             brightness=_cj["brightness"],
             contrast=_cj["contrast"],
